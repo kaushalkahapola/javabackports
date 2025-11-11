@@ -31,13 +31,28 @@ bash ../configure \
     --with-native-debug-symbols=none \
     --disable-zip-debug-info
 
+echo "--- Patching spec.gmk to disable warnings-as-errors... ---"
+# JDK 8's build system hardcodes -Werror in many places
+# We need to remove it from the generated spec.gmk file
+if [ -f spec.gmk ]; then
+    # Remove -Werror flags from all compiler flag variables
+    sed -i 's/-Werror[^ ]*//g' spec.gmk
+    sed -i 's/WARNINGS_ARE_ERRORS[[:space:]]*:=[[:space:]]*-Werror/WARNINGS_ARE_ERRORS :=/g' spec.gmk
+    echo "--- spec.gmk patched ---"
+else
+    echo "--- Warning: spec.gmk not found, skipping patch ---"
+fi
+
 # Build the JDK
 echo "--- Running make... (Output will be in ${BUILD_DIR_ABS}) ---"
 
 # Run 'make' from inside the build dir.
 # For JDK 8, use 'all' target instead of 'images'
-# and use COMPILER_WARNINGS_FATAL=false
-if make JOBS="${MAKE_JOBS:-$(nproc)}" all COMPILER_WARNINGS_FATAL=false; then
+# Pass multiple flags to disable warnings-as-errors
+if make JOBS="${MAKE_JOBS:-$(nproc)}" all \
+    COMPILER_WARNINGS_FATAL=false \
+    WARNINGS_ARE_ERRORS="" \
+    CFLAGS_WARNINGS_ARE_ERRORS=""; then
     echo "=== Build OK ==="
 else
     echo "=== Build FAILED ==="
