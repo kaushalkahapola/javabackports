@@ -21,7 +21,7 @@ mkdir -p "${BUILD_DIR_ABS}"
 cd "${BUILD_DIR_ABS}"
 
 echo "--- Configuring build from outside source dir... ---"
-# JDK 8 configure options (different from JDK 11+)
+
 # Note: --disable-warnings-as-errors does NOT exist in JDK 8
 bash ../configure \
     --with-boot-jdk="${BOOT_JDK}" \

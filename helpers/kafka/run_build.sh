@@ -9,8 +9,6 @@ echo "=== Starting Kafka Build in Docker for ${COMMIT_SHA:0:7} ==="
 docker volume create --name=gradle-cache || true
 
 # The build command to run inside the container
-# We build, but skip tests (-x test) to just check compilation
-# --- FIX: Removed 'generateSources' ---
 BUILD_COMMAND="git checkout -f ${COMMIT_SHA} && ./gradlew build -x test"
 
 # Run the build in a container

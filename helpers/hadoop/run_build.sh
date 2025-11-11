@@ -7,7 +7,6 @@ echo "=== Starting Hadoop Build in Docker for ${COMMIT_SHA:0:7} ==="
 # We create a persistent maven cache volume to speed up builds
 docker volume create --name=maven-cache || true
 
-# SOLUTION: Build only specific modules we need, bypassing the reactor aggregator
 # This avoids the parent POM trying to resolve modules we want to skip
 BUILD_COMMAND="git checkout -f ${COMMIT_SHA} && \
   mvn clean install -DskipTests -Dmaven.javadoc.skip=true -Drat.skip=true \
@@ -16,11 +15,6 @@ BUILD_COMMAND="git checkout -f ${COMMIT_SHA} && \
     -pl hadoop-mapreduce-project \
     -am"
 
-# Alternative: Use profiles to skip problematic modules if they exist
-# BUILD_COMMAND="git checkout -f ${COMMIT_SHA} && \
-#   mvn clean package -DskipTests -Dmaven.javadoc.skip=true -Drat.skip=true \
-#   -Pyarn.catalog.skip 2>/dev/null || \
-#   mvn clean package -DskipTests -Dmaven.javadoc.skip=true -Drat.skip=true"
 
 # Run the build in a container
 if docker run --rm --dns=8.8.8.8 \

@@ -28,7 +28,6 @@ docker volume create maven-repo 2>/dev/null || true
 echo "=== Running optimized Maven build (skipping tests, web-console, and checks) ==="
 
 # Run Maven build
-# --- FIX: Added -pl '!:distribution' to explicitly skip the final broken module ---
 docker run --rm \
     -v "${PROJECT_DIR}:/repo" \
     -v "maven-repo:/root/.m2/repository" \

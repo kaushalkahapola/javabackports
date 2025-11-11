@@ -28,8 +28,6 @@ bash ../configure \
     --enable-ccache \
     --disable-warnings-as-errors \
     --with-debug-level=release \
-    --with-native-debug-symbols=none
-    # --- FIX: Removed --disable-zip-debug-info ---
 
 # Build the JDK
 echo "--- Running make... (Output will be in ${BUILD_DIR_ABS}) ---"

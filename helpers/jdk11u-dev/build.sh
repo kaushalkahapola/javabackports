@@ -29,7 +29,6 @@ bash ../configure \
     --disable-warnings-as-errors \
     --with-debug-level=release \
     --with-native-debug-symbols=none
-    # Note: --disable-zip-debug-info is not a valid flag for JDK 11
 
 # Build the JDK
 echo "--- Running make... (Output will be in ${BUILD_DIR_ABS}) ---"

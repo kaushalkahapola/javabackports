@@ -2,7 +2,6 @@
 FROM eclipse-temurin:8-jdk
 
 # ---- system packages --------------------------------------------------
-# This part is still needed and runs as root
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     ccache \
@@ -13,7 +12,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     rm -rf /var/lib/apt/lists/*
 
 # ---- jtreg ------------------------------------------------------------
-# --- FIX: Download jtreg 4.2-b16, which is required for JDK 8 ---
 RUN mkdir -p /opt/jtreg && \
     curl -L "https://builds.shipilev.net/jtreg/jtreg4.2-b16.zip" -o /tmp/jtreg.zip && \
     unzip -q /tmp/jtreg.zip -d /opt/ && \
@@ -32,8 +30,7 @@ ENV JTREG_HOME=/opt/jtreg
 
 # --- Switch to root user to fix all permission errors ---
 WORKDIR /repo
-# We will run as ROOT to avoid all permission errors
-# --- END FIX ---
+
 
 # Add the repo directory as a "safe directory" for Git
 RUN git config --global --add safe.directory /repo

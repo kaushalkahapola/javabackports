@@ -33,7 +33,6 @@ ENV JTREG_HOME=/opt/jtreg
 # --- Switch to root user to fix all permission errors ---
 WORKDIR /repo
 # We will run as ROOT to avoid all permission errors
-# --- END FIX ---
 
 # Add the repo directory as a "safe directory" for Git
 RUN git config --global --add safe.directory /repo
