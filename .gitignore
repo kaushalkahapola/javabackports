@@ -15,3 +15,5 @@ gradle-cache/
 .vscode/
 .idea/
 .DS_Store
+*.swp
+*.swo
