@@ -2,8 +2,8 @@
 import os
 import sys
 import subprocess
-import argparse
 import shutil
+import argparse
 from datetime import datetime
 
 # --- 1. PROJECT CONFIGURATION ---
@@ -12,8 +12,8 @@ from datetime import datetime
 PROJECT_CONFIG = {
     "elasticsearch": {
         "repo_name": "elasticsearch",
-        "build_system": "self-building", # Special case
-        "builder_tag": "es-builder:latest" # Not pre-built, but used for naming
+        "build_system": "gradle", # We'll use this to set the right env vars
+        "builder_tag": "es-builder:latest"
     },
     "kafka": {
         "repo_name": "kafka",
@@ -81,38 +81,39 @@ def build_single_commit(config, toolkit_dir, project_dir, commit_sha, build_type
     
     status_file = os.path.join(results_dir, f"{build_type}_build_status.txt")
     builder_image_tag = config['builder_tag']
-    project_helper_dir = os.path.join(toolkit_dir, "helpers", config['repo_name'])
+    project_toolkit_dir = os.path.join(toolkit_dir, "helpers", config['repo_name'])
 
-    # --- 1. Set up Base Environment Variables ---
     build_env = os.environ.copy()
     build_env.update({
         "COMMIT_SHA": commit_sha,
         "BUILDER_IMAGE_TAG": builder_image_tag,
         "BUILD_STATUS_FILE": status_file,
         "PROJECT_DIR": project_dir,
-        "TOOLKIT_DIR": project_helper_dir, # Pass the helper dir as TOOLKIT_DIR
+        "TOOLKIT_DIR": project_toolkit_dir,
     })
 
-    # --- 2. Add build-system-specific variables ---
-    if config['build_system'] == 'make': # For JDKs
+    # Add specific env vars for different build systems
+    if config['build_system'] == 'make':
         build_env["BUILD_DIR_NAME"] = f"build_output_{short_sha}_{build_type}"
         build_env["BOOT_JDK"] = config['boot_jdk']
         build_env["JTREG_HOME"] = config['jtreg_home']
     
-    elif config['build_system'] == 'self-building': # For elasticsearch
+    elif config['build_system'] == 'gradle' or config['build_system'] == 'maven':
+        # This var is used by elasticsearch's script
         build_env["IMAGE_TAG"] = f"{config['repo_name']}-{build_type}-{short_sha}"
+        # This var is used by hadoop/kafka/druid
+        build_env["IMAGE_TAG_TO_BUILD"] = f"{config['repo_name']}-{build_type}-{short_sha}"
+        # This var is used by elasticsearch
         build_env["BUILD_DIR"] = os.path.join(results_dir, f"{build_type}_run", "build_output")
         os.makedirs(build_env["BUILD_DIR"], exist_ok=True)
-    
-    # Note: Kafka, Hadoop, Druid (gradle/maven) don't need extra env vars
-    # because run_build.sh handles them.
+
 
     build_status = "Fail (Script Error)"
     start_time = datetime.now()
     
     try:
         # Run the build
-        run_command(f"bash {project_helper_dir}/run_build.sh", env=build_env, check=True, cwd=toolkit_dir)
+        run_command(f"bash {project_toolkit_dir}/run_build.sh", env=build_env, check=True, cwd=toolkit_dir)
         
         # Read the status file
         try:
@@ -166,24 +167,26 @@ def main():
     # 3. Check for Project Repo
     if not os.path.isdir(PROJECT_DIR):
         print(f"\n--- ❌ ERROR: Project directory not found at {PROJECT_DIR}")
-        print(f"--- Please clone '{config['repo_name']}' into the parent folder (next to this repo).")
+        print(f"--- Please clone '{config['repo_name']}' into the parent folder (next to 'patch-bi-builder').")
         sys.exit(1)
 
-    # 4. Build the Builder Image (if not self-building)
+    # 4. Build the Builder Image
     builder_tag = config['builder_tag']
     dockerfile_path = os.path.join(TOOLKIT_DIR, "helpers", PROJECT_NAME, "Dockerfile")
-    
-    if config['build_system'] != 'self-building':
-        print(f"\n--- Building builder image '{builder_tag}'... ---")
-        try:
-            run_command(f"docker build -t {builder_tag} -f {dockerfile_path} {os.path.dirname(dockerfile_path)}")
-            print("--- Builder image is ready. ---")
-        except Exception as e:
-            print(f"--- ❌ ERROR: Failed to build Dockerfile at {dockerfile_path}")
-            print(e)
-            sys.exit(1)
-    else:
-        print(f"\n--- Skipping builder image (project '{PROJECT_NAME}' builds its own). ---")
+    print(f"\n--- Building builder image '{builder_tag}'... ---")
+    try:
+        # For Elasticsearch, use the project directory as build context so gradlew is available
+        if PROJECT_NAME == "elasticsearch":
+            build_context = PROJECT_DIR
+        else:
+            build_context = os.path.dirname(dockerfile_path)
+        
+        run_command(f"docker build -t {builder_tag} -f {dockerfile_path} {build_context}")
+        print("--- Builder image is ready. ---")
+    except Exception as e:
+        print(f"--- ❌ ERROR: Failed to build Dockerfile at {dockerfile_path}")
+        print(e)
+        sys.exit(1)
 
     # 5. Run the "After" Build
     after_status, after_time = build_single_commit(
@@ -192,7 +195,6 @@ def main():
     
     before_status = "Skipped"
     before_time = 0
-    parent_commit = "" # For cleanup
 
     # 6. Run the "Before" Build (if requested)
     if args.build_before:
@@ -215,23 +217,7 @@ def main():
             before_status = "Fail (Error)"
 
     # 7. Final Cleanup
-    print("\n--- Cleaning up build environment... ---")
-    
-    # Clean up build artifacts from repo
-    run_command(f"sudo rm -rf {PROJECT_DIR}/build_output_*", check=False, capture_output=True)
-    
-    # Clean up Docker images
-    if config['build_system'] == 'self-building':
-        # For elasticsearch, rmi the images it just built
-        after_tag = f"{config['repo_name']}-{build_type}-{COMMIT_SHA[:7]}"
-        before_tag = ""
-        if before_status != "Skipped" and parent_commit:
-             before_tag = f"{config['repo_name']}-{build_type}-{parent_commit[:7]}"
-        run_command(f"docker rmi -f {after_tag} {before_tag}", check=False, capture_output=True)
-    else:
-        # For all other projects, rmi the builder image
-        run_command(f"docker rmi -f {builder_tag}", check=False, capture_output=True)
-
+    print("\n--- Cleaning up Docker build cache... ---")
     run_command("docker builder prune -a -f", check=False, capture_output=True)
     
     # 8. Write Final Report
@@ -242,7 +228,6 @@ def main():
     report_content = (
         f"Project:         {PROJECT_NAME}\n"
         f"Commit (After):  {COMMIT_SHA}\n"
-        f"Parent (Before): {parent_commit if parent_commit else 'N/A'}\n"
         f"----------------------------------\n"
         f"Status (After):  {after_status}\n"
         f"Build Time:      {after_time:.2f}s\n"

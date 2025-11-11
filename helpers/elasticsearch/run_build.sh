@@ -5,7 +5,7 @@ set -e # Exit on error
 echo "--- Building code for ${COMMIT_SHA:0:7} ---"
 
 echo "--- Changing directory to ${PROJECT_DIR} ---"
-cd ${PROJECT_DIR}"
+cd "${PROJECT_DIR}"
 
 echo "--- Checking out commit... ---"
 git checkout ${COMMIT_SHA}
