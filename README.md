@@ -1,33 +1,65 @@
-# 🔧 Java Backports Patch Bi-Builder
+# JavaBackports: A Dataset for Benchmarking Automated Backporting in Java
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![Docker](https://img.shields.io/badge/docker-required-blue.svg)](https://www.docker.com/)
+[![Dataset](https://img.shields.io/badge/dataset-474%20backports-blue.svg)](#-dataset-overview)
+[![Projects](https://img.shields.io/badge/projects-8%20Java%20repos-green.svg)](#-included-projects)
 
-A comprehensive replication toolkit for building and testing Java backport patches across multiple projects. This repository contains the build scripts and datasets used in our MSR paper research, enabling reproducible builds for any given commit across various Java projects.
 
-## 📋 Table of Contents
 
-- [Features](#-features)
-- [Prerequisites](#-prerequisites)
-- [Setup](#-setup)
-- [Usage](#-usage)
+
+## Dataset Overview
+
+The JavaBackports dataset contains **474 manually validated backport instances** spanning across 8 major Java projects. Each backport represents a real-world scenario where a patch from a main development branch was adapted and applied to a long-term support or stable release branch.
+
+
+### Dataset Schema
+
+Each CSV file contains the following columns:
+
+| Column | Description |
+|--------|-------------|
+| `Project` | Name of the source project (e.g., "kafka", "druid", "jdk17u-dev") |
+| `Original Version` | Source branch/version where the original patch was applied (e.g., "trunk", "master") |
+| `Original Commit` | SHA hash of the original commit in the source branch |
+| `Backport Version` | Target branch/version where the backport was applied (e.g., "3.6", "29.0.1") |
+| `Backport Commit` | SHA hash of the backported commit in the target branch |
+| `Backport Date` | DateTime | Timestamp when the backport was committed |
+| `Type` | Classification of backport complexity (TYPE-I, TYPE-II, ... TYPE-V) |
+
+
+## Included Projects
+
+The dataset covers 8 major Java projects representing different domains:
+
+| Project | Repository | Domain |
+|---------|------------|--------|
+| **Apache Druid** | [apache/druid](https://github.com/apache/druid) | Real-time analytics database |
+| **Elasticsearch** | [elastic/elasticsearch](https://github.com/elastic/elasticsearch) | Search and analytics engine |
+| **Apache Hadoop** | [apache/hadoop](https://github.com/apache/hadoop) | Distributed computing framework |
+| **Apache Kafka** | [apache/kafka](https://github.com/apache/kafka) | Distributed streaming platform |
+| **OpenJDK 8** | [openjdk/jdk8u-dev](https://github.com/openjdk/jdk8u-dev) | Java Development Kit 8 LTS |
+| **OpenJDK 11** | [openjdk/jdk11u-dev](https://github.com/openjdk/jdk11u-dev) | Java Development Kit 11 LTS |
+| **OpenJDK 17** | [openjdk/jdk17u-dev](https://github.com/openjdk/jdk17u-dev) | Java Development Kit 17 LTS |
+| **OpenJDK 21** | [openjdk/jdk21u-dev](https://github.com/openjdk/jdk21u-dev) | Java Development Kit 21 LTS |
+
+
+---
+
+# Build Tool
+
+This repository also includes a comprehensive build tool for reproducing and testing the backport instances in containerized environments. The tool enables researchers to replicate builds for any commit in the dataset.
+
+## Table of Contents
+
+- [Prerequisites](#-prerequisites-1)
+- [Setup](#-setup-1)
+- [Usage](#-usage-1)
 - [Supported Projects](#-supported-projects)
 - [Directory Structure](#-directory-structure)
-- [Contributing](#-contributing)
-- [License](#-license)
 
-## ✨ Features
+## Prerequisites
 
-- **Multi-project support**: Build commits across Kafka, Hadoop, JDK versions, Elasticsearch, and Druid
-- **Docker-based isolation**: Consistent build environments using containerization
-- **Before/after comparison**: Build both buggy and fixed versions of commits
-- **Automated result tracking**: Organized output in `build_results/` directory
-- **Comprehensive datasets**: Pre-collected commit datasets for research replication
-
-## 📋 Prerequisites
-
-Before you begin, ensure you have the following tools installed on your system:
+Before using the build tool, ensure you have the following installed:
 
 > **Recommended OS**: Ubuntu/Debian-based Linux (Windows and macOS may require additional configuration)
 
@@ -40,7 +72,7 @@ Before you begin, ensure you have the following tools installed on your system:
 | **pip** | Latest | Installing Python dependencies |
 | **Docker** | Latest | Containerized build environments |
 
-### 🐋 Docker Setup (Critical)
+### Docker Setup (Critical)
 
 **Important**: You must configure Docker to run without `sudo` privileges:
 
@@ -61,7 +93,7 @@ newgrp docker
 docker run hello-world
 ```
 
-## 🚀 Setup
+## Setup
 
 ### Step 1: Install Python Dependencies
 
@@ -80,7 +112,7 @@ cd javabackports
 
 ### Step 3: Set Up Project Repositories
 
-> 🎯 **Critical Step**: The build scripts expect project repositories to be located in the **parent directory** of this toolkit.
+> **Critical Step**: The build scripts expect project repositories to be located in the **parent directory** of this toolkit.
 
 Clone the project repositories you want to test **adjacent** to this repository:
 
@@ -128,7 +160,7 @@ Your workspace must follow this exact structure:
 └── 📁 druid/                      ← Apache Druid repository
 ```
 
-## 🔨 Usage
+## Usage
 
 All builds are executed from the `javabackports` directory using the `build_commit.py` script.
 
@@ -146,7 +178,7 @@ All builds are executed from the `javabackports` directory using the `build_comm
 python3 build_commit.py --project <PROJECT_NAME> --commit <COMMIT_HASH> [--build-before]
 ```
 
-### 📚 Examples
+### Examples
 
 #### Example 1: Build Fixed Version Only
 
@@ -180,7 +212,7 @@ You can use shortened commit hashes:
 python3 build_commit.py --project elasticsearch --commit a1b2c3d --build-before
 ```
 
-### 📊 Viewing Results
+### Viewing Results
 
 - **Live Output**: All build logs stream directly to your terminal in real-time
 - **Saved Results**: Build artifacts and status files are automatically saved to:
@@ -193,20 +225,6 @@ python3 build_commit.py --project elasticsearch --commit a1b2c3d --build-before
   │       └── build_logs/
   ```
 
-## 🎯 Supported Projects
-
-This toolkit supports the following projects with pre-configured build environments:
-
-| Project | Repository | Description | Dataset |
-|---------|------------|-------------|---------|
-| **Kafka** | [apache/kafka](https://github.com/apache/kafka) | Distributed streaming platform | `dataset/kafka.csv` |
-| **Hadoop** | [apache/hadoop](https://github.com/apache/hadoop) | Distributed storage and processing | `dataset/hadoop.csv` |
-| **JDK 8** | [openjdk/jdk8u-dev](https://github.com/openjdk/jdk8u-dev) | Java Development Kit 8 | `dataset/jdk8u-dev.csv` |
-| **JDK 11** | [openjdk/jdk11u-dev](https://github.com/openjdk/jdk11u-dev) | Java Development Kit 11 | `dataset/jdk11u-dev.csv` |
-| **JDK 17** | [openjdk/jdk17u-dev](https://github.com/openjdk/jdk17u-dev) | Java Development Kit 17 | `dataset/jdk17u-dev.csv` |
-| **JDK 21** | [openjdk/jdk21u-dev](https://github.com/openjdk/jdk21u-dev) | Java Development Kit 21 | `dataset/jdk21u-dev.csv` |
-| **Elasticsearch** | [elastic/elasticsearch](https://github.com/elastic/elasticsearch) | Search and analytics engine | `dataset/elasticsearch.csv` |
-| **Druid** | [apache/druid](https://github.com/apache/druid) | Real-time analytics database | `dataset/druid.csv` |
 
 ## 📁 Directory Structure
 
@@ -217,6 +235,7 @@ javabackports/
 ├── 📄 README.md                    # This file
 │
 ├── 📁 dataset/                     # Research datasets
+│   ├── all_projects_combined.csv  # Complete dataset (474 instances)
 │   ├── kafka.csv                  # Kafka commit dataset
 │   ├── hadoop.csv                 # Hadoop commit dataset
 │   ├── jdk8u-dev.csv             # JDK 8 commit dataset
@@ -256,24 +275,3 @@ javabackports/
         ├── Dockerfile
         └── run_build.sh
 ```
-
-## 🤝 Contributing
-
-We welcome contributions to improve this toolkit! Please:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-<div align="center">
-  <strong>🔧 Happy Building! 🔧</strong><br>
-  <em>If you encounter any issues, please check the Docker setup and directory structure first.</em>
-</div>
