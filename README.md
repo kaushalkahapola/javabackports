@@ -1,6 +1,5 @@
 # JavaBackports: A Dataset for Benchmarking Automated Backporting in Java
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Dataset](https://img.shields.io/badge/dataset-474%20backports-blue.svg)](#-dataset-overview)
 [![Projects](https://img.shields.io/badge/projects-8%20Java%20repos-green.svg)](#-included-projects)
 
@@ -231,7 +230,6 @@ python3 build_commit.py --project elasticsearch --commit a1b2c3d --build-before
 ```
 javabackports/
 ├── 📄 build_commit.py              # Main build orchestrator
-├── 📄 LICENSE                      # MIT License
 ├── 📄 README.md                    # This file
 │
 ├── 📁 dataset/                     # Research datasets
