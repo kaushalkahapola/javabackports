@@ -21,12 +21,12 @@ mkdir -p "${BUILD_DIR_ABS}"
 cd "${BUILD_DIR_ABS}"
 
 echo "--- Configuring build from outside source dir... ---"
-# Call configure using a relative path and flags from reference script
+# JDK 8 configure options (different from JDK 11+)
+# Note: --disable-warnings-as-errors does NOT exist in JDK 8
 bash ../configure \
     --with-boot-jdk="${BOOT_JDK}" \
     --with-jtreg="${JTREG_HOME}" \
     --enable-ccache \
-    --disable-warnings-as-errors \
     --with-debug-level=release \
     --with-native-debug-symbols=none \
     --disable-zip-debug-info
@@ -35,7 +35,11 @@ bash ../configure \
 echo "--- Running make... (Output will be in ${BUILD_DIR_ABS}) ---"
 
 # Run 'make' from inside the build dir.
-# Add the COMPILER_WARNINGS_FATAL=false flag from reference script
-make JOBS="${MAKE_JOBS:-$(nproc)}" images COMPILER_WARNINGS_FATAL=false
-
-echo "=== Build OK ==="
+# For JDK 8, use 'all' target instead of 'images'
+# and use COMPILER_WARNINGS_FATAL=false
+if make JOBS="${MAKE_JOBS:-$(nproc)}" all COMPILER_WARNINGS_FATAL=false; then
+    echo "=== Build OK ==="
+else
+    echo "=== Build FAILED ==="
+    exit 1
+fi
