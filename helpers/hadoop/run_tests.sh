@@ -42,11 +42,3 @@ else
     echo "❌ Tests Failed"
     exit 1
 fi
-```
-
-### How to Enable This
-
-1.  Create these two files in `helpers/hadoop/`.
-2.  Make the shell script executable:
-    ```bash
-    chmod +x helpers/hadoop/run_tests.sh
