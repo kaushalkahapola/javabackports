@@ -1,8 +1,10 @@
 # JavaBackports: A Dataset for Benchmarking Automated Backporting in Java
 
-[](https://www.google.com/search?q=LICENSE)
-[](https://www.google.com/search?q=%23-dataset-overview)
-[](https://www.google.com/search?q=%23-included-projects)
+[![Dataset](https://img.shields.io/badge/dataset-474%20backports-blue.svg)](#-dataset-overview)
+[![Projects](https://img.shields.io/badge/projects-8%20Java%20repos-green.svg)](#-included-projects)
+
+
+
 
 ## Dataset Overview
 
@@ -196,31 +198,3 @@ python3 build_commit.py --project druid --commit <SHA> --build-before --run-test
     │       └── final_build_report.txt    # Summary including test results
     ```
 
-## 📁 Directory Structure
-
-```
-javabackports/
-├── 📄 build_commit.py              # Main orchestrator script
-├── 📄 README.md                    # This file
-│
-├── 📁 dataset/                     # Research datasets
-│   ├── kafka.csv
-│   └── ...
-│
-└── 📁 helpers/                     # Docker & Script configurations
-    ├── kafka/
-    │   ├── Dockerfile              # Environment definition
-    │   ├── run_build.sh            # Build logic
-    │   ├── run_tests.sh            # Test execution logic
-    │   └── get_test_targets.py     # Smart filtering logic
-    │
-    ├── jdk8u-dev/
-    │   ├── Dockerfile
-    │   ├── build.sh                # Internal container build script
-    │   ├── run_build.sh            # External build runner
-    │   ├── test.sh                 # Internal container test script
-    │   ├── run_tests.sh            # External test runner
-    │   └── get_test_targets.py     # Smart filtering logic
-    │
-    └── ... (similar structure for other projects)
-```
