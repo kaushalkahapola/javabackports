@@ -124,6 +124,9 @@ def run_tests(config, toolkit_dir, project_dir, commit_sha, build_type, results_
         test_env["JTREG_HOME"] = config['jtreg_home']
         test_env["BUILD_DIR_NAME"] = f"build_output_{commit_sha[:7]}_{build_type}"
 
+    elif config['build_system'] == 'self-building':
+        test_env["BUILD_TYPE"] = build_type
+
     run_tests_script = os.path.join(project_helper_dir, "run_tests.sh")
     if not os.path.exists(run_tests_script):
         print(f"--- ❌ Error: {run_tests_script} not found. ---")
