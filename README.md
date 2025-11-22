@@ -1,16 +1,12 @@
 # JavaBackports: A Dataset for Benchmarking Automated Backporting in Java
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Dataset](https://img.shields.io/badge/dataset-474%20backports-blue.svg)](#-dataset-overview)
-[![Projects](https://img.shields.io/badge/projects-8%20Java%20repos-green.svg)](#-included-projects)
-
-
-
+[](https://www.google.com/search?q=LICENSE)
+[](https://www.google.com/search?q=%23-dataset-overview)
+[](https://www.google.com/search?q=%23-included-projects)
 
 ## Dataset Overview
 
 The JavaBackports dataset contains **474 manually validated backport instances** spanning across 8 major Java projects. Each backport represents a real-world scenario where a patch from a main development branch was adapted and applied to a long-term support or stable release branch.
-
 
 ### Dataset Schema
 
@@ -25,7 +21,6 @@ Each CSV file contains the following columns:
 | `Backport Commit` | SHA hash of the backported commit in the target branch |
 | `Backport Date` | DateTime | Timestamp when the backport was committed |
 | `Type` | Classification of backport complexity (TYPE-I, TYPE-II, ... TYPE-V) |
-
 
 ## Included Projects
 
@@ -42,20 +37,19 @@ The dataset covers 8 major Java projects representing different domains:
 | **OpenJDK 17** | [openjdk/jdk17u-dev](https://github.com/openjdk/jdk17u-dev) | Java Development Kit 17 LTS |
 | **OpenJDK 21** | [openjdk/jdk21u-dev](https://github.com/openjdk/jdk21u-dev) | Java Development Kit 21 LTS |
 
+-----
 
----
+# Build & Test Tool
 
-# Build Tool
-
-This repository also includes a comprehensive build tool for reproducing and testing the backport instances in containerized environments. The tool enables researchers to replicate builds for any commit in the dataset.
+This repository also includes a comprehensive build and test orchestration tool. It enables researchers to replicate builds and run regression tests for any commit in the dataset using containerized environments.
 
 ## Table of Contents
 
-- [Prerequisites](#-prerequisites-1)
-- [Setup](#-setup-1)
-- [Usage](#-usage-1)
-- [Supported Projects](#-supported-projects)
-- [Directory Structure](#-directory-structure)
+  - [Prerequisites](https://www.google.com/search?q=%23-prerequisites-1)
+  - [Setup](https://www.google.com/search?q=%23-setup-1)
+  - [Usage](https://www.google.com/search?q=%23-usage-1)
+  - [Supported Projects](https://www.google.com/search?q=%23-supported-projects)
+  - [Directory Structure](https://www.google.com/search?q=%23-directory-structure)
 
 ## Prerequisites
 
@@ -70,7 +64,7 @@ Before using the build tool, ensure you have the following installed:
 | **Git** | Latest | Source code management |
 | **Python** | 3.8+ | Running build scripts |
 | **pip** | Latest | Installing Python dependencies |
-| **Docker** | Latest | Containerized build environments |
+| **Docker** | Latest | Containerized build/test environments |
 
 ### Docker Setup (Critical)
 
@@ -84,20 +78,9 @@ sudo usermod -aG docker $USER
 newgrp docker
 ```
 
-> ⚠️ **Warning**: You must log out and log back in after running the `usermod` command for changes to take effect.
-
-### Verify Docker Installation
-
-```bash
-# Test Docker without sudo
-docker run hello-world
-```
-
 ## Setup
 
 ### Step 1: Install Python Dependencies
-
-Install the required Python packages:
 
 ```bash
 pip3 install pandas
@@ -106,7 +89,7 @@ pip3 install pandas
 ### Step 2: Clone This Repository
 
 ```bash
-git clone https://github.com/kaushalkahapola/javabackports.git
+git clone https://github.com/your-repo/javabackports.git
 cd javabackports
 ```
 
@@ -124,11 +107,7 @@ cd ..
 git clone https://github.com/apache/kafka.git
 git clone https://github.com/apache/hadoop.git
 git clone https://github.com/openjdk/jdk17u-dev.git
-git clone https://github.com/openjdk/jdk11u-dev.git
-git clone https://github.com/openjdk/jdk8u-dev.git
-git clone https://github.com/openjdk/jdk21u-dev.git
-git clone https://github.com/elastic/elasticsearch.git
-git clone https://github.com/apache/druid.git
+# ... (clone other projects as needed)
 ```
 
 ### Required Directory Structure
@@ -139,139 +118,109 @@ Your workspace must follow this exact structure:
 📁 your-research-workspace/
 │
 ├── 📁 javabackports/              ← This repository
-│   ├── 📄 build_commit.py         ← Main build script
+│   ├── 📄 build_commit.py         ← Main orchestrator
 │   ├── 📄 README.md
 │   ├── 📁 dataset/                ← Commit datasets
-│   │   ├── kafka.csv
-│   │   ├── hadoop.csv
-│   │   └── ...
-│   └── 📁 helpers/                ← Docker configurations
+│   └── 📁 helpers/                ← Build & Test logic
 │       ├── kafka/
 │       ├── hadoop/
 │       └── ...
 │
 ├── 📁 kafka/                      ← Apache Kafka repository
 ├── 📁 hadoop/                     ← Apache Hadoop repository  
-├── 📁 jdk17u-dev/                 ← OpenJDK 17 repository
-├── 📁 jdk11u-dev/                 ← OpenJDK 11 repository
-├── 📁 jdk8u-dev/                  ← OpenJDK 8 repository
-├── 📁 jdk21u-dev/                 ← OpenJDK 21 repository
-├── 📁 elasticsearch/              ← Elasticsearch repository
-└── 📁 druid/                      ← Apache Druid repository
+└── ...
 ```
 
 ## Usage
 
-All builds are executed from the `javabackports` directory using the `build_commit.py` script.
+All operations are executed from the `javabackports` directory using the `build_commit.py` script.
 
 ### Command Line Arguments
 
-| Argument | Short | Required | Description |
-|----------|-------|----------|-------------|
-| `--project` | `-p` | ✅ Yes | Name of the project to build |
-| `--commit` | `-c` | ✅ Yes | Commit hash to build (the "after"/"fixed" version) |
-| `--build-before` | `-b` | ❌ No | Also build the parent commit ("before"/"buggy" version) |
+| Argument | Short | Description | Default |
+|----------|-------|-------------|---------|
+| `--project` | `-p` | **(Required)** Name of the project to build | - |
+| `--commit` | `-c` | **(Required)** Commit hash to build (the "after"/"fixed" version) | - |
+| `--build-before` | `-b` | Also build the parent commit ("before"/"buggy" version) | False |
+| `--run-tests` | | Run tests after a successful build | False |
+| `--test-target` | | Which version to test: `fixed`, `buggy`, or `both` | `fixed` |
+| `--test-strategy` | | Test selection mode: `smart` (filtered) or `all` (full suite) | `smart` |
 
-### Basic Command Structure
+### Basic Build Examples
 
-```bash
-python3 build_commit.py --project <PROJECT_NAME> --commit <COMMIT_HASH> [--build-before]
-```
-
-### Examples
-
-#### Example 1: Build Fixed Version Only
-
-Build the "after" (fixed) version of a Kafka commit:
+**Build Fixed Version Only:**
 
 ```bash
 python3 build_commit.py --project kafka --commit 6351bc05aafc8ba480e9f85ab702e67e48416953
 ```
 
-#### Example 2: Build Both Versions
-
-Build **both** "before" (buggy) and "after" (fixed) versions for comparison:
+**Build Both Versions:**
 
 ```bash
 python3 build_commit.py --project hadoop --commit e6cf6e6 --build-before
 ```
 
-#### Example 3: Build JDK Commit
+### Test Execution Examples
 
-Build a specific JDK 17 commit:
+**Build & Smart Test (Recommended):**
+This uses `get_test_targets.py` to analyze the git diff and run only relevant tests/modules.
 
 ```bash
-python3 build_commit.py --project jdk17u-dev --commit ffa7dd545d654060803405786375c879d2b8b937
+python3 build_commit.py --project jdk8u-dev --commit <SHA> --run-tests
 ```
 
-#### Example 4: Build with Short Commit Hash
-
-You can use shortened commit hashes:
+**Build & Run ALL Tests:**
+Warning: This can take hours depending on the project.
 
 ```bash
-python3 build_commit.py --project elasticsearch --commit a1b2c3d --build-before
+python3 build_commit.py --project kafka --commit <SHA> --run-tests --test-strategy all
+```
+
+**Test Both Versions (Regression Check):**
+Builds and tests both the buggy and fixed versions to verify the fix.
+
+```bash
+python3 build_commit.py --project druid --commit <SHA> --build-before --run-tests --test-target both
 ```
 
 ### Viewing Results
 
-- **Live Output**: All build logs stream directly to your terminal in real-time
-- **Saved Results**: Build artifacts and status files are automatically saved to:
-  ```
-  build_results/
-  ├── <project_name>/
-  │   └── <commit_hash>/
-  │       ├── fixed_build_status.txt
-  │       ├── buggy_build_status.txt (if --build-before used)
-  │       └── build_logs/
-  ```
-
+  - **Live Output**: Build and test logs stream directly to your terminal.
+  - **Saved Results**: Artifacts are saved locally to `build_results/`:
+    ```
+    build_results/
+    ├── <project_name>/
+    │   └── <commit_hash>/
+    │       ├── fixed_build_status.txt    # Success / Fail
+    │       ├── buggy_build_status.txt    # Success / Fail
+    │       └── final_build_report.txt    # Summary including test results
+    ```
 
 ## 📁 Directory Structure
 
 ```
 javabackports/
-├── 📄 build_commit.py              # Main build orchestrator
-├── 📄 LICENSE                      # MIT License
+├── 📄 build_commit.py              # Main orchestrator script
 ├── 📄 README.md                    # This file
 │
 ├── 📁 dataset/                     # Research datasets
-│   ├── all_projects_combined.csv  # Complete dataset (474 instances)
-│   ├── kafka.csv                  # Kafka commit dataset
-│   ├── hadoop.csv                 # Hadoop commit dataset
-│   ├── jdk8u-dev.csv             # JDK 8 commit dataset
-│   ├── jdk11u-dev.csv            # JDK 11 commit dataset
-│   ├── jdk17u-dev.csv            # JDK 17 commit dataset
-│   ├── jdk21u-dev.csv            # JDK 21 commit dataset
-│   ├── elasticsearch.csv          # Elasticsearch commit dataset
-│   └── druid.csv                  # Druid commit dataset
+│   ├── kafka.csv
+│   └── ...
 │
-└── 📁 helpers/                     # Docker build configurations
-    ├── kafka/                     # Kafka build environment
+└── 📁 helpers/                     # Docker & Script configurations
+    ├── kafka/
+    │   ├── Dockerfile              # Environment definition
+    │   ├── run_build.sh            # Build logic
+    │   ├── run_tests.sh            # Test execution logic
+    │   └── get_test_targets.py     # Smart filtering logic
+    │
+    ├── jdk8u-dev/
     │   ├── Dockerfile
-    │   └── run_build.sh
-    ├── hadoop/                    # Hadoop build environment
-    │   ├── Dockerfile
-    │   └── run_build.sh
-    ├── jdk8u-dev/                # JDK 8 build environment
-    │   ├── Dockerfile
-    │   ├── build.sh
-    │   └── run_build.sh
-    ├── jdk11u-dev/               # JDK 11 build environment
-    │   ├── Dockerfile
-    │   ├── build.sh
-    │   └── run_build.sh
-    ├── jdk17u-dev/               # JDK 17 build environment
-    │   ├── Dockerfile
-    │   ├── build.sh
-    │   └── run_build.sh
-    ├── jdk21u-dev/               # JDK 21 build environment
-    │   ├── Dockerfile
-    │   ├── build.sh
-    │   └── run_build.sh
-    ├── elasticsearch/             # Elasticsearch build environment
-    │   ├── Dockerfile
-    │   └── run_build.sh
-    └── druid/                     # Druid build environment
-        ├── Dockerfile
-        └── run_build.sh
+    │   ├── build.sh                # Internal container build script
+    │   ├── run_build.sh            # External build runner
+    │   ├── test.sh                 # Internal container test script
+    │   ├── run_tests.sh            # External test runner
+    │   └── get_test_targets.py     # Smart filtering logic
+    │
+    └── ... (similar structure for other projects)
 ```
