@@ -22,5 +22,29 @@
       "all_failures_after": [],
       "all_failures_before": []
     }
+  },
+  {
+    "index": 1,
+    "commit": "8867d017b18ad7cd8842b9324c5c031a44a58064",
+    "parent": "5c7f201af69a500b06a345f84a5b1ce550b605b2",
+    "build_status_after": "Success",
+    "test_status_after": "Crash/Timeout",
+    "build_status_before": "Success",
+    "test_status_before": "Success",
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
   }
 ]

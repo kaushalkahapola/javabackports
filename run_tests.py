@@ -39,7 +39,6 @@ PROJECT_CONFIG = {
     },
     "jdk8u-dev": {
         "repo_dir": "jdk8u-dev",
-        # JTReg XMLs are usually in JTwork/ or JTreport/
         "report_pattern": "**/JTwork/**/*.xml", 
         "builder_tag": "jdk8-builder:latest",
         "build_system": "make",
@@ -72,16 +71,21 @@ PROJECT_CONFIG = {
     }
 }
 
-def run_command(command, env=None, check=True, cwd=None):
+# --- FIX 1: Allow **kwargs to support capture_output ---
+def run_command(command, env=None, check=True, cwd=None, **kwargs):
     """Runs a shell command and prints output."""
-    print(f"CMD: {command}", flush=True)
+    # Only print command if we are not capturing output (to keep logs clean)
+    if not kwargs.get("capture_output"):
+        print(f"CMD: {command}", flush=True)
+    
     process_env = os.environ.copy()
     if env:
         process_env.update(env)
+    
     # We use shell=True to easily handle complex bash strings
-    return subprocess.run(command, shell=True, check=check, env=process_env, cwd=cwd)
+    return subprocess.run(command, shell=True, check=check, env=process_env, cwd=cwd, **kwargs)
 
-def parse_test_results(results_dir, project_name):
+def parse_test_results(results_dir):
     """
     Scans the results directory for XML files and parses them.
     Returns: (set(passed_tests), set(failed_tests))
@@ -89,12 +93,8 @@ def parse_test_results(results_dir, project_name):
     passed = set()
     failed = set()
     
-    # Get the glob pattern for this project
-    pattern = PROJECT_CONFIG[project_name]["report_pattern"]
-    search_path = os.path.join(results_dir, pattern)
-    
-    # Recursive glob to find all XMLs
-    xml_files = glob.glob(search_path, recursive=True)
+    # Recursive glob to find all XMLs in the temp folder
+    xml_files = glob.glob(os.path.join(results_dir, "**/*.xml"), recursive=True)
     
     print(f"--- Parsing {len(xml_files)} test report files in {results_dir} ---")
 
@@ -104,18 +104,14 @@ def parse_test_results(results_dir, project_name):
             root = tree.getroot()
             
             # Handle standard JUnit XML format
-            # Iterate over <testcase> elements
             for testcase in root.iter('testcase'):
-                # Construct unique test name: ClassName.MethodName
                 classname = testcase.get('classname', 'UnknownClass')
                 name = testcase.get('name', 'UnknownTest')
                 full_name = f"{classname}.{name}"
                 
-                # Check for failure or error tags
                 if testcase.find('failure') is not None or testcase.find('error') is not None:
                     failed.add(full_name)
                 else:
-                    # Ensure skipped tests aren't counted as passed
                     if testcase.find('skipped') is None:
                         passed.add(full_name)
                         
@@ -140,6 +136,26 @@ def get_smart_test_targets(toolkit_dir, project_dir, commit_sha, project_name):
         return targets if targets else "NONE"
     except:
         return "ALL"
+
+def collect_test_reports(project_name, project_repo_dir, dest_dir):
+    """
+    Copies test reports from the project repo to our temp analysis folder.
+    """
+    pattern = PROJECT_CONFIG[project_name]["report_pattern"]
+    # Use glob inside the repo dir
+    search_path = os.path.join(project_repo_dir, pattern)
+    found_files = glob.glob(search_path, recursive=True)
+    
+    print(f"--- Collecting {len(found_files)} report files from {pattern} ---")
+    
+    for f in found_files:
+        try:
+            # Create a unique filename to avoid overwrites if multiple modules have same filename
+            # e.g. repo/moduleA/TEST-x.xml -> dest/moduleA_TEST-x.xml
+            rel_path = os.path.relpath(f, project_repo_dir).replace("/", "_")
+            shutil.copy2(f, os.path.join(dest_dir, rel_path))
+        except Exception as e:
+            print(f"Warning: Failed to copy {f}: {e}")
 
 def execute_lifecycle(project_name, commit_sha, state, toolkit_dir, project_repo_dir, work_dir):
     """
@@ -166,7 +182,7 @@ def execute_lifecycle(project_name, commit_sha, state, toolkit_dir, project_repo
         "TOOLKIT_DIR": os.path.join(toolkit_dir, "helpers", project_name),
         "BUILDER_IMAGE_TAG": config['builder_tag'],
         "BUILD_STATUS_FILE": status_file,
-        "BUILD_DIR_NAME": f"build_{commit_sha[:7]}_{state}" # For Make/JDK
+        "BUILD_DIR_NAME": f"build_{commit_sha[:7]}_{state}" 
     }
     
     # Add JDK specific envs
@@ -198,25 +214,24 @@ def execute_lifecycle(project_name, commit_sha, state, toolkit_dir, project_repo
 
     # 5. Run Tests
     env["TEST_TARGETS"] = test_targets
-    # Important: Mount the test output dir so we can parse results on host
     env["TEST_REPORT_DIR"] = test_output_dir 
-    # For self-building (Elasticsearch), we need to pass BUILD_TYPE
     if config['build_system'] == 'self-building':
         env["BUILD_TYPE"] = state
 
     test_script = os.path.join(toolkit_dir, "helpers", project_name, "run_tests.sh")
     try:
-        # We use check=False because tests might fail, but script execution itself worked
         proc = run_command(f"bash {test_script}", env=env, check=False)
         test_status = "Success" if proc.returncode == 0 else "Fail"
     except:
         test_status = "Error"
 
+    # --- FIX 2: COPY RESULTS ---
+    # Explicitly copy XMLs from repo to our temp directory before parsing
+    collect_test_reports(project_name, project_repo_dir, test_output_dir)
+
     # 6. Parse Results
-    # We look in the mounted directory on the host
-    passed, failed = parse_test_results(test_output_dir, project_name)
+    passed, failed = parse_test_results(test_output_dir)
     
-    # If tests failed but we found 0 failed tests in XML, it might be a crash
     if test_status == "Fail" and len(failed) == 0:
         test_status = "Crash/Timeout"
 
@@ -277,7 +292,7 @@ def main():
     # Iterate
     for idx in range(args.start_index, end_index):
         row = df.iloc[idx]
-        commit_sha = row['Backport Commit'] # Assuming column name from your dataset schema
+        commit_sha = row['Backport Commit'] 
         
         print(f"\n\n=== [{idx}/{total_rows}] Processing {commit_sha} ===")
 
@@ -285,7 +300,6 @@ def main():
             print(f"--- Skipping {commit_sha} (Already processed) ---")
             continue
 
-        # Determine Parent Commit
         try:
             res = subprocess.run(f"git rev-parse {commit_sha}^", shell=True, cwd=project_repo_dir, capture_output=True, text=True)
             parent_sha = res.stdout.strip()
@@ -293,7 +307,7 @@ def main():
             print("Error finding parent commit.")
             continue
 
-        # Create temp work dir for this specific run
+        # Create temp work dir
         work_dir = os.path.join(toolkit_dir, "temp_work", commit_sha)
         if os.path.exists(work_dir): shutil.rmtree(work_dir)
         os.makedirs(work_dir)
@@ -302,20 +316,14 @@ def main():
         after_res = execute_lifecycle(project_name, commit_sha, "fixed", toolkit_dir, project_repo_dir, work_dir)
         
         # --- EXECUTE BEFORE (Buggy) ---
-        # Only run if After built successfully (saves time)
         if after_res["build"] == "Success":
             before_res = execute_lifecycle(project_name, parent_sha, "buggy", toolkit_dir, project_repo_dir, work_dir)
         else:
             before_res = {"build": "Skipped", "test": "Skipped", "passed": set(), "failed": set()}
 
         # --- ANALYZE RESULTS ---
-        # Regressions: Passed in Before -> Failed in After
         regressions = list(before_res["passed"].intersection(after_res["failed"]))
-        
-        # Fixes: Failed in Before -> Passed in After
         fixes = list(before_res["failed"].intersection(after_res["passed"]))
-        
-        # Persistent Failures: Failed in Both
         persistent = list(before_res["failed"].intersection(after_res["failed"]))
 
         result_entry = {
@@ -346,12 +354,9 @@ def main():
         full_results_data.append(result_entry)
 
         # --- SAVE RESULTS (Incremental) ---
-        # Save JSON
         with open(results_json, 'w') as f:
             json.dump(full_results_data, f, indent=2)
         
-        # Save CSV (Summary)
-        # We flatten the stats for the CSV
         csv_row = {
             "commit": commit_sha,
             "build_after": after_res["build"],
@@ -362,7 +367,6 @@ def main():
             "fixes": len(fixes)
         }
         
-        # Append to CSV file
         csv_df = pd.DataFrame([csv_row])
         if not os.path.exists(results_csv):
             csv_df.to_csv(results_csv, index=False)
@@ -372,14 +376,12 @@ def main():
         print(f"--- Results saved for {commit_sha} ---")
         
         # --- CLEANUP ---
-        # Remove the temp work directory to save space
         if os.path.exists(work_dir):
             shutil.rmtree(work_dir)
         
-        # Prune Docker
         run_command("docker builder prune -a -f", check=False, capture_output=True)
         if project_name == "elasticsearch":
-             run_command(f"docker rmi -f elasticsearch-fixed-{commit_sha[:7]} elasticsearch-buggy-{parent_sha[:7]}", check=False)
+             run_command(f"docker rmi -f elasticsearch-fixed-{commit_sha[:7]} elasticsearch-buggy-{parent_sha[:7]}", check=False, capture_output=True)
 
     print("\n=== EXPERIMENT RUN COMPLETE ===")
 
