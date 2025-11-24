@@ -94,7 +94,6 @@ def parse_console_output(console_text):
         failed.add(test_name)
 
     # Extract Passed (Approximation from summary if available)
-    # Pattern: Passed: java/lang/String/StringTest.java
     pass_matches = re.findall(r"^Passed:\s+(.+)$", console_text, re.MULTILINE)
     for p in pass_matches:
         test_name = p.replace("/", ".").replace(".java", "")
@@ -146,32 +145,35 @@ def get_smart_test_targets(toolkit_dir, project_dir, commit_sha, project_name):
 
 def collect_test_reports(project_name, project_repo_dir, dest_dir):
     """Recursively searches for XML reports and copies them."""
-    found_files = []
-    if "jdk" in project_name:
-        try:
-            cmd = f"find {project_repo_dir} -type f \\( -path '*/JTwork/*.xml' -o -path '*/test-results/*.xml' \\)"
-            result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
-            if result.returncode == 0:
-                found_files = result.stdout.strip().splitlines()
-        except: pass
-    else:
-        pattern = PROJECT_CONFIG[project_name]["report_pattern"]
-        search_path = os.path.join(project_repo_dir, pattern)
-        found_files = glob.glob(search_path, recursive=True)
+    print(f"--- Scanning {project_repo_dir} for test reports... ---")
     
-    print(f"--- Found {len(found_files)} XML report files ---")
-    
-    for f in found_files:
-        if not f: continue
-        try:
-            rel_path = os.path.relpath(f, project_repo_dir).replace("/", "_")
-            shutil.copy2(f, os.path.join(dest_dir, rel_path))
-        except: pass
+    count = 0
+    for root, dirs, files in os.walk(project_repo_dir):
+        if ".git" in dirs: dirs.remove(".git")
+        if "build" in dirs and "jdk" not in project_name: pass 
+        
+        for file in files:
+            if file.endswith(".xml"):
+                is_report = False
+                if "jdk" in project_name:
+                    if "JTwork" in root: is_report = True
+                else:
+                    if file.startswith("TEST-"): is_report = True
+                
+                if is_report:
+                    full_src_path = os.path.join(root, file)
+                    rel_path = os.path.relpath(full_src_path, project_repo_dir).replace("/", "_")
+                    dest_path = os.path.join(dest_dir, rel_path)
+                    try:
+                        shutil.copy2(full_src_path, dest_path)
+                        count += 1
+                    except Exception as e: pass
+
+    print(f"--- Collected {count} test report files. ---")
 
 def execute_lifecycle(project_name, commit_sha, state, toolkit_dir, project_repo_dir, work_dir, test_targets):
     """
     Runs Build -> Test -> Parse.
-    Crucially: It accepts 'test_targets' as an argument, forcing the same tests for both states.
     """
     print(f"\n>>> Processing {state.upper()} state for {commit_sha}...")
     
@@ -233,7 +235,7 @@ def execute_lifecycle(project_name, commit_sha, state, toolkit_dir, project_repo
         with open(console_log_file, "w") as f:
             f.write(proc.stdout)
             if proc.stderr: f.write("\n\n--- STDERR ---\n" + proc.stderr)
-        print(proc.stdout) # Stream to tmux
+        print(proc.stdout) 
         if proc.stderr: print(proc.stderr)
         
         test_status = "Success" if proc.returncode == 0 else "Fail"
@@ -289,7 +291,6 @@ def main():
     
     print(f"--- Processing {project_name} rows {args.start_index} to {end_index} ---")
 
-    # Load existing
     existing_commits = set()
     full_results_data = []
     if os.path.exists(results_json):
@@ -299,7 +300,6 @@ def main():
                 existing_commits = {item['commit'] for item in full_results_data}
         except: pass
 
-    # Build Builder Image
     builder_tag = PROJECT_CONFIG[project_name]['builder_tag']
     if PROJECT_CONFIG[project_name]['build_system'] != 'self-building':
         dockerfile = os.path.join(toolkit_dir, "helpers", project_name, "Dockerfile")
@@ -326,8 +326,7 @@ def main():
         if os.path.exists(work_dir): shutil.rmtree(work_dir)
         os.makedirs(work_dir)
 
-        # --- 1. CALCULATE TESTS (ONCE) ---
-        # We calculate targets based on the BACKPORT (After) commit
+        # --- 1. CALCULATE TESTS ---
         print(f"--- Calculating Test Targets for {commit_sha}... ---")
         test_targets = get_smart_test_targets(toolkit_dir, project_repo_dir, commit_sha, project_name)
         print(f"--- Targets: {test_targets} ---")
@@ -341,15 +340,28 @@ def main():
         else:
             before_res = {"build": "Skipped", "test": "Skipped", "passed": set(), "failed": set()}
 
-        # --- ANALYZE ---
-        regressions = list(before_res["passed"].intersection(after_res["failed"]))
+        # --- 4. DETAILED ANALYSIS (UPDATED) ---
+        
+        # Fail -> Pass (Fixes)
         fixes = list(before_res["failed"].intersection(after_res["passed"]))
+        
+        # Pass -> Fail (Regressions)
+        regressions = list(before_res["passed"].intersection(after_res["failed"]))
+        
+        # Failed in Both (Persistent)
+        persistent = list(before_res["failed"].intersection(after_res["failed"]))
+        
+        # --- NEW LOGIC: New Tests that Passed ---
+        # (Passed in After) MINUS (Passed in Before OR Failed in Before)
+        # Meaning: It passed now, but it didn't exist (or didn't run) before.
+        all_tests_before = before_res["passed"].union(before_res["failed"])
+        new_passes = list(after_res["passed"].difference(all_tests_before))
 
         result_entry = {
             "index": idx,
             "commit": commit_sha,
             "parent": parent_sha,
-            "test_targets": test_targets, # Log what we decided to run
+            "test_targets": test_targets, 
             "build_status_after": after_res["build"],
             "test_status_after": after_res["test"],
             "build_status_before": before_res["build"],
@@ -360,11 +372,14 @@ def main():
                 "before_pass_count": len(before_res["passed"]),
                 "before_fail_count": len(before_res["failed"]),
                 "regression_count": len(regressions),
-                "fix_count": len(fixes)
+                "fix_count": len(fixes),
+                "new_pass_count": len(new_passes) # New Stat
             },
             "details": {
                 "regressions": regressions,
                 "fixes": fixes,
+                "new_passes": new_passes, # New List
+                "persistent_failures": persistent,
                 "all_failures_after": list(after_res["failed"]),
                 "all_failures_before": list(before_res["failed"])
             }
@@ -382,7 +397,8 @@ def main():
             "build_before": before_res["build"],
             "test_before": before_res["test"],
             "regressions": len(regressions),
-            "fixes": len(fixes)
+            "fixes": len(fixes),
+            "new_passes": len(new_passes) # New Column
         }
         
         csv_df = pd.DataFrame([csv_row])
