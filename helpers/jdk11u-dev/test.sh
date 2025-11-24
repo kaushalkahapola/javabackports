@@ -27,10 +27,7 @@ for TARGET in ${TEST_LIST}; do
     set +e
 
     # This is the important line – works on both old and new JTreg
-    make test TEST="${TARGET}" \
-         JOBS=$(nproc) \
-         JTREG="VERBOSE=pass,fail,error,summary OPTIONS=-xml:verify" \
-         IGNORE_INTERNAL_VM_WARNINGS=true
+    make test JTREG="KEYWORDS=!ignore -vmoptions:-Djtreg.ui=text VERBOSE=pass,fail,error"
 
     EXIT_CODE=$?
     set -e
