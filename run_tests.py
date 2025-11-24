@@ -39,6 +39,8 @@ PROJECT_CONFIG = {
     },
     "jdk8u-dev": {
         "repo_dir": "jdk8u-dev",
+        # JTReg XMLs are usually in JTwork/**/*.xml or JTreport/**/*.xml
+        # We use a broader pattern to catch them all
         "report_pattern": "**/JTwork/**/*.xml", 
         "builder_tag": "jdk8-builder:latest",
         "build_system": "make",
@@ -71,10 +73,8 @@ PROJECT_CONFIG = {
     }
 }
 
-# --- FIX 1: Allow **kwargs to support capture_output ---
 def run_command(command, env=None, check=True, cwd=None, **kwargs):
     """Runs a shell command and prints output."""
-    # Only print command if we are not capturing output (to keep logs clean)
     if not kwargs.get("capture_output"):
         print(f"CMD: {command}", flush=True)
     
@@ -82,7 +82,6 @@ def run_command(command, env=None, check=True, cwd=None, **kwargs):
     if env:
         process_env.update(env)
     
-    # We use shell=True to easily handle complex bash strings
     return subprocess.run(command, shell=True, check=check, env=process_env, cwd=cwd, **kwargs)
 
 def parse_test_results(results_dir):
@@ -116,7 +115,8 @@ def parse_test_results(results_dir):
                         passed.add(full_name)
                         
         except Exception as e:
-            print(f"⚠️ Error parsing {xml_file}: {e}")
+            # Don't print error for every file (some XMLs might not be JUnit reports)
+            pass
             
     return passed, failed
 
@@ -142,25 +142,43 @@ def collect_test_reports(project_name, project_repo_dir, dest_dir):
     Copies test reports from the project repo to our temp analysis folder.
     """
     pattern = PROJECT_CONFIG[project_name]["report_pattern"]
-    # Use glob inside the repo dir
+    # Use glob inside the repo dir. We use recursive=True for ** patterns.
     search_path = os.path.join(project_repo_dir, pattern)
-    found_files = glob.glob(search_path, recursive=True)
     
-    print(f"--- Collecting {len(found_files)} report files from {pattern} ---")
+    # IMPORTANT: Python glob might not handle the build_output_* dynamic folders well
+    # if we just say 'jdk8u-dev/**/JTwork'.
+    # So we search the ENTIRE project repo for any .xml file in a JTwork folder.
+    
+    # For JDKs, the build dir changes name (build_output_sha_fixed), so we must be flexible.
+    if "jdk" in project_name:
+        # Look for any folder named JTwork or test-results inside the repo
+        # This command is safer than glob for deep/dynamic paths
+        try:
+            # Find all XML files in directories named JTwork or test-results
+            find_cmd = f"find {project_repo_dir} -type f -path '*/JTwork/*.xml' -o -path '*/test-results/*.xml'"
+            result = subprocess.run(find_cmd, shell=True, capture_output=True, text=True)
+            found_files = result.stdout.strip().splitlines()
+        except:
+            found_files = []
+    else:
+        # For standard maven/gradle layouts
+        found_files = glob.glob(search_path, recursive=True)
+    
+    print(f"--- Collecting {len(found_files)} report files ---")
     
     for f in found_files:
+        if not f: continue
         try:
-            # Create a unique filename to avoid overwrites if multiple modules have same filename
+            # Create a unique filename to avoid overwrites
             # e.g. repo/moduleA/TEST-x.xml -> dest/moduleA_TEST-x.xml
             rel_path = os.path.relpath(f, project_repo_dir).replace("/", "_")
             shutil.copy2(f, os.path.join(dest_dir, rel_path))
         except Exception as e:
-            print(f"Warning: Failed to copy {f}: {e}")
+            pass
 
 def execute_lifecycle(project_name, commit_sha, state, toolkit_dir, project_repo_dir, work_dir):
     """
     Runs Build -> Test -> Parse for a specific state ('fixed' or 'buggy').
-    Returns: dict with build_status, test_status, passed_tests, failed_tests
     """
     print(f"\n>>> Processing {state.upper()} state for {commit_sha}...")
     
@@ -185,7 +203,6 @@ def execute_lifecycle(project_name, commit_sha, state, toolkit_dir, project_repo
         "BUILD_DIR_NAME": f"build_{commit_sha[:7]}_{state}" 
     }
     
-    # Add JDK specific envs
     if config['build_system'] == 'make':
         env["BOOT_JDK"] = config['boot_jdk']
         env["JTREG_HOME"] = config['jtreg_home']
@@ -225,16 +242,24 @@ def execute_lifecycle(project_name, commit_sha, state, toolkit_dir, project_repo
     except:
         test_status = "Error"
 
-    # --- FIX 2: COPY RESULTS ---
-    # Explicitly copy XMLs from repo to our temp directory before parsing
+    # --- COPY RESULTS ---
     collect_test_reports(project_name, project_repo_dir, test_output_dir)
 
     # 6. Parse Results
     passed, failed = parse_test_results(test_output_dir)
     
-    if test_status == "Fail" and len(failed) == 0:
-        test_status = "Crash/Timeout"
-
+    # If tests failed but we found 0 failed tests in XML, it implies a crash or timeout
+    # BUT: If we also found 0 *passed* tests, it means we failed to parse anything.
+    if test_status == "Fail":
+        if len(failed) == 0:
+            if len(passed) > 0:
+                # Weird case: exit code 1 but no failed tests found in XML.
+                # Maybe a timeout or infrastructure error.
+                test_status = "Fail (Infra/Timeout)"
+            else:
+                # We parsed nothing.
+                test_status = "Crash/No Report"
+    
     return {
         "build": build_status, 
         "test": test_status, 
@@ -269,7 +294,7 @@ def main():
     
     print(f"--- Processing {project_name} rows {args.start_index} to {end_index} ---")
 
-    # Load existing results to skip
+    # Load existing results
     existing_commits = set()
     full_results_data = []
     
@@ -307,7 +332,7 @@ def main():
             print("Error finding parent commit.")
             continue
 
-        # Create temp work dir
+        # Create temp work dir for this specific run
         work_dir = os.path.join(toolkit_dir, "temp_work", commit_sha)
         if os.path.exists(work_dir): shutil.rmtree(work_dir)
         os.makedirs(work_dir)
@@ -353,7 +378,7 @@ def main():
 
         full_results_data.append(result_entry)
 
-        # --- SAVE RESULTS (Incremental) ---
+        # --- SAVE RESULTS ---
         with open(results_json, 'w') as f:
             json.dump(full_results_data, f, indent=2)
         
@@ -378,7 +403,13 @@ def main():
         # --- CLEANUP ---
         if os.path.exists(work_dir):
             shutil.rmtree(work_dir)
+            
+        # IMPORTANT: Cleanup the build output in the repo to save space
+        # For JDKs, this is crucial because each build is ~500MB-1GB
+        if PROJECT_CONFIG[project_name]['build_system'] == 'make':
+            run_command(f"sudo rm -rf {project_repo_dir}/build_*", check=False, capture_output=True)
         
+        # Prune Docker
         run_command("docker builder prune -a -f", check=False, capture_output=True)
         if project_name == "elasticsearch":
              run_command(f"docker rmi -f elasticsearch-fixed-{commit_sha[:7]} elasticsearch-buggy-{parent_sha[:7]}", check=False, capture_output=True)
