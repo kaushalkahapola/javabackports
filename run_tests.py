@@ -312,17 +312,40 @@ def execute_lifecycle(project_name, commit_sha, state, toolkit_dir, project_repo
 
     test_script = os.path.join(toolkit_dir, "helpers", project_name, "run_tests.sh")
     
+    # Set timeout based on project (JDK tests can take a long time)
+    timeout_minutes = 120 if "jdk" in project_name else 60
+    
     console_output = ""
     try:
-        proc = run_command(f"bash {test_script}", env=env, check=False, capture_output=True, text=True)
-        with open(console_log_file, "w") as f:
-            f.write(proc.stdout)
-            if proc.stderr: f.write("\n\n--- STDERR ---\n" + proc.stderr)
-        print(proc.stdout) 
-        if proc.stderr: print(proc.stderr)
-        
-        test_status = "Success" if proc.returncode == 0 else "Fail"
-        console_output = proc.stdout
+        # Stream output in real-time instead of buffering
+        with open(console_log_file, "w") as log_file:
+            proc = subprocess.Popen(
+                f"bash {test_script}",
+                shell=True,
+                env={**os.environ, **env},
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
+                text=True,
+                bufsize=1,  # Line buffered
+                universal_newlines=True
+            )
+            
+            # Read and display output line by line
+            try:
+                for line in proc.stdout:
+                    print(line, end='', flush=True)
+                    log_file.write(line)
+                    console_output += line
+                
+                proc.wait(timeout=timeout_minutes * 60)
+                test_status = "Success" if proc.returncode == 0 else "Fail"
+                
+            except subprocess.TimeoutExpired:
+                print(f"\n!!! Test execution timed out after {timeout_minutes} minutes !!!")
+                proc.kill()
+                proc.wait()
+                test_status = "Timeout"
+            
     except Exception as e:
         print(f"Error running tests: {e}")
         test_status = "Error"
