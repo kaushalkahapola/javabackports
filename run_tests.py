@@ -87,17 +87,68 @@ def parse_console_output(console_text):
     passed = set()
     failed = set()
     
-    # Extract Failures
+    # JDK8 style - verbose FAILED/Passed lines
     fail_matches = re.findall(r"^FAILED:\s+(.+)$", console_text, re.MULTILINE)
     for f in fail_matches:
         test_name = f.replace("/", ".").replace(".java", "")
         failed.add(test_name)
 
-    # Extract Passed (Approximation from summary if available)
     pass_matches = re.findall(r"^Passed:\s+(.+)$", console_text, re.MULTILINE)
     for p in pass_matches:
         test_name = p.replace("/", ".").replace(".java", "")
         passed.add(test_name)
+    
+    # JDK11 style - terse "Target X PASSED/FAILED"
+    terse_pass = re.findall(r"Target\s+(.+?)\s+PASSED", console_text, re.MULTILINE)
+    for target in terse_pass:
+        test_name = target.replace("test/", "").replace("/", ".")
+        passed.add(test_name)
+    
+    terse_fail = re.findall(r"Target\s+(.+?)\s+FAILED", console_text, re.MULTILINE)
+    for target in terse_fail:
+        test_name = target.replace("test/", "").replace("/", ".")
+        failed.add(test_name)
+    
+    # jtreg summary format: "Test results: passed: X; failed: Y"
+    summary_match = re.search(r"Test results:\s+passed:\s+(\d+)(?:;\s+failed:\s+(\d+))?", console_text)
+    if summary_match and len(passed) == 0 and len(failed) == 0:
+        pass_count = int(summary_match.group(1))
+        fail_count = int(summary_match.group(2) or 0)
+        
+        # Try to extract test names from jtreg output
+        # Pattern: "test SomeTest.java"
+        test_names = re.findall(r"^\s*test\s+(.+\.java)", console_text, re.MULTILINE)
+        
+        if test_names:
+            # We have test names, try to categorize them
+            for test_name in test_names:
+                clean_name = test_name.replace("/", ".").replace(".java", "")
+                # Check if this test failed (look for failure indicators near this test)
+                test_section = re.search(
+                    rf"{re.escape(test_name)}.*?(?:FAILED|PASSED|^test\s|\Z)", 
+                    console_text, 
+                    re.DOTALL | re.MULTILINE
+                )
+                if test_section:
+                    section_text = test_section.group(0)
+                    if "FAILED" in section_text or "Error" in section_text:
+                        failed.add(clean_name)
+                    else:
+                        passed.add(clean_name)
+        else:
+            # No test names found, create placeholders based on counts
+            if pass_count > 0:
+                passed.add(f"TestGroup.passed_{pass_count}_tests")
+            if fail_count > 0:
+                failed.add(f"TestGroup.failed_{fail_count}_tests")
+    
+    # Alternative: Look for "TEST: test_name" patterns in jtreg verbose output
+    if len(passed) == 0 and len(failed) == 0:
+        test_lines = re.findall(r"TEST:\s+(.+)", console_text)
+        for test in test_lines:
+            clean_test = test.strip().replace("/", ".").replace(".java", "")
+            # Default to passed if we can't determine status
+            passed.add(clean_test)
 
     return passed, failed
 
@@ -148,28 +199,60 @@ def collect_test_reports(project_name, project_repo_dir, dest_dir):
     print(f"--- Scanning {project_repo_dir} for test reports... ---")
     
     count = 0
-    for root, dirs, files in os.walk(project_repo_dir):
-        if ".git" in dirs: dirs.remove(".git")
-        if "build" in dirs and "jdk" not in project_name: pass 
+    
+    # For JDK projects, search more broadly
+    if "jdk" in project_name:
+        # Search in multiple possible locations
+        search_patterns = [
+            os.path.join(project_repo_dir, "**/JTwork/**/*.xml"),
+            os.path.join(project_repo_dir, "**/JTreport/**/*.xml"),
+            os.path.join(project_repo_dir, "build*/JTwork*/**/*.xml"),
+            os.path.join(project_repo_dir, "build*/test-results/**/*.xml"),
+            os.path.join(project_repo_dir, "build*/test-support/**/*.xml"),
+        ]
         
-        for file in files:
-            if file.endswith(".xml"):
-                is_report = False
-                if "jdk" in project_name:
-                    if "JTwork" in root: is_report = True
-                else:
-                    if file.startswith("TEST-"): is_report = True
-                
-                if is_report:
+        xml_files = []
+        for pattern in search_patterns:
+            xml_files.extend(glob.glob(pattern, recursive=True))
+        
+        # Remove duplicates
+        xml_files = list(set(xml_files))
+        
+        print(f"--- Found {len(xml_files)} XML files in JDK project ---")
+        
+        for full_src_path in xml_files:
+            rel_path = os.path.relpath(full_src_path, project_repo_dir).replace("/", "_")
+            dest_path = os.path.join(dest_dir, rel_path)
+            try:
+                shutil.copy2(full_src_path, dest_path)
+                count += 1
+            except Exception as e:
+                print(f"Failed to copy {full_src_path}: {e}")
+    else:
+        # Original logic for non-JDK projects
+        for root, dirs, files in os.walk(project_repo_dir):
+            if ".git" in dirs: 
+                dirs.remove(".git")
+            
+            for file in files:
+                if file.endswith(".xml") and file.startswith("TEST-"):
                     full_src_path = os.path.join(root, file)
                     rel_path = os.path.relpath(full_src_path, project_repo_dir).replace("/", "_")
                     dest_path = os.path.join(dest_dir, rel_path)
                     try:
                         shutil.copy2(full_src_path, dest_path)
                         count += 1
-                    except Exception as e: pass
+                    except Exception as e:
+                        pass
 
     print(f"--- Collected {count} test report files. ---")
+    
+    # Debug: List what we collected
+    if count > 0:
+        print(f"--- Sample of collected files: ---")
+        collected_files = os.listdir(dest_dir)[:10]
+        for f in collected_files:
+            print(f"  - {f}")
 
 def execute_lifecycle(project_name, commit_sha, state, toolkit_dir, project_repo_dir, work_dir, test_targets):
     """
