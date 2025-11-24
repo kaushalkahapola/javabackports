@@ -26,10 +26,13 @@ for TARGET in ${TEST_LIST}; do
 
     set +e
 
+# In the make test command:
     make test TEST="${TARGET}" \
-         JOBS=$(nproc) \
-         JTREG="VERBOSE=all OPTIONS=-xml:verify" \
-         IGNORE_INTERNAL_VM_WARNINGS=true
+        JOBS=$(nproc) \
+        JTREG="VERBOSE=all,fail,error,summary,time OPTIONS=-xml:verify -va -vp" \
+        JTREG_VERBOSE=all \
+        IGNORE_INTERNAL_VM_WARNINGS=true \
+        2>&1 | tee test_output_${TARGET}.log
 
     EXIT_CODE=$?
     set -e
