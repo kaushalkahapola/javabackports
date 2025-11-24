@@ -39,8 +39,6 @@ PROJECT_CONFIG = {
     },
     "jdk8u-dev": {
         "repo_dir": "jdk8u-dev",
-        # JTReg XMLs are usually in JTwork/**/*.xml or JTreport/**/*.xml
-        # We use a broader pattern to catch them all
         "report_pattern": "**/JTwork/**/*.xml", 
         "builder_tag": "jdk8-builder:latest",
         "build_system": "make",
@@ -139,45 +137,46 @@ def get_smart_test_targets(toolkit_dir, project_dir, commit_sha, project_name):
 
 def collect_test_reports(project_name, project_repo_dir, dest_dir):
     """
-    Copies test reports from the project repo to our temp analysis folder.
+    Recursively searches for XML reports and copies them to the dest_dir.
     """
-    print(f"--- Collecting test reports from {project_repo_dir} ---")
+    print(f"--- Scanning {project_repo_dir} for test reports... ---")
     
-    found_files = []
+    count = 0
+    # Walk through the entire project directory
+    for root, dirs, files in os.walk(project_repo_dir):
+        # Optimization: Skip huge folders that definitely don't have reports
+        if ".git" in dirs: dirs.remove(".git")
+        if "build" in dirs and "jdk" not in project_name: pass # Keep build for maven/gradle
+        
+        for file in files:
+            if file.endswith(".xml"):
+                # Check if it looks like a test report
+                # JDK 8: inside a 'JTwork' folder
+                # Maven/Gradle: usually TEST-*.xml
+                is_report = False
+                if "jdk" in project_name:
+                    if "JTwork" in root:
+                        is_report = True
+                else:
+                    if file.startswith("TEST-"):
+                        is_report = True
+                
+                if is_report:
+                    full_src_path = os.path.join(root, file)
+                    
+                    # Create a unique filename for the destination
+                    # e.g. /repo/build/foo/JTwork/TEST.xml -> build_foo_JTwork_TEST.xml
+                    rel_path = os.path.relpath(full_src_path, project_repo_dir)
+                    safe_name = rel_path.replace(os.sep, "_")
+                    dest_path = os.path.join(dest_dir, safe_name)
+                    
+                    try:
+                        shutil.copy2(full_src_path, dest_path)
+                        count += 1
+                    except Exception as e:
+                        print(f"⚠️ Failed to copy {file}: {e}")
 
-    # Special handling for JDK projects (8, 11, 17, 21)
-    if "jdk" in project_name:
-        # JDK 8/11/17 structure: .../testoutput/<target>/JTwork/**/*.xml
-        # We use 'find' to ignore the dynamic build directory names
-        try:
-            # Find any .xml file inside a folder named 'JTwork' or 'test-results'
-            cmd = f"find {project_repo_dir} -type f \\( -path '*/JTwork/*.xml' -o -path '*/test-results/*.xml' \\)"
-            result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
-            if result.returncode == 0:
-                found_files = result.stdout.strip().splitlines()
-        except Exception as e:
-            print(f"Warning: 'find' command failed: {e}")
-    
-    else:
-        # Standard glob for Maven/Gradle projects
-        pattern = PROJECT_CONFIG[project_name]["report_pattern"]
-        search_path = os.path.join(project_repo_dir, pattern)
-        found_files = glob.glob(search_path, recursive=True)
-    
-    print(f"--- Found {len(found_files)} report files ---")
-    
-    for f in found_files:
-        if not f: continue
-        try:
-            # Create a unique filename to avoid overwrites
-            # e.g. .../jdk_util/JTwork/foo/Bar.xml -> jdk_util_JTwork_foo_Bar.xml
-            # We strip the repo dir to get a clean relative path
-            rel_path = os.path.relpath(f, project_repo_dir).replace("/", "_")
-            
-            # Copy to our destination
-            shutil.copy2(f, os.path.join(dest_dir, rel_path))
-        except Exception as e:
-            pass # Ignore copy errors
+    print(f"--- Collected {count} test report files. ---")
 
 def execute_lifecycle(project_name, commit_sha, state, toolkit_dir, project_repo_dir, work_dir):
     """
