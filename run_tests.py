@@ -83,27 +83,22 @@ def run_command(command, env=None, check=True, cwd=None, **kwargs):
     return subprocess.run(command, shell=True, check=check, env=process_env, cwd=cwd, **kwargs)
 
 def parse_console_output(console_text):
-    """
-    Parses raw console text to find failed tests and stats when XMLs are missing.
-    Work specifically for JDK 'make test' output.
-    """
+    """Parses raw console text for JDK test results when XMLs are missing."""
     passed = set()
     failed = set()
     
-    # Extract Failures (Pattern: FAILED: java/net/CookieHandler/Test.java)
+    # Extract Failures
     fail_matches = re.findall(r"^FAILED:\s+(.+)$", console_text, re.MULTILINE)
     for f in fail_matches:
-        # Convert file path to test name (replace / with .)
         test_name = f.replace("/", ".").replace(".java", "")
         failed.add(test_name)
 
-    # Extract Pass/Fail counts from summary line
-    # Pattern: TEST STATS: name=jdk_core  run=4193  pass=4187  fail=6
-    stats_match = re.search(r"TEST STATS:.*pass=(\d+)\s+fail=(\d+)", console_text)
-    
-    # If we found explicit failures but no stats line, trust the failures list
-    if len(failed) > 0 and not stats_match:
-        return passed, failed
+    # Extract Passed (Approximation from summary if available)
+    # Pattern: Passed: java/lang/String/StringTest.java
+    pass_matches = re.findall(r"^Passed:\s+(.+)$", console_text, re.MULTILINE)
+    for p in pass_matches:
+        test_name = p.replace("/", ".").replace(".java", "")
+        passed.add(test_name)
 
     return passed, failed
 
@@ -134,8 +129,12 @@ def parse_test_results(results_dir):
     return passed, failed
 
 def get_smart_test_targets(toolkit_dir, project_dir, commit_sha, project_name):
+    """Calls the project-specific python script to calculate test targets."""
     resolver_script = os.path.join(toolkit_dir, "helpers", project_name, "get_test_targets.py")
-    if not os.path.exists(resolver_script): return "ALL"
+    
+    if not os.path.exists(resolver_script):
+        return "ALL"
+
     try:
         result = subprocess.run(
             f"python3 {resolver_script} --repo {project_dir} --commit {commit_sha}",
@@ -145,8 +144,37 @@ def get_smart_test_targets(toolkit_dir, project_dir, commit_sha, project_name):
     except:
         return "ALL"
 
-def execute_lifecycle(project_name, commit_sha, state, toolkit_dir, project_repo_dir, work_dir):
+def collect_test_reports(project_name, project_repo_dir, dest_dir):
+    """Recursively searches for XML reports and copies them."""
+    found_files = []
+    if "jdk" in project_name:
+        try:
+            cmd = f"find {project_repo_dir} -type f \\( -path '*/JTwork/*.xml' -o -path '*/test-results/*.xml' \\)"
+            result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+            if result.returncode == 0:
+                found_files = result.stdout.strip().splitlines()
+        except: pass
+    else:
+        pattern = PROJECT_CONFIG[project_name]["report_pattern"]
+        search_path = os.path.join(project_repo_dir, pattern)
+        found_files = glob.glob(search_path, recursive=True)
+    
+    print(f"--- Found {len(found_files)} XML report files ---")
+    
+    for f in found_files:
+        if not f: continue
+        try:
+            rel_path = os.path.relpath(f, project_repo_dir).replace("/", "_")
+            shutil.copy2(f, os.path.join(dest_dir, rel_path))
+        except: pass
+
+def execute_lifecycle(project_name, commit_sha, state, toolkit_dir, project_repo_dir, work_dir, test_targets):
+    """
+    Runs Build -> Test -> Parse.
+    Crucially: It accepts 'test_targets' as an argument, forcing the same tests for both states.
+    """
     print(f"\n>>> Processing {state.upper()} state for {commit_sha}...")
+    
     config = PROJECT_CONFIG[project_name]
     
     state_dir = os.path.join(work_dir, state)
@@ -158,6 +186,7 @@ def execute_lifecycle(project_name, commit_sha, state, toolkit_dir, project_repo
     os.makedirs(build_output_dir, exist_ok=True)
     os.makedirs(test_output_dir, exist_ok=True)
 
+    # 1. Run Build
     env = {
         "COMMIT_SHA": commit_sha,
         "PROJECT_DIR": project_repo_dir,
@@ -176,7 +205,6 @@ def execute_lifecycle(project_name, commit_sha, state, toolkit_dir, project_repo
     elif config['build_system'] in ['gradle', 'maven']:
          env["IMAGE_TAG_TO_BUILD"] = f"{project_name}-{state}-{commit_sha[:7]}"
 
-    # 1. Run Build
     build_script = os.path.join(toolkit_dir, "helpers", project_name, "run_build.sh")
     try:
         run_command(f"bash {build_script}", env=env, check=True)
@@ -188,12 +216,10 @@ def execute_lifecycle(project_name, commit_sha, state, toolkit_dir, project_repo
     if build_status != "Success":
         return {"build": "Fail", "test": "Skipped", "passed": set(), "failed": set()}
 
-    # 2. Smart Test Filtering
-    test_targets = get_smart_test_targets(toolkit_dir, project_repo_dir, commit_sha, project_name)
+    # 2. Run Tests (Using the pre-calculated targets)
     if test_targets == "NONE":
          return {"build": "Success", "test": "Skipped (No Targets)", "passed": set(), "failed": set()}
-
-    # 3. Run Tests
+         
     env["TEST_TARGETS"] = test_targets
     env["TEST_REPORT_DIR"] = test_output_dir 
     if config['build_system'] == 'self-building':
@@ -201,18 +227,13 @@ def execute_lifecycle(project_name, commit_sha, state, toolkit_dir, project_repo
 
     test_script = os.path.join(toolkit_dir, "helpers", project_name, "run_tests.sh")
     
-    # --- NEW: Capture Output for Parsing ---
+    console_output = ""
     try:
-        # We capture output this time so we can parse the logs if XML fails
         proc = run_command(f"bash {test_script}", env=env, check=False, capture_output=True, text=True)
-        
-        # Save log to file for debugging
         with open(console_log_file, "w") as f:
             f.write(proc.stdout)
             if proc.stderr: f.write("\n\n--- STDERR ---\n" + proc.stderr)
-            
-        # Print to screen so you can still see it
-        print(proc.stdout)
+        print(proc.stdout) # Stream to tmux
         if proc.stderr: print(proc.stderr)
         
         test_status = "Success" if proc.returncode == 0 else "Fail"
@@ -220,23 +241,22 @@ def execute_lifecycle(project_name, commit_sha, state, toolkit_dir, project_repo
     except Exception as e:
         print(f"Error running tests: {e}")
         test_status = "Error"
-        console_output = ""
 
-    # 4. Parse Results (Hybrid Approach)
+    # 3. Parse Results
+    collect_test_reports(project_name, project_repo_dir, test_output_dir)
     passed, failed = parse_test_results(test_output_dir)
     
-    # If XML parsing found nothing, try parsing the console log
+    # Fallback to console parsing if XMLs missing
     if len(passed) == 0 and len(failed) == 0:
         print("--- No XML results found. Attempting to parse console logs... ---")
         log_passed, log_failed = parse_console_output(console_output)
-        
         if len(log_passed) > 0 or len(log_failed) > 0:
             passed, failed = log_passed, log_failed
             print(f"--- Recovered stats from logs: {len(passed)} passed, {len(failed)} failed ---")
         else:
              if test_status == "Fail":
                  test_status = "Crash/No Report"
-
+    
     return {
         "build": build_status, 
         "test": test_status, 
@@ -269,6 +289,7 @@ def main():
     
     print(f"--- Processing {project_name} rows {args.start_index} to {end_index} ---")
 
+    # Load existing
     existing_commits = set()
     full_results_data = []
     if os.path.exists(results_json):
@@ -278,6 +299,7 @@ def main():
                 existing_commits = {item['commit'] for item in full_results_data}
         except: pass
 
+    # Build Builder Image
     builder_tag = PROJECT_CONFIG[project_name]['builder_tag']
     if PROJECT_CONFIG[project_name]['build_system'] != 'self-building':
         dockerfile = os.path.join(toolkit_dir, "helpers", project_name, "Dockerfile")
@@ -304,13 +326,22 @@ def main():
         if os.path.exists(work_dir): shutil.rmtree(work_dir)
         os.makedirs(work_dir)
 
-        after_res = execute_lifecycle(project_name, commit_sha, "fixed", toolkit_dir, project_repo_dir, work_dir)
+        # --- 1. CALCULATE TESTS (ONCE) ---
+        # We calculate targets based on the BACKPORT (After) commit
+        print(f"--- Calculating Test Targets for {commit_sha}... ---")
+        test_targets = get_smart_test_targets(toolkit_dir, project_repo_dir, commit_sha, project_name)
+        print(f"--- Targets: {test_targets} ---")
+
+        # --- 2. EXECUTE AFTER (Fixed) ---
+        after_res = execute_lifecycle(project_name, commit_sha, "fixed", toolkit_dir, project_repo_dir, work_dir, test_targets)
         
+        # --- 3. EXECUTE BEFORE (Buggy) ---
         if after_res["build"] == "Success":
-            before_res = execute_lifecycle(project_name, parent_sha, "buggy", toolkit_dir, project_repo_dir, work_dir)
+            before_res = execute_lifecycle(project_name, parent_sha, "buggy", toolkit_dir, project_repo_dir, work_dir, test_targets)
         else:
             before_res = {"build": "Skipped", "test": "Skipped", "passed": set(), "failed": set()}
 
+        # --- ANALYZE ---
         regressions = list(before_res["passed"].intersection(after_res["failed"]))
         fixes = list(before_res["failed"].intersection(after_res["passed"]))
 
@@ -318,6 +349,7 @@ def main():
             "index": idx,
             "commit": commit_sha,
             "parent": parent_sha,
+            "test_targets": test_targets, # Log what we decided to run
             "build_status_after": after_res["build"],
             "test_status_after": after_res["test"],
             "build_status_before": before_res["build"],
@@ -361,9 +393,10 @@ def main():
 
         print(f"--- Results saved for {commit_sha} ---")
         
-        if os.path.exists(work_dir):
-            shutil.rmtree(work_dir)
-        
+        # Cleanup
+        if os.path.exists(work_dir): shutil.rmtree(work_dir)
+        if PROJECT_CONFIG[project_name]['build_system'] == 'make':
+            run_command(f"sudo rm -rf {project_repo_dir}/build_*", check=False, capture_output=True)
         run_command("docker builder prune -a -f", check=False, capture_output=True)
         if project_name == "elasticsearch":
              run_command(f"docker rmi -f elasticsearch-fixed-{commit_sha[:7]} elasticsearch-buggy-{parent_sha[:7]}", check=False, capture_output=True)
