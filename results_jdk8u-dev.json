@@ -1,50 +1,30 @@
 [
   {
-    "index": 0,
-    "commit": "ddce2b5d39cb780c84d0c4d3bf01df2fe5d3d989",
-    "parent": "c8eb027b59dbb12150a1edd926b14fc2f6753bbd",
-    "build_status_after": "Success",
-    "test_status_after": "Success",
-    "build_status_before": "Success",
-    "test_status_before": "Success",
-    "stats": {
-      "after_pass_count": 0,
-      "after_fail_count": 0,
-      "before_pass_count": 0,
-      "before_fail_count": 0,
-      "regression_count": 0,
-      "fix_count": 0
-    },
-    "details": {
-      "regressions": [],
-      "fixes": [],
-      "persistent_failures": [],
-      "all_failures_after": [],
-      "all_failures_before": []
-    }
-  },
-  {
     "index": 1,
     "commit": "8867d017b18ad7cd8842b9324c5c031a44a58064",
     "parent": "5c7f201af69a500b06a345f84a5b1ce550b605b2",
+    "test_targets": "jdk_util",
     "build_status_after": "Success",
-    "test_status_after": "Crash/Timeout",
+    "test_status_after": "Fail",
     "build_status_before": "Success",
-    "test_status_before": "Success",
+    "test_status_before": "Fail",
     "stats": {
-      "after_pass_count": 0,
-      "after_fail_count": 0,
-      "before_pass_count": 0,
-      "before_fail_count": 0,
+      "after_pass_count": 677,
+      "after_fail_count": 1,
+      "before_pass_count": 676,
+      "before_fail_count": 1,
       "regression_count": 0,
       "fix_count": 0
     },
     "details": {
       "regressions": [],
       "fixes": [],
-      "persistent_failures": [],
-      "all_failures_after": [],
-      "all_failures_before": []
+      "all_failures_after": [
+        "java.util.Currency.ValidateISO4217"
+      ],
+      "all_failures_before": [
+        "java.util.Currency.ValidateISO4217"
+      ]
     }
   }
 ]

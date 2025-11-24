@@ -40,10 +40,12 @@ for TARGET in ${TEST_LIST}; do
     if [[ "${TARGET}" == "langtools_"* ]]; then
         make ${TARGET} JOBS=$(nproc)
     else
-        # Run make test with the TEST variable
+        # --- FIX: Added -xml:verify to JTREG options ---
+        # This forces jtreg to generate the JUnit-style XML reports 
+        # required by the parse_test_results python function.
         make test TEST=${TARGET} \
              JOBS=$(nproc) \
-             JTREG="VERBOSE=fail,error" \
+             JTREG="VERBOSE=fail,error -xml:verify" \
              IGNORE_INTERNAL_VM_WARNINGS=true
     fi
     
