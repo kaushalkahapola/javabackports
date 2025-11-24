@@ -6,7 +6,6 @@ echo "--- Inside Docker: Running tests for ${COMMIT_SHA:0:7} ---"
 echo "Target: ${TEST_TARGETS}"
 
 # 1. Define Build Directory
-# In JDK 11+ build.sh, we created a separate build directory inside /repo
 BUILD_DIR_ABS="/repo/${BUILD_DIR_NAME}"
 
 if [ ! -d "${BUILD_DIR_ABS}" ]; then
@@ -37,12 +36,13 @@ for TARGET in ${TEST_LIST}; do
     
     set +e
     
-    # JDK 11+ Unified Test Framework
-    # We can just pass the path or group to TEST=
-    # JTREG="VERBOSE=fail,error" keeps logs clean
+    # --- FIX: Enable Verbose Logging and XML Generation ---
+    # VERBOSE=all -> Allows python script to parse stdout for "Passed: ..."
+    # OPTIONS=-xml:verify -> Forces creation of XML reports
     make test TEST="${TARGET}" \
          JOBS=$(nproc) \
-         JTREG="VERBOSE=fail,error"
+         JTREG="VERBOSE=all OPTIONS=-xml:verify" \
+         IGNORE_INTERNAL_VM_WARNINGS=true
     
     EXIT_CODE=$?
     set -e
