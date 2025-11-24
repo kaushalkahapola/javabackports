@@ -27,12 +27,12 @@ for TARGET in ${TEST_LIST}; do
     set +e
 
 # In the make test command:
-    make test TEST="${TARGET}" \
-        JOBS=$(nproc) \
-        JTREG="VERBOSE=all,fail,error,summary,time OPTIONS=-xml:verify -va -vp" \
-        JTREG_VERBOSE=all \
-        IGNORE_INTERNAL_VM_WARNINGS=true \
-        2>&1 | tee test_output_${TARGET}.log
+    # After the make test command fails to give good output:
+    JTREG=${JTREG_HOME}/bin/jtreg
+    $JTREG -verbose:all -xml:verify \
+        -workDir:/repo/JTwork \
+        -reportDir:/repo/JTreport \
+        ${TARGET}
 
     EXIT_CODE=$?
     set -e
