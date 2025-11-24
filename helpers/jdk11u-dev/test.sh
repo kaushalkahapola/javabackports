@@ -1,53 +1,41 @@
 #!/bin/bash
-# This script runs INSIDE the Docker container
 set -e
 
 echo "--- Inside Docker: Running tests for ${COMMIT_SHA:0:7} ---"
 echo "Target: ${TEST_TARGETS}"
 
-# 1. Define Build Directory
 BUILD_DIR_ABS="/repo/${BUILD_DIR_NAME}"
+[ -d "$BUILD_DIR_ABS" ] || { echo "Build dir missing"; exit 1; }
+cd "$BUILD_DIR_ABS"
 
-if [ ! -d "${BUILD_DIR_ABS}" ]; then
-    echo "❌ Error: Build directory not found at ${BUILD_DIR_ABS}"
-    echo "The build must succeed before running tests."
-    exit 1
-fi
-
-cd "${BUILD_DIR_ABS}"
-
-# 2. Configure Test Targets
 if [ "${TEST_TARGETS}" == "ALL" ]; then
     TEST_LIST="tier1"
 elif [ "${TEST_TARGETS}" == "NONE" ]; then
-    echo "No relevant source code changes found. Skipping tests."
+    echo "No tests to run"
     exit 0
 else
     TEST_LIST="${TEST_TARGETS}"
 fi
 
-echo "--- Starting Test Execution in ${BUILD_DIR_ABS} ---"
+echo "--- Starting Test Execution in $BUILD_DIR_ABS ---"
 
 FINAL_EXIT_CODE=0
 
-# 3. Iterate and Run
 for TARGET in ${TEST_LIST}; do
-    echo "--- Running target: ${TARGET} ---"
-    
+    echo "=== Running test target: ${TARGET} ==="
+
     set +e
-    
-    # --- FIX: Enable Verbose Logging and XML Generation ---
-    # VERBOSE=all -> Allows python script to parse stdout for "Passed: ..."
-    # OPTIONS=-xml:verify -> Forces creation of XML reports
+
+    # This is the important line – works on both old and new JTreg
     make test TEST="${TARGET}" \
          JOBS=$(nproc) \
-         JTREG="VERBOSE=all OPTIONS=-xml:verify" \
+         JTREG="VERBOSE=pass,fail,error,summary OPTIONS=-xml:verify" \
          IGNORE_INTERNAL_VM_WARNINGS=true
-    
+
     EXIT_CODE=$?
     set -e
-    
-    if [ ${EXIT_CODE} -ne 0 ]; then
+
+    if [ $EXIT_CODE -ne 0 ]; then
         echo "❌ Target ${TARGET} FAILED"
         FINAL_EXIT_CODE=1
     else
@@ -55,7 +43,7 @@ for TARGET in ${TEST_LIST}; do
     fi
 done
 
-if [ ${FINAL_EXIT_CODE} -eq 0 ]; then
+if [ $FINAL_EXIT_CODE -eq 0 ]; then
     echo "=== ALL TESTS PASSED ==="
     exit 0
 else
