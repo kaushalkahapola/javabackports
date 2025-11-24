@@ -141,40 +141,43 @@ def collect_test_reports(project_name, project_repo_dir, dest_dir):
     """
     Copies test reports from the project repo to our temp analysis folder.
     """
-    pattern = PROJECT_CONFIG[project_name]["report_pattern"]
-    # Use glob inside the repo dir. We use recursive=True for ** patterns.
-    search_path = os.path.join(project_repo_dir, pattern)
+    print(f"--- Collecting test reports from {project_repo_dir} ---")
     
-    # IMPORTANT: Python glob might not handle the build_output_* dynamic folders well
-    # if we just say 'jdk8u-dev/**/JTwork'.
-    # So we search the ENTIRE project repo for any .xml file in a JTwork folder.
-    
-    # For JDKs, the build dir changes name (build_output_sha_fixed), so we must be flexible.
+    found_files = []
+
+    # Special handling for JDK projects (8, 11, 17, 21)
     if "jdk" in project_name:
-        # Look for any folder named JTwork or test-results inside the repo
-        # This command is safer than glob for deep/dynamic paths
+        # JDK 8/11/17 structure: .../testoutput/<target>/JTwork/**/*.xml
+        # We use 'find' to ignore the dynamic build directory names
         try:
-            # Find all XML files in directories named JTwork or test-results
-            find_cmd = f"find {project_repo_dir} -type f -path '*/JTwork/*.xml' -o -path '*/test-results/*.xml'"
-            result = subprocess.run(find_cmd, shell=True, capture_output=True, text=True)
-            found_files = result.stdout.strip().splitlines()
-        except:
-            found_files = []
+            # Find any .xml file inside a folder named 'JTwork' or 'test-results'
+            cmd = f"find {project_repo_dir} -type f \\( -path '*/JTwork/*.xml' -o -path '*/test-results/*.xml' \\)"
+            result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+            if result.returncode == 0:
+                found_files = result.stdout.strip().splitlines()
+        except Exception as e:
+            print(f"Warning: 'find' command failed: {e}")
+    
     else:
-        # For standard maven/gradle layouts
+        # Standard glob for Maven/Gradle projects
+        pattern = PROJECT_CONFIG[project_name]["report_pattern"]
+        search_path = os.path.join(project_repo_dir, pattern)
         found_files = glob.glob(search_path, recursive=True)
     
-    print(f"--- Collecting {len(found_files)} report files ---")
+    print(f"--- Found {len(found_files)} report files ---")
     
     for f in found_files:
         if not f: continue
         try:
             # Create a unique filename to avoid overwrites
-            # e.g. repo/moduleA/TEST-x.xml -> dest/moduleA_TEST-x.xml
+            # e.g. .../jdk_util/JTwork/foo/Bar.xml -> jdk_util_JTwork_foo_Bar.xml
+            # We strip the repo dir to get a clean relative path
             rel_path = os.path.relpath(f, project_repo_dir).replace("/", "_")
+            
+            # Copy to our destination
             shutil.copy2(f, os.path.join(dest_dir, rel_path))
         except Exception as e:
-            pass
+            pass # Ignore copy errors
 
 def execute_lifecycle(project_name, commit_sha, state, toolkit_dir, project_repo_dir, work_dir):
     """
