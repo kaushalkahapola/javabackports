@@ -516,7 +516,9 @@ def main():
         print(f"--- Results saved for {commit_sha} ---")
         
         # Cleanup
-        if os.path.exists(work_dir): shutil.rmtree(work_dir)
+        if os.path.exists(work_dir): 
+            # Use the run_command wrapper to execute removal with sudo
+            run_command(f"sudo rm -rf {work_dir}", check=False, capture_output=True)
         if PROJECT_CONFIG[project_name]['build_system'] == 'make':
             run_command(f"sudo rm -rf {project_repo_dir}/build_*", check=False, capture_output=True)
         run_command("docker builder prune -a -f", check=False, capture_output=True)
