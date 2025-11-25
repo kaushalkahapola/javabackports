@@ -40,3 +40,6 @@ RUN ./gradlew --version || true
 
 # Copy all files *AS* the gradle user.
 COPY --chown=gradle:gradle . .
+
+# Set the default user for all subsequent commands
+USER gradle
