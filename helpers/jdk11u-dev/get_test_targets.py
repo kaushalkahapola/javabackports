@@ -71,14 +71,51 @@ def main():
 
         # 4. Test Files Changed
         # Path: test/jdk/... or test/hotspot/...
+        # For backport analysis, run broader test suites instead of individual tests
         if f.startswith("test/jdk/") and f.endswith(".java"):
-            test_targets.add(os.path.dirname(f))
+            # Map to broader test groups for better comparison
+            # Extract the top-level package (e.g., test/jdk/java/lang -> jdk_lang)
+            test_path = f.replace("test/jdk/", "")
+            parts = test_path.split("/")
+            if len(parts) >= 2:
+                top_package = parts[0]  # e.g., "java", "javax", "sun"
+                second_level = parts[1] if len(parts) > 1 else ""
+                
+                # Map to standard test groups
+                if top_package == "java" and second_level in ["lang", "reflect"]:
+                    test_targets.add("jdk_lang")
+                elif top_package == "java" and second_level == "util":
+                    test_targets.add("jdk_util")
+                elif top_package == "java" and second_level == "io":
+                    test_targets.add("jdk_io")
+                elif top_package == "java" and second_level == "nio":
+                    test_targets.add("jdk_nio")
+                elif top_package == "java" and second_level == "net":
+                    test_targets.add("jdk_net")
+                elif top_package == "java" and second_level == "security":
+                    test_targets.add("jdk_security")
+                elif top_package == "javax":
+                    # javax tests - run the top-level package
+                    test_targets.add(f"test/jdk/{top_package}/{second_level}")
+                else:
+                    # For other cases, use the parent directory (broader than single test)
+                    parent_dir = os.path.dirname(os.path.dirname(f))
+                    if parent_dir and parent_dir != "test/jdk":
+                        test_targets.add(parent_dir)
+                    else:
+                        test_targets.add("jdk_core")
         elif f.startswith("test/hotspot/jtreg/"):
-            # For hotspot tests, we usually run the whole group because deps are complex,
-            # but we can try adding the directory.
-            test_targets.add(os.path.dirname(f))
+            # For hotspot tests, run relevant test groups
+            if "/gc/" in f:
+                test_targets.add("hotspot_gc")
+            elif "/compiler/" in f:
+                test_targets.add("hotspot_compiler")
+            elif "/runtime/" in f:
+                test_targets.add("hotspot_runtime")
+            else:
+                test_targets.add("hotspot_all")
         elif f.startswith("test/langtools/"):
-            test_targets.add(os.path.dirname(f))
+            test_targets.add("langtools_all")
 
     # 3. Output
     if not test_targets:
