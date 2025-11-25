@@ -30,7 +30,9 @@ docker volume create --name=gradle-cache || true
 echo "--- Executing: ${GRADLE_CMD} ---"
 
 # Note: The Dockerfile for ES already sets WORKDIR /repo and user 'gradle'
+# FIX: Explicitly set the user to 'gradle' to prevent the "can not run elasticsearch as root" error.
 if docker run --rm \
+    --user gradle \
     -v "gradle-cache:/home/gradle/.gradle" \
     "${IMAGE_TAG}" \
     bash -c "${GRADLE_CMD}"; then
