@@ -428,6 +428,61 @@ def main():
         
         print(f"--- Modified tests: {modified_tests or 'None'} ---")
         print(f"--- Added tests: {added_tests or 'None'} ---")
+
+        if all_targets == "NONE" or (not modified_tests and not added_tests and all_targets == ""):
+             print(f"--- No test targets found for {commit_sha}. Skipping build. ---")
+             result_entry = {
+                "index": idx,
+                "commit": commit_sha,
+                "parent": parent_sha,
+                "test_targets": {
+                    "modified": modified_tests,
+                    "added": added_tests,
+                    "all": all_targets
+                },
+                "build_status_after": "Skipped",
+                "test_status_after": "Skipped (No Targets)",
+                "build_status_before": "Skipped",
+                "test_status_before": "Skipped",
+                "stats": {
+                    "after_pass_count": 0,
+                    "after_fail_count": 0,
+                    "before_pass_count": 0,
+                    "before_fail_count": 0,
+                    "regression_count": 0,
+                    "fix_count": 0,
+                    "new_pass_count": 0
+                },
+                "details": {
+                    "regressions": [],
+                    "fixes": [],
+                    "new_passes": [],
+                    "persistent_failures": [],
+                    "all_failures_after": [],
+                    "all_failures_before": []
+                }
+            }
+             full_results_data.append(result_entry)
+             with open(results_json, 'w') as f:
+                json.dump(full_results_data, f, indent=2)
+
+             csv_row = {
+                "commit": commit_sha,
+                "build_after": "Skipped",
+                "test_after": "Skipped (No Targets)",
+                "build_before": "Skipped",
+                "test_before": "Skipped",
+                "regressions": 0,
+                "fixes": 0,
+                "new_passes": 0
+             }
+             csv_df = pd.DataFrame([csv_row])
+             if not os.path.exists(results_csv):
+                csv_df.to_csv(results_csv, index=False)
+             else:
+                csv_df.to_csv(results_csv, mode='a', header=False, index=False)
+             print(f"--- Results saved for {commit_sha} (Skipped) ---")
+             continue
         
         # Decide if we need to test buggy version
         skip_buggy = (len(modified_tests) == 0 and len(added_tests) > 0)
