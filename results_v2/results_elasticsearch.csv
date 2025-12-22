@@ -82,3 +82,5 @@ ff0932f74fe09a872c88b1c4d3a089e031c438f9,VALID_BACKPORT,tests_fixed,Success,Succ
 f65580822f8303a8f97f5537dc3c2a8c6c574906,VALID_BACKPORT,,Success,Skipped (No Targets),Success,Skipped (No Targets),,0,0,0
 55ac92975e6ec0d714cfaa80d2d4a883bed9b78e,VALID_BACKPORT,tests_fixed,Success,Success,Success,Fail,,0,1,0
 5426cd9bb65e4b5ad2c46f6223a808a716408d6c,VALID_BACKPORT,,Success,Skipped (No Targets),Success,Skipped (No Targets),,0,0,0
+6090f464c59de4a1c32fcfd8f99c9a53aeced6d7,VALID_BACKPORT,build_fixed,Success,Success,Fail,Skipped,,0,0,3
+ba1283a9adc04bc09ed2fd2eff9b5a9dab36f631,VALID_BACKPORT,build_fixed,Success,Success,Fail,Skipped,,0,0,5
