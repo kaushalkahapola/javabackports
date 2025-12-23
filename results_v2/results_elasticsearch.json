@@ -9439,5 +9439,408 @@
       "all_failures_after": [],
       "all_failures_before": []
     }
+  },
+  {
+    "index": 271,
+    "commit": "e73e6b04f9e565cb1f1016a7b599d896426941a1",
+    "parent": "54a08adef1bf985ebcaac10d6241192999904122",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": "build_fixed",
+    "test_targets": {
+      "modified": [
+        ":x-pack:plugin:esql:internalClusterTest --tests \"org.elasticsearch.xpack.esql.action.CrossClustersQueryIT\"",
+        ":x-pack:plugin:esql:internalClusterTest --tests \"org.elasticsearch.xpack.esql.action.CrossClustersUsageTelemetryIT\"",
+        ":x-pack:plugin:esql:test --tests \"org.elasticsearch.xpack.esql.session.EsqlSessionCCSUtilsTests\"",
+        ":x-pack:plugin:security:qa:multi-cluster:check"
+      ],
+      "added": [],
+      "modified_files": [
+        "x-pack/plugin/esql/src/internalClusterTest/java/org/elasticsearch/xpack/esql/action/CrossClustersQueryIT.java",
+        "x-pack/plugin/esql/src/internalClusterTest/java/org/elasticsearch/xpack/esql/action/CrossClustersUsageTelemetryIT.java",
+        "x-pack/plugin/esql/src/test/java/org/elasticsearch/xpack/esql/session/EsqlSessionCCSUtilsTests.java",
+        "x-pack/plugin/security/qa/multi-cluster/src/javaRestTest/java/org/elasticsearch/xpack/remotecluster/CrossClusterEsqlRCS1MissingIndicesIT.java",
+        "x-pack/plugin/security/qa/multi-cluster/src/javaRestTest/java/org/elasticsearch/xpack/remotecluster/RemoteClusterSecurityEsqlIT.java"
+      ],
+      "all": ":x-pack:plugin:esql:internalClusterTest --tests \"org.elasticsearch.xpack.esql.action.CrossClustersQueryIT\" :x-pack:plugin:esql:internalClusterTest --tests \"org.elasticsearch.xpack.esql.action.CrossClustersUsageTelemetryIT\" :x-pack:plugin:esql:test --tests \"org.elasticsearch.xpack.esql.session.EsqlSessionCCSUtilsTests\" :x-pack:plugin:security:qa:multi-cluster:check"
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Fail",
+    "build_status_before": "Fail",
+    "test_status_before": "Skipped",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 18,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 18
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [
+        "org.elasticsearch.xpack.esql.session.EsqlSessionCCSUtilsTests.testCheckForCcsLicense",
+        "org.elasticsearch.xpack.esql.action.CrossClustersUsageTelemetryIT.testFailed",
+        "org.elasticsearch.xpack.esql.session.EsqlSessionCCSUtilsTests.testUpdateExecutionInfoAtEndOfPlanning",
+        "org.elasticsearch.xpack.esql.action.CrossClustersUsageTelemetryIT.testDisconnect",
+        "org.elasticsearch.xpack.esql.action.CrossClustersUsageTelemetryIT.testLocalOnly",
+        "org.elasticsearch.xpack.remotecluster.RemoteClusterSecurityBWCToRCS2ClusterRestIT.testBwcCCSViaRCS1orRCS2",
+        "org.elasticsearch.xpack.esql.session.EsqlSessionCCSUtilsTests.testUpdateExecutionInfoWithClustersWithNoMatchingIndices",
+        "org.elasticsearch.xpack.esql.action.CrossClustersUsageTelemetryIT.testLocalRemote",
+        "org.elasticsearch.xpack.esql.session.EsqlSessionCCSUtilsTests.testDetermineUnavailableRemoteClusters",
+        "org.elasticsearch.xpack.esql.session.EsqlSessionCCSUtilsTests.testUpdateExecutionInfoWithUnavailableClusters",
+        "org.elasticsearch.xpack.esql.session.EsqlSessionCCSUtilsTests.testUpdateExecutionInfoToReturnEmptyResult",
+        "org.elasticsearch.xpack.esql.action.CrossClustersUsageTelemetryIT.testNoSuchCluster",
+        "org.elasticsearch.xpack.esql.action.CrossClustersUsageTelemetryIT.testAsync",
+        "org.elasticsearch.xpack.esql.session.EsqlSessionCCSUtilsTests.testCreateIndexExpressionFromAvailableClusters",
+        "org.elasticsearch.xpack.esql.session.EsqlSessionCCSUtilsTests.testConcreteIndexRequested",
+        "org.elasticsearch.xpack.esql.session.EsqlSessionCCSUtilsTests.testReturnSuccessWithEmptyResult",
+        "org.elasticsearch.xpack.esql.action.CrossClustersUsageTelemetryIT.testRemoteOnly",
+        "org.elasticsearch.xpack.remotecluster.RemoteClusterSecurityBWCToRCS1ClusterRestIT.testBwcCCSViaRCS1orRCS2"
+      ],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 272,
+    "commit": "54a08adef1bf985ebcaac10d6241192999904122",
+    "parent": "8913122459e64ba82d09b547353e10d0ebc25446",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": "build_fixed",
+    "test_targets": {
+      "modified": [
+        ":server:test --tests \"org.elasticsearch.plugins.PluginsLoaderTests\"",
+        ":server:test --tests \"org.elasticsearch.plugins.PluginsServiceTests\""
+      ],
+      "added": [],
+      "modified_files": [
+        "server/src/test/java/org/elasticsearch/plugins/PluginsLoaderTests.java",
+        "server/src/test/java/org/elasticsearch/plugins/PluginsServiceTests.java",
+        "x-pack/plugin/watcher/src/test/java/org/elasticsearch/xpack/watcher/test/bench/WatcherScheduleEngineBenchmark.java"
+      ],
+      "all": ":server:test --tests \"org.elasticsearch.plugins.PluginsLoaderTests\" :server:test --tests \"org.elasticsearch.plugins.PluginsServiceTests\""
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Success",
+    "build_status_before": "Fail",
+    "test_status_before": "Skipped",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 26,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 26
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [
+        "org.elasticsearch.plugins.PluginsServiceTests.testPassingMandatoryPluginCheck",
+        "org.elasticsearch.plugins.PluginsServiceTests.testPluginNameClash",
+        "org.elasticsearch.plugins.PluginsServiceTests.testNoExtensionConstructors",
+        "org.elasticsearch.plugins.PluginsServiceTests.testThrowingConstructor",
+        "org.elasticsearch.plugins.PluginsServiceTests.testStartupWithRemovingMarker",
+        "org.elasticsearch.plugins.PluginsServiceTests.testHiddenFiles",
+        "org.elasticsearch.plugins.PluginsServiceTests.testBadSingleParameterConstructor",
+        "org.elasticsearch.plugins.PluginsServiceTests.testCanCreateAClassLoader",
+        "org.elasticsearch.plugins.PluginsServiceTests.testFailingMandatoryPluginCheck",
+        "org.elasticsearch.plugins.PluginsServiceTests.testDeprecatedPluginMethod",
+        "org.elasticsearch.plugins.PluginsServiceTests.testDesktopServicesStoreFiles",
+        "org.elasticsearch.plugins.PluginsServiceTests.testLoadPluginWithNoPublicConstructorOfCorrectSignature",
+        "org.elasticsearch.plugins.PluginsServiceTests.testFilterPlugins",
+        "org.elasticsearch.plugins.PluginsServiceTests.testMapPlugins",
+        "org.elasticsearch.plugins.PluginsServiceTests.testPluginFromParentClassLoader",
+        "org.elasticsearch.plugins.PluginsServiceTests.testTooManyParametersExtensionConstructors",
+        "org.elasticsearch.plugins.PluginsServiceTests.testMultipleExtensionConstructors",
+        "org.elasticsearch.plugins.PluginsServiceTests.testDeprecatedPluginInterface",
+        "org.elasticsearch.plugins.PluginsServiceTests.testLoadServiceProvidersInSameClassLoader",
+        "org.elasticsearch.plugins.PluginsServiceTests.testExistingMandatoryInstalledPlugin",
+        "org.elasticsearch.plugins.PluginsServiceTests.testLoadPluginWithMultiplePublicConstructors",
+        "org.elasticsearch.plugins.PluginsServiceTests.testLoadServiceProviders",
+        "org.elasticsearch.plugins.PluginsServiceTests.testLoadPluginWithNoPublicConstructor",
+        "org.elasticsearch.plugins.PluginsServiceTests.testNonExtensibleDep",
+        "org.elasticsearch.plugins.PluginsServiceTests.testExtensiblePlugin",
+        "org.elasticsearch.plugins.PluginsServiceTests.testStablePluginLoading"
+      ],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 274,
+    "commit": "37e39f4bd2bd7d6eb21891fa02392e9d46b9eeb3",
+    "parent": "280ab319a1d066d4528be0a02836c4b5772d9dd4",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [],
+      "added": [],
+      "modified_files": [],
+      "all": "NONE"
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Skipped (No Targets)",
+    "build_status_before": "Success",
+    "test_status_before": "Skipped (No Targets)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 275,
+    "commit": "00dbf119161855256b860a89aa05f353e41eb1b8",
+    "parent": "b02de7e3871aa14e9c1db9a4568de7b61c329c7b",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": "build_fixed",
+    "test_targets": {
+      "modified": [
+        ":x-pack:plugin:migrate:internalClusterTest --tests \"org.elasticsearch.xpack.migrate.action.CreateIndexFromSourceActionIT\"",
+        ":x-pack:plugin:migrate:test --tests \"org.elasticsearch.xpack.migrate.action.CreateFromSourceIndexRequestTests\""
+      ],
+      "added": [],
+      "modified_files": [
+        "x-pack/plugin/migrate/src/internalClusterTest/java/org/elasticsearch/xpack/migrate/action/CreateIndexFromSourceActionIT.java",
+        "x-pack/plugin/migrate/src/test/java/org/elasticsearch/xpack/migrate/action/CreateFromSourceIndexRequestTests.java"
+      ],
+      "all": ":x-pack:plugin:migrate:internalClusterTest --tests \"org.elasticsearch.xpack.migrate.action.CreateIndexFromSourceActionIT\" :x-pack:plugin:migrate:test --tests \"org.elasticsearch.xpack.migrate.action.CreateFromSourceIndexRequestTests\""
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Success",
+    "build_status_before": "Fail",
+    "test_status_before": "Skipped",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 15,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 15
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [
+        "org.elasticsearch.xpack.migrate.action.CreateFromSourceIndexRequestTests.testToString",
+        "org.elasticsearch.xpack.migrate.action.CreateFromSourceIndexRequestTests.testSerialization",
+        "org.elasticsearch.xpack.migrate.action.CreateFromSourceIndexRequestTests.testConcurrentEquals",
+        "org.elasticsearch.xpack.migrate.action.CreateIndexFromSourceActionIT.testRemoveIndexBlocks",
+        "org.elasticsearch.xpack.migrate.action.CreateFromSourceIndexRequestTests.testToAndFromXContent",
+        "org.elasticsearch.xpack.migrate.action.CreateIndexFromSourceActionIT.testDestIndexCreated",
+        "org.elasticsearch.xpack.migrate.action.CreateFromSourceIndexRequestTests.testEqualsAndHashcode",
+        "org.elasticsearch.xpack.migrate.action.CreateIndexFromSourceActionIT.testOldSettingsManuallyFiltered",
+        "org.elasticsearch.xpack.migrate.action.CreateIndexFromSourceActionIT.testSettingsOverridden",
+        "org.elasticsearch.xpack.migrate.action.CreateIndexFromSourceActionIT.testSettingsNullOverride",
+        "org.elasticsearch.xpack.migrate.action.CreateIndexFromSourceActionIT.testSettingsCopiedFromSource",
+        "org.elasticsearch.xpack.migrate.action.CreateIndexFromSourceActionIT.testMappingsCopiedFromSource",
+        "org.elasticsearch.xpack.migrate.action.CreateFromSourceIndexRequestTests.testConcurrentHashCode",
+        "org.elasticsearch.xpack.migrate.action.CreateFromSourceIndexRequestTests.testConcurrentSerialization",
+        "org.elasticsearch.xpack.migrate.action.CreateIndexFromSourceActionIT.testMappingsOverridden"
+      ],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 276,
+    "commit": "b02de7e3871aa14e9c1db9a4568de7b61c329c7b",
+    "parent": "7539fb7da6148e3455b61e9ede14470fcabcf5fd",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": "build_fixed",
+    "test_targets": {
+      "modified": [
+        ":x-pack:plugin:inference:test --tests \"org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests\""
+      ],
+      "added": [],
+      "modified_files": [
+        "x-pack/plugin/inference/src/test/java/org/elasticsearch/xpack/inference/mapper/SemanticTextFieldMapperTests.java"
+      ],
+      "all": ":x-pack:plugin:inference:test --tests \"org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests\""
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Success",
+    "build_status_before": "Fail",
+    "test_status_before": "Skipped",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 74,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 74
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testDenseVectorElementType {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testExistsQueryDenseVector {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testExistsQuerySparseVector {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testUpdates {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testDefaults {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testMissingTaskType {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testDeprecatedBoostWarning {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testFieldHasValue {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testSuccessfulParse {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testIgnoreMalformedExplicitlyFalse {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testBoostNotAllowed {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testMinimalIsInvalidInRoutingPath {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testMeta {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testIgnoreMalformedFalseByDefault {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testMinimalToMaximal {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testBlankName {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testExistsQueryDenseVector {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testInvalidInferenceEndpoints {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testTextSearchInfoConsistency {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testBlankName {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testEmptyName {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testExistsQueryMinimalMapping {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testMultiFieldsSupport {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testDeprecatedBoostWarning {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testMissingInferenceId {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testDynamicUpdate {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testSupportsParsingObject {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testIndexTimeFieldData {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testAggregatableConsistency {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testFieldHasValueWithEmptyFieldInfos {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testUpdateSearchInferenceId {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testMinimalIsInvalidInRoutingPath {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testSetInferenceEndpoints {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testMissingModelSettings {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testUpdatesToInferenceIdNotSupported {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testIgnoreMalformedTrue {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testIgnoreMalformedFalseByDefault {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testMissingModelSettings {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testMinimalSerializesToItself {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testModelSettingsRequiredWithChunks {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testIndexTimeFieldData {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testUpdateModelSettings {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testTotalFieldsCount {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testTextSearchInfoConsistency {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testModelSettingsRequiredWithChunks {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testMinimalToMaximal {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testExistsQueryMinimalMapping {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testMissingInferenceId {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testMultiFieldsSupport {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testTotalFieldsCount {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testDefaults {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testSuccessfulParse {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testMeta {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testIgnoreMalformedTrue {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testBoostNotAllowed {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testNullInput {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testDynamicUpdate {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testExistsQuerySparseVector {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testSupportsParsingObject {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testAggregatableConsistency {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testIgnoreMalformedExplicitlyFalse {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testMissingTaskType {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testDenseVectorElementType {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testUpdates {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testUpdateSearchInferenceId {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testMinimalSerializesToItself {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testUpdatesToInferenceIdNotSupported {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testUpdateModelSettings {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testSetInferenceEndpoints {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testInvalidInferenceEndpoints {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testFieldHasValue {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testFieldHasValueWithEmptyFieldInfos {p0=false}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testEmptyName {p0=true}",
+        "org.elasticsearch.xpack.inference.mapper.SemanticTextFieldMapperTests.testNullInput {p0=false}"
+      ],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 277,
+    "commit": "132350bc09fb0164122f6c62b90978c6a8187001",
+    "parent": "8e00d7e7f4e5b1737e1ef7922992e5c11a71b67b",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":x-pack:plugin:mapper-counted-keyword:test --tests \"org.elasticsearch.xpack.countedkeyword.CountedKeywordFieldMapperTests\""
+      ],
+      "added": [],
+      "modified_files": [
+        "x-pack/plugin/mapper-counted-keyword/src/test/java/org/elasticsearch/xpack/countedkeyword/CountedKeywordFieldMapperTests.java"
+      ],
+      "all": ":x-pack:plugin:mapper-counted-keyword:test --tests \"org.elasticsearch.xpack.countedkeyword.CountedKeywordFieldMapperTests\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
   }
 ]

@@ -185,3 +185,9 @@ c38d43805fc4d8ea0e7bd80d67e7d64e3cd77206,VALID_BACKPORT,,Success,Crash/No Report
 5de3d0804a0672bb9ed7dff3e01aa167105c3d96,VALID_BACKPORT,build_fixed,Success,Success,Fail,Skipped,,0,0,9
 af83c2e8905ed3a4643999fe1596187a4a7a5092,VALID_BACKPORT,build_fixed,Success,Success,Fail,Skipped,,0,0,8
 57dc275469354f104a995b2a83ec916d7b9114dc,VALID_BACKPORT,build_fixed,Success,Success,Fail,Skipped,,0,0,4
+e73e6b04f9e565cb1f1016a7b599d896426941a1,VALID_BACKPORT,build_fixed,Success,Fail,Fail,Skipped,,0,0,18
+54a08adef1bf985ebcaac10d6241192999904122,VALID_BACKPORT,build_fixed,Success,Success,Fail,Skipped,,0,0,26
+37e39f4bd2bd7d6eb21891fa02392e9d46b9eeb3,VALID_BACKPORT,,Success,Skipped (No Targets),Success,Skipped (No Targets),,0,0,0
+00dbf119161855256b860a89aa05f353e41eb1b8,VALID_BACKPORT,build_fixed,Success,Success,Fail,Skipped,,0,0,15
+b02de7e3871aa14e9c1db9a4568de7b61c329c7b,VALID_BACKPORT,build_fixed,Success,Success,Fail,Skipped,,0,0,74
+132350bc09fb0164122f6c62b90978c6a8187001,VALID_BACKPORT,,Fail,Skipped,Skipped,Skipped (Build Failed),,0,0,0
