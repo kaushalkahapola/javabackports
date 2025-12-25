@@ -1,0 +1,107 @@
+[
+  {
+    "index": 0,
+    "commit": "6733c65d20c47ffd09dbd34f47e5cd4e4f7f4a9a",
+    "parent": "faab7a2f0cd46f92d856975406e484c120061bb9",
+    "test_targets": {
+      "modified": [
+        ":solr:core:test"
+      ],
+      "added": [],
+      "all": ":solr:core:test"
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Success",
+    "build_status_before": "Fail",
+    "test_status_before": "Skipped",
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 1,
+    "commit": "7597d14fdaf782f6145fb16f5927b116b8edbeee",
+    "parent": "cb1d225c9b0f01fd8c44d5d372b388957b22a753",
+    "test_targets": {
+      "modified": [
+        ":solr:core:test"
+      ],
+      "added": [],
+      "all": ":solr:core:test"
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Fail",
+    "build_status_before": "Success",
+    "test_status_before": "Fail",
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 1,
+      "before_pass_count": 0,
+      "before_fail_count": 1,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [
+        "RankFieldTest.testBadFormat"
+      ],
+      "all_failures_after": [
+        "RankFieldTest.testBadFormat"
+      ],
+      "all_failures_before": [
+        "RankFieldTest.testBadFormat"
+      ]
+    }
+  },
+  {
+    "index": 4,
+    "commit": "a883061c8f485a6fdd5ae113684e31f47e61a140",
+    "parent": "1acfacaa9d0185504a2d874209768b84256cd9d0",
+    "test_targets": {
+      "modified": [],
+      "added": [
+        ":solr:core:test"
+      ],
+      "all": ":solr:core:test"
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Success",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Only New Tests)",
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  }
+]

@@ -1,0 +1,7 @@
+unique_id,repo,key,scope,complexity,Backport Commit,date,message
+solr_3880_branch_9x,solr,3880_branch_9x,S3,C3,6733c65d20c47ffd09dbd34f47e5cd4e4f7f4a9a,2025-11-24 14:52:47+00:00,SOLR-17231: Don't try buffering updates when there's no update log (cherry-pick from #3880) (#3887)
+solr_3347_branch_9x,solr,3347_branch_9x,S3,C5,7597d14fdaf782f6145fb16f5927b116b8edbeee,2025-05-28 17:08:30+00:00,"9x backport for ""SOLR-7962 --jvm-opts with -e doesn't work on windows (#3347)"" (#3376)"
+solr_2862_branch_9x,solr,2862_branch_9x,S3,C5,73e82607c00ace791e1e4d0b2d739e1b559de78f,2024-11-15 00:16:43+00:00,Backport: Update com.google.errorprone:* to 2.31.0 (#2862) (#2863)
+solr_2666_branch_9x,solr,2666_branch_9x,S3,C3,6dbd8d1b8e0e1690b048e32bf152837b5a341fee,2024-10-16 14:16:05+00:00,SOLR-17158 Terminate distributed processing faster when query limit is reached and partial results are not needed (#2666) (#2773)
+solr_2689_branch_9x,solr,2689_branch_9x,S3,C3,a883061c8f485a6fdd5ae113684e31f47e61a140,2024-10-08 10:51:15+00:00,SOLR-16503: New home for default http2 client (#2689)
+solr_2193_branch_9x,solr,2193_branch_9x,S3,C4,252688d76fc1adb5b32a3ea6998dbc71957f613b,2024-01-26 15:11:07+00:00,SOLR-17126 Cut over System.getProperty() to EnvUtils.getProperty() for modules (backport-9x) (#2215)

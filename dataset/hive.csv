@@ -1,0 +1,4 @@
+unique_id,repo,key,scope,complexity,Backport Commit,date,message
+hive_5959_branch-4.1,hive,5959_branch-4.1,S3,C3,5ec47759d5db7b3a0570d4697225d8ca8054bdca,2025-07-13 14:22:23+00:00,HIVE-29083: Iceberg: Unable to create table using HadoopCatalog (#5959) (#5970)
+hive_5956_branch-4.1,hive,5956_branch-4.1,S3,C3,b43a2ef706d56f017bb13533be35a6b175659fbe,2025-07-12 12:15:51+00:00,HIVE-29078: RuntimeException: Null when starting standalone HMS (#5956) (#5963)
+hive_5879_branch-4.1,hive,5879_branch-4.1,S3,C1,aeabe39368633a7f06c038c97b590e1ea9094968,2025-07-02 01:15:48+00:00,HIVE-28667: Error initializing field trimmer instance when starting HS2 (#5879) (#5913)

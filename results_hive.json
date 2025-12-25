@@ -1,0 +1,66 @@
+[
+  {
+    "index": 0,
+    "commit": "5ec47759d5db7b3a0570d4697225d8ca8054bdca",
+    "parent": "dc73ac77db3c3b9cc6d7e7d9ab63664fc7906c77",
+    "test_targets": {
+      "modified": [
+        "org.apache.iceberg.mr.hive.TestHiveIcebergStorageHandlerNoScan"
+      ],
+      "added": [],
+      "all": "org.apache.iceberg.mr.hive.TestHiveIcebergStorageHandlerNoScan"
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Crash/No Report",
+    "build_status_before": "Success",
+    "test_status_before": "Crash/No Report",
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 2,
+    "commit": "aeabe39368633a7f06c038c97b590e1ea9094968",
+    "parent": "21b632440daaa69fbdc10a2e9f7889df574003f7",
+    "test_targets": {
+      "modified": [],
+      "added": [],
+      "all": "NONE"
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Skipped (No Targets)",
+    "build_status_before": "Success",
+    "test_status_before": "Skipped (No Targets)",
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  }
+]

@@ -18,3 +18,6 @@ gradle-cache/
 .DS_Store
 *.swp
 *.swo
+
+#virtual environment
+venv/

@@ -1,0 +1,5 @@
+unique_id,repo,key,scope,complexity,Backport Commit,date,message
+flow_20475_2.12,flow,20475_2.12,S3,C5,e1b5dc801f1c75f92a3d694ff6dc420c6d8d8fc6,2025-07-29 07:23:18+00:00,Fix: move blocking calls outside session lock (#21961)
+flow_20516_2.11,flow,20516_2.11,S3,C5,ee4e84ba34affb66c4574d721c0820f7702861e5,2025-04-14 08:44:00+00:00,feat: backport of PWA icons generation at build time (#21279)
+flow_21174_24.6,flow,21174_24.6,S3,C1,dafb966db388abfb476a10fee88e13eba2b03663,2025-03-28 06:52:52+00:00,fix: prevent hot-reload failure caused by prepare-frontend task (#21174) (#21185)
+flow_16644_23.4,flow,16644_23.4,S3,C3,513de77f566d3b2041f45f4c44067c1aec46d75b,2024-02-22 10:58:51+00:00,feat: Added single and double click event listeners registration methods (#18778)

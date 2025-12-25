@@ -1,0 +1,100 @@
+[
+  {
+    "index": 0,
+    "commit": "e1b5dc801f1c75f92a3d694ff6dc420c6d8d8fc6",
+    "parent": "0b9a2c78cb2bbe42e5a0692bbb9d60d304761fbc",
+    "test_targets": {
+      "modified": [
+        "com.vaadin.flow.server.communication.ServerRpcHandlerTest",
+        "com.vaadin.flow.server.communication.UidlRequestHandlerTest"
+      ],
+      "added": [],
+      "all": "com.vaadin.flow.server.communication.ServerRpcHandlerTest com.vaadin.flow.server.communication.UidlRequestHandlerTest"
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Success",
+    "build_status_before": "Success",
+    "test_status_before": "Success",
+    "stats": {
+      "after_pass_count": 5,
+      "after_fail_count": 0,
+      "before_pass_count": 5,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 2,
+    "commit": "dafb966db388abfb476a10fee88e13eba2b03663",
+    "parent": "888432bd8c4ff18b76f8da46c66fe13a6604f775",
+    "test_targets": {
+      "modified": [
+        "com.vaadin.flow.server.frontend.TaskRemoveOldFrontendGeneratedFilesTest"
+      ],
+      "added": [],
+      "all": "com.vaadin.flow.server.frontend.TaskRemoveOldFrontendGeneratedFilesTest"
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Crash/No Report",
+    "build_status_before": "Success",
+    "test_status_before": "Crash/No Report",
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 3,
+    "commit": "513de77f566d3b2041f45f4c44067c1aec46d75b",
+    "parent": "4b7035eb01505d1a0ae93e09e145c8db6fd251e2",
+    "test_targets": {
+      "modified": [],
+      "added": [],
+      "all": "NONE"
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Skipped (No Targets)",
+    "build_status_before": "Success",
+    "test_status_before": "Skipped (No Targets)",
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  }
+]
