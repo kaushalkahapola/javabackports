@@ -1,0 +1,370 @@
+[
+  {
+    "index": 2,
+    "commit": "3dc13d42ee0136b21ffaf1ebbdd1c38806e3794f",
+    "parent": "09dd985bef988f3ff7d9cad85215f14a4b2df186",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        "lucene/facet:org.apache.lucene.facet.TestDrillSideways",
+        "lucene/sandbox:org.apache.lucene.sandbox.facet.TestRangeFacet"
+      ],
+      "added": [],
+      "modified_files": [
+        "lucene/facet/src/test/org/apache/lucene/facet/TestDrillSideways.java",
+        "lucene/sandbox/src/test/org/apache/lucene/sandbox/facet/TestRangeFacet.java"
+      ],
+      "all": "lucene/facet:org.apache.lucene.facet.TestDrillSideways lucene/sandbox:org.apache.lucene.sandbox.facet.TestRangeFacet"
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Crash/No Report",
+    "build_status_before": "Success",
+    "test_status_before": "Crash/No Report",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 3,
+    "commit": "80a69348cecbed725350796b70616ac1908e4fce",
+    "parent": "7a0365d4d39ff9b570ac26fed7bf59997ad8d669",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        "lucene/core:org.apache.lucene.index.TestSoftDeletesDirectoryReaderWrapper"
+      ],
+      "added": [],
+      "modified_files": [
+        "lucene/core/src/test/org/apache/lucene/index/TestSoftDeletesDirectoryReaderWrapper.java"
+      ],
+      "all": "lucene/core:org.apache.lucene.index.TestSoftDeletesDirectoryReaderWrapper"
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Success",
+    "build_status_before": "Success",
+    "test_status_before": "Success",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 5,
+    "commit": "518c76b51a79b29a940fe5808c1274c1cab44fe0",
+    "parent": "97bfd8b6736ca4e11ae1b4c148a11dfd795ede22",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        "lucene/core:org.apache.lucene.index.TestSoftDeletesDirectoryReaderWrapper"
+      ],
+      "added": [],
+      "modified_files": [
+        "lucene/core/src/test/org/apache/lucene/index/TestSoftDeletesDirectoryReaderWrapper.java"
+      ],
+      "all": "lucene/core:org.apache.lucene.index.TestSoftDeletesDirectoryReaderWrapper"
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Success",
+    "build_status_before": "Success",
+    "test_status_before": "Success",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 6,
+    "commit": "23a8d656a653d31b388eb33cef49acf831055323",
+    "parent": "4a0a09a8bbbfb7cb341537a72f02666cbd581261",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        "lucene/core:org.apache.lucene.codecs.lucene912.TestForDeltaUtil",
+        "lucene/core:org.apache.lucene.codecs.lucene912.TestForUtil",
+        "lucene/core:org.apache.lucene.codecs.lucene912.TestPForUtil"
+      ],
+      "added": [
+        "lucene/core:org.apache.lucene.internal.vectorization.TestPostingDecodingUtil"
+      ],
+      "modified_files": [
+        "lucene/core/src/test/org/apache/lucene/codecs/lucene912/TestForDeltaUtil.java",
+        "lucene/core/src/test/org/apache/lucene/codecs/lucene912/TestForUtil.java",
+        "lucene/core/src/test/org/apache/lucene/codecs/lucene912/TestPForUtil.java"
+      ],
+      "all": "lucene/core:org.apache.lucene.codecs.lucene912.TestForDeltaUtil lucene/core:org.apache.lucene.codecs.lucene912.TestForUtil lucene/core:org.apache.lucene.codecs.lucene912.TestPForUtil lucene/core:org.apache.lucene.internal.vectorization.TestPostingDecodingUtil"
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Success",
+    "build_status_before": "Success",
+    "test_status_before": "Success",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 7,
+    "commit": "539274f453097a5201ae1bec6a742e9e98f8d6eb",
+    "parent": "7edd64614c51c0982416a83fd8f0a2c196eb8dd3",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        "lucene/core:org.apache.lucene.search.TestTopDocsMerge",
+        "lucene/grouping:org.apache.lucene.search.grouping.TestGrouping"
+      ],
+      "added": [],
+      "modified_files": [
+        "lucene/core/src/test/org/apache/lucene/search/TestTopDocsMerge.java",
+        "lucene/grouping/src/test/org/apache/lucene/search/grouping/TestGrouping.java",
+        "lucene/test-framework/src/java/org/apache/lucene/tests/search/ScorerIndexSearcher.java"
+      ],
+      "all": "lucene/core:org.apache.lucene.search.TestTopDocsMerge lucene/grouping:org.apache.lucene.search.grouping.TestGrouping"
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Crash/No Report",
+    "build_status_before": "Success",
+    "test_status_before": "Crash/No Report",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 8,
+    "commit": "04d0170bac86e2b62eabcbaf9be6883025f42e1f",
+    "parent": "ef5d0f2729aac871c8b9314ff6c118b1bdd5b50d",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        "lucene/facet:org.apache.lucene.facet.TestDrillDownQuery",
+        "lucene/facet:org.apache.lucene.facet.TestMultipleIndexFields",
+        "lucene/facet:org.apache.lucene.facet.sortedset.TestSortedSetDocValuesFacets",
+        "lucene/facet:org.apache.lucene.facet.taxonomy.TestOrdinalMappingLeafReader",
+        "lucene/facet:org.apache.lucene.facet.taxonomy.TestTaxonomyFacetCounts",
+        "lucene/facet:org.apache.lucene.facet.taxonomy.TestTaxonomyFacetValueSource"
+      ],
+      "added": [],
+      "modified_files": [
+        "lucene/facet/src/test/org/apache/lucene/facet/TestDrillDownQuery.java",
+        "lucene/facet/src/test/org/apache/lucene/facet/TestMultipleIndexFields.java",
+        "lucene/facet/src/test/org/apache/lucene/facet/sortedset/TestSortedSetDocValuesFacets.java",
+        "lucene/facet/src/test/org/apache/lucene/facet/taxonomy/TestOrdinalMappingLeafReader.java",
+        "lucene/facet/src/test/org/apache/lucene/facet/taxonomy/TestTaxonomyFacetCounts.java",
+        "lucene/facet/src/test/org/apache/lucene/facet/taxonomy/TestTaxonomyFacetValueSource.java"
+      ],
+      "all": "lucene/facet:org.apache.lucene.facet.TestDrillDownQuery lucene/facet:org.apache.lucene.facet.TestMultipleIndexFields lucene/facet:org.apache.lucene.facet.sortedset.TestSortedSetDocValuesFacets lucene/facet:org.apache.lucene.facet.taxonomy.TestOrdinalMappingLeafReader lucene/facet:org.apache.lucene.facet.taxonomy.TestTaxonomyFacetCounts lucene/facet:org.apache.lucene.facet.taxonomy.TestTaxonomyFacetValueSource"
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Success",
+    "build_status_before": "Success",
+    "test_status_before": "Success",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 9,
+    "commit": "44ad4d95c6226e1a07f9b364ae415623247295e9",
+    "parent": "f8ee339f64c809a29f0be17e87ce31a92b188fc9",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        "lucene/backward-codecs:org.apache.lucene.backward_index.TestAncientIndicesCompatibility"
+      ],
+      "added": [],
+      "modified_files": [
+        "lucene/backward-codecs/src/test/org/apache/lucene/backward_codecs/lucene50/Lucene50RWPostingsFormat.java",
+        "lucene/backward-codecs/src/test/org/apache/lucene/backward_index/TestAncientIndicesCompatibility.java"
+      ],
+      "all": "lucene/backward-codecs:org.apache.lucene.backward_index.TestAncientIndicesCompatibility"
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Success",
+    "build_status_before": "Success",
+    "test_status_before": "Success",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 10,
+    "commit": "e78f23738f4cb0031bd425fb835ffdc27174d8fe",
+    "parent": "48816b4de422f6330c6b4bfbdd30a3f1722b8fad",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        "lucene/core:org.apache.lucene.search.TestIndexSearcher",
+        "lucene/core:org.apache.lucene.search.TestTaskExecutor"
+      ],
+      "added": [],
+      "modified_files": [
+        "lucene/core/src/test/org/apache/lucene/search/TestIndexSearcher.java",
+        "lucene/core/src/test/org/apache/lucene/search/TestTaskExecutor.java"
+      ],
+      "all": "lucene/core:org.apache.lucene.search.TestIndexSearcher lucene/core:org.apache.lucene.search.TestTaskExecutor"
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Success",
+    "build_status_before": "Success",
+    "test_status_before": "Success",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  }
+]
