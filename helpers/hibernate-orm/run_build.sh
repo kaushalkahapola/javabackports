@@ -38,40 +38,48 @@ docker run --rm \
              chmod +x gradlew 2>/dev/null || true; \
              mkdir -p /repo/.gradle /repo/build"
 
-# Run build 
-if docker run --rm \
+# Run build function
+run_gradle_build() {
+    local extra_setup="$1"
+    
+    docker run --rm \
         -v "${PROJECT_DIR}:/repo" \
         -v "gradle-cache-hibernate:/home/gradle/.gradle/caches" \
         -v "gradle-wrapper-hibernate:/home/gradle/.gradle/wrapper" \
         -w /repo \
         ${IMAGE_TAG} \
         bash -c "set -e; \
-# Run build with fallback
-# Try default (JDK 21) first, then fallback to JDK 25 if needed
-BUILD_CMD="./gradlew cleanClasses classes testClasses -x test --no-daemon"
-git config --global --add safe.directory /repo
+                 ${extra_setup} \
+                 git config --global --add safe.directory /repo; \
+                 ./gradlew cleanClasses classes testClasses -x test --no-daemon"
+}
 
-# Run with output capture
-if ${BUILD_CMD} > build_output.log 2>&1; then
+echo "--- Attempting build with default JDK ---"
+if run_gradle_build "" > build_output.log 2>&1; then
     cat build_output.log
     echo "Success" > "${BUILD_STATUS_FILE}"
+    echo "--- Build complete for ${COMMIT_SHA:0:7} ---"
     exit 0
 fi
 
-# Check failure reason
 cat build_output.log
-if grep -q "requires at least JDK 25" build_output.log; then
+
+# Check for known JDK version issues
+# "requires at least JDK 25" -> Explicit check in build script
+# "Unsupported class file major version 69" -> Running on older JDK, encountered JDK 25 class
+if grep -q "requires at least JDK 25" build_output.log || grep -q "Unsupported class file major version 69" build_output.log; then
     echo "--- Detected JDK 25 requirement. Retrying with JDK 25... ---"
-    export JAVA_HOME=/opt/java/jdk-25
-    export PATH="${JAVA_HOME}/bin:${PATH}"
+    # Set JAVA_HOME and update PATH within the container
+    SETUP_JDK25="export JAVA_HOME=/opt/java/jdk-25; export PATH=\$JAVA_HOME/bin:\$PATH;"
     
-    if ${BUILD_CMD}; then
+    if run_gradle_build "${SETUP_JDK25}" > build_output.log 2>&1; then
+        cat build_output.log
         echo "Success" > "${BUILD_STATUS_FILE}"
+        echo "--- Build complete for ${COMMIT_SHA:0:7} ---"
         exit 0
     fi
+    cat build_output.log
 fi
 
 echo "Fail" > "${BUILD_STATUS_FILE}"
 exit 1
-
-echo "--- Build complete for ${COMMIT_SHA:0:7} ---"
