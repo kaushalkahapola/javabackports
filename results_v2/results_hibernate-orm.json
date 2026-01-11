@@ -1,0 +1,2728 @@
+[
+  {
+    "index": 0,
+    "commit": "b0aa5cbf88deefdbfcda059eb053030a2c556ba0",
+    "parent": "23a544ee3f6bb99cb72a769c4103871fa6c3e0ce",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.bytecode.enhance.version.ReEnhancementTests\""
+      ],
+      "added": [],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/orm/test/bytecode/enhance/version/ReEnhancementTests.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.bytecode.enhance.version.ReEnhancementTests\""
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Success",
+    "build_status_before": "Success",
+    "test_status_before": "Success",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 21,
+      "after_fail_count": 0,
+      "before_pass_count": 19,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 2
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [
+        "org.hibernate.orm.test.bytecode.enhance.version.ReEnhancementTests.[2] class org.hibernate.orm.test.bytecode.enhance.version.ReEnhancementTests$EntityClass",
+        "org.hibernate.orm.test.bytecode.enhance.version.ReEnhancementTests.[1] class org.hibernate.orm.test.bytecode.enhance.version.ReEnhancementTests$MappedSuper"
+      ],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 1,
+    "commit": "eafaf38201a0fcaa5e20c448b1ec21531be697a4",
+    "parent": "c5d89d80c50e87212babd2ed67c500e392bc8990",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [],
+      "added": [
+        ":hibernate-core:test --tests \"org.hibernate.internal.util.SubSequenceTest\""
+      ],
+      "modified_files": [],
+      "all": ":hibernate-core:test --tests \"org.hibernate.internal.util.SubSequenceTest\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 8,
+    "commit": "5dd29f8a006df9bf7accc848a208e6256b7790bf",
+    "parent": "1ad46ec4c41800eb814da5f386ec9b12dd474eff",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [],
+      "added": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.mapping.collections.BidirectionalOneToManyTest\""
+      ],
+      "modified_files": [],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.mapping.collections.BidirectionalOneToManyTest\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 9,
+    "commit": "482d095f361ef78def0b1f0d07c464287d41578e",
+    "parent": "275387e4ba13347fe7028da408d61adecca26930",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.stateless.UpsertTest\""
+      ],
+      "added": [],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/orm/test/stateless/UpsertTest.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.stateless.UpsertTest\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 11,
+    "commit": "cfd54a41298ae8b529a24a83435f0916f256b1ee",
+    "parent": "9f550bcf2e8e4d4e90cc30802309332d1877f48b",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [],
+      "added": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.query.NativeQueryNestedTreeTest\""
+      ],
+      "modified_files": [],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.query.NativeQueryNestedTreeTest\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 13,
+    "commit": "794eea15d277074b001d5b129e710263cb554287",
+    "parent": "d563d19cb18fef64cce707048dac8466bc5e33d6",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [],
+      "added": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.annotations.beanvalidation.CollectionActionsValidationStatelessTest\""
+      ],
+      "modified_files": [],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.annotations.beanvalidation.CollectionActionsValidationStatelessTest\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 19,
+    "commit": "a04f801aa16eb27a44ea20fbf26f276774313b63",
+    "parent": "2b5e12dd55196a7a2f7509076b727a9b36210ee7",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.write.OptionalTableUpdateTests\""
+      ],
+      "added": [],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/orm/test/write/OptionalTableUpdateTests.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.write.OptionalTableUpdateTests\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 28,
+    "commit": "c97bd5424e9a671bc93b49ae4c1362e536fd252f",
+    "parent": "900cbe8ac30689c50d326c963958c371b88092b0",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.dialect.unit.sequence.DB2zSequenceInformationExtractorTest\""
+      ],
+      "added": [],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/orm/test/dialect/unit/sequence/DB2zSequenceInformationExtractorTest.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.dialect.unit.sequence.DB2zSequenceInformationExtractorTest\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 48,
+    "commit": "897665d501c9e17924166c52f9853468a90c4faa",
+    "parent": "7e6d136c741f6a5951472ed92980b5430352f90c",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [],
+      "added": [
+        ":hibernate-envers:test --tests \"org.hibernate.orm.test.envers.integration.lob.LargeObjectMappingTest\""
+      ],
+      "modified_files": [],
+      "all": ":hibernate-envers:test --tests \"org.hibernate.orm.test.envers.integration.lob.LargeObjectMappingTest\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 51,
+    "commit": "dbe4ac14fbc9d1873b70267ac08dbf06778de4bd",
+    "parent": "9874ccda41ea0f60dcf9e4ff1688589f86d49b75",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [],
+      "added": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.jpa.xml.BaseShop\"",
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.jpa.xml.ExplicitOptimisticLockAnnotationOnCollectionXmlOnlyTest\"",
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.jpa.xml.Supermarket\""
+      ],
+      "modified_files": [
+        "hibernate-testing/src/main/java/org/hibernate/testing/jdbc/SQLStatementInspector.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.jpa.xml.BaseShop\" :hibernate-core:test --tests \"org.hibernate.orm.test.jpa.xml.ExplicitOptimisticLockAnnotationOnCollectionXmlOnlyTest\" :hibernate-core:test --tests \"org.hibernate.orm.test.jpa.xml.Supermarket\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 52,
+    "commit": "a0bf95e68dff8d64c358da0432528f1cc1e9be7e",
+    "parent": "de25ece4d24ac64971cc88f221c68f515f1b94c7",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [],
+      "added": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.typedescriptor.NullTest\""
+      ],
+      "modified_files": [],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.typedescriptor.NullTest\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 54,
+    "commit": "fc84bf7ad64cd0b6c0cf4e7ea842c1f7e88ef16d",
+    "parent": "b4b2a20707f22aec5ce9c6e7d50c54267fddbad3",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.query.hql.FunctionTests\""
+      ],
+      "added": [],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/orm/test/query/hql/FunctionTests.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.query.hql.FunctionTests\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 56,
+    "commit": "daa498921104316aae2202b4b705236b0c774f86",
+    "parent": "d1b208b2bf81b06bc10fba6b682b89c7688896f5",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.query.hql.FunctionTests\""
+      ],
+      "added": [],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/orm/test/query/hql/FunctionTests.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.query.hql.FunctionTests\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 65,
+    "commit": "aefc2d1558d92ddc44795549347bc8388d56bf2c",
+    "parent": "b8304a93dbe9cdd4fb1f436df2a452490dd0e0a6",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [],
+      "added": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.notfound.CompositeForeignKeyNotFoundTest\""
+      ],
+      "modified_files": [],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.notfound.CompositeForeignKeyNotFoundTest\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 66,
+    "commit": "b8304a93dbe9cdd4fb1f436df2a452490dd0e0a6",
+    "parent": "500f2d91745e54738c3986cb3f5023b41bc63092",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.mapping.collections.OrderColumnListIndexHHH18771ListInitializerTest\""
+      ],
+      "added": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.mapping.collections.OrderColumnListIndexArrayInitializerTest\""
+      ],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/orm/test/mapping/collections/OrderColumnListIndexHHH18771ListInitializerTest.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.mapping.collections.OrderColumnListIndexHHH18771ListInitializerTest\" :hibernate-core:test --tests \"org.hibernate.orm.test.mapping.collections.OrderColumnListIndexArrayInitializerTest\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 69,
+    "commit": "90bf4f48510b356c830f54dc2b728543ed68dc08",
+    "parent": "e5c2197a495f877b9f01dc568d69c60973e9097c",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.querycache.EntityWithCollectionReloadCacheInheritanceTest\""
+      ],
+      "added": [],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/orm/test/querycache/EntityWithCollectionReloadCacheInheritanceTest.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.querycache.EntityWithCollectionReloadCacheInheritanceTest\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 70,
+    "commit": "31ecca5912c6689386fc85310ef7ec141b792db5",
+    "parent": "90bf4f48510b356c830f54dc2b728543ed68dc08",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.function.array.ArrayPositionTest\"",
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.function.array.ArrayPositionsTest\""
+      ],
+      "added": [],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/orm/test/function/array/ArrayPositionTest.java",
+        "hibernate-core/src/test/java/org/hibernate/orm/test/function/array/ArrayPositionsTest.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.function.array.ArrayPositionTest\" :hibernate-core:test --tests \"org.hibernate.orm.test.function.array.ArrayPositionsTest\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 71,
+    "commit": "0f310ba32e0c126ca58e40b38dc4ee98ff0b5db3",
+    "parent": "bb931c7c8d046a9387815b2650650170efcb1b0f",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [],
+      "added": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.secondarytable.HHH18813Test\""
+      ],
+      "modified_files": [],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.secondarytable.HHH18813Test\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 75,
+    "commit": "cb89514772262a30d655b0212d24048c6aa7e0cd",
+    "parent": "a92e0dbadfd4751be100862a4ba9187846970dd2",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.inheritance.discriminator.JoinedInheritanceDiscriminatorSelectionTest\""
+      ],
+      "added": [],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/orm/test/inheritance/discriminator/JoinedInheritanceDiscriminatorSelectionTest.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.inheritance.discriminator.JoinedInheritanceDiscriminatorSelectionTest\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 89,
+    "commit": "1ffde48f5ba6b84bb604cfee02fc43a13bef80c4",
+    "parent": "abfe6b9b556f3748a657f017a7ac2ec45a88197b",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.bytecode.enhancement.access.InvalidPropertyNameTest\""
+      ],
+      "added": [],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/orm/test/bytecode/enhancement/access/InvalidPropertyNameTest.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.bytecode.enhancement.access.InvalidPropertyNameTest\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 98,
+    "commit": "6584eb3d53c32ed041d40a17a9b1ed169e2ee347",
+    "parent": "5328e83e035808fc67bcfa684864deed900ef410",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [],
+      "added": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.associations.ManyToOneUniqueKeyReferenceWithCustomIdTest\""
+      ],
+      "modified_files": [],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.associations.ManyToOneUniqueKeyReferenceWithCustomIdTest\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 99,
+    "commit": "8ba6d4321ba144d1398a70b9df575513ae9de187",
+    "parent": "df8745aaff71085a281830c1d3f0ecedb4cdb561",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.bytecode.internal.bytebuddy.GenerateProxiesTest\""
+      ],
+      "added": [
+        ":hibernate-core:test --tests \"org.hibernate.bytecode.internal.bytebuddy.MappedSuperclassEntity\"",
+        ":hibernate-core:test --tests \"org.hibernate.bytecode.internal.bytebuddy.mappedsuperclass.BaseMappedSuperclass\""
+      ],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/bytecode/internal/bytebuddy/GenerateProxiesTest.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.bytecode.internal.bytebuddy.GenerateProxiesTest\" :hibernate-core:test --tests \"org.hibernate.bytecode.internal.bytebuddy.MappedSuperclassEntity\" :hibernate-core:test --tests \"org.hibernate.bytecode.internal.bytebuddy.mappedsuperclass.BaseMappedSuperclass\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 106,
+    "commit": "4863033429ffaf5f64256ca9885aa6cbbf81d20d",
+    "parent": "cdcfbf4584c7c551d881f8464c27834b4eec5f6a",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [],
+      "added": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.annotations.attributeoverride.MapAttributeOverrideTest\"",
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.annotations.attributeoverride.Route\"",
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.annotations.attributeoverride.Schedule\""
+      ],
+      "modified_files": [],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.annotations.attributeoverride.MapAttributeOverrideTest\" :hibernate-core:test --tests \"org.hibernate.orm.test.annotations.attributeoverride.Route\" :hibernate-core:test --tests \"org.hibernate.orm.test.annotations.attributeoverride.Schedule\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 125,
+    "commit": "b1787d9a07955635bc82aea0643fc77f9311c5bb",
+    "parent": "a8d0e736324ff080fd624b076371aeb5a1f8a5d2",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.jpa.criteria.basic.PredicateTest\""
+      ],
+      "added": [],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/orm/test/jpa/criteria/basic/PredicateTest.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.jpa.criteria.basic.PredicateTest\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 131,
+    "commit": "dfbb72abe62c25907f8d40f739d626983e95ffcd",
+    "parent": "a7cbd1a3b81bfb87762630be29efd6783d3234c4",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.boot.database.metadata.MetadataAccessTests\""
+      ],
+      "added": [],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/orm/test/boot/database/metadata/MetadataAccessTests.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.boot.database.metadata.MetadataAccessTests\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 135,
+    "commit": "9ba0dd7af03d63dc39ce0ac8acd6688803ea0af9",
+    "parent": "b2f1725520d0e54219689d0b6c18b00683b5c89e",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.jpa.ql.MapIssueTest\"",
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.sql.exec.onetoone.bidirectional.EntityWithBidirectionalAssociationsOneOfWhichIsAJoinTableTest\""
+      ],
+      "added": [],
+      "modified_files": [
+        "hibernate-core/src/main/java/org/hibernate/query/sqm/tree/select/SqmQuerySpec.java",
+        "hibernate-core/src/test/java/org/hibernate/orm/test/jpa/ql/MapIssueTest.java",
+        "hibernate-core/src/test/java/org/hibernate/orm/test/sql/exec/onetoone/bidirectional/EntityWithBidirectionalAssociationsOneOfWhichIsAJoinTableTest.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.jpa.ql.MapIssueTest\" :hibernate-core:test --tests \"org.hibernate.orm.test.sql.exec.onetoone.bidirectional.EntityWithBidirectionalAssociationsOneOfWhichIsAJoinTableTest\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 137,
+    "commit": "32d4f1596e2a2bfb93c90e9e8c2e734c880a2f6a",
+    "parent": "73edbac469a14086f8f068674b1daa96a7110d77",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.boot.database.metadata.MetadataAccessTests\""
+      ],
+      "added": [],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/orm/test/boot/database/metadata/MetadataAccessTests.java",
+        "hibernate-testing/src/main/java/org/hibernate/testing/logger/TriggerOnPrefixLogListener.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.boot.database.metadata.MetadataAccessTests\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 150,
+    "commit": "0e0437715b66225b868af1440882a00eeab43a8e",
+    "parent": "94f17a92e02f124a8423e16e6e578f354f2e42fb",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.tenantid.TenantIdTest\""
+      ],
+      "added": [],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/orm/test/tenantid/TenantIdTest.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.tenantid.TenantIdTest\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 1,
+    "commit": "eafaf38201a0fcaa5e20c448b1ec21531be697a4",
+    "parent": "c5d89d80c50e87212babd2ed67c500e392bc8990",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [],
+      "added": [
+        ":hibernate-core:test --tests \"org.hibernate.internal.util.SubSequenceTest\""
+      ],
+      "modified_files": [],
+      "all": ":hibernate-core:test --tests \"org.hibernate.internal.util.SubSequenceTest\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 8,
+    "commit": "5dd29f8a006df9bf7accc848a208e6256b7790bf",
+    "parent": "1ad46ec4c41800eb814da5f386ec9b12dd474eff",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [],
+      "added": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.mapping.collections.BidirectionalOneToManyTest\""
+      ],
+      "modified_files": [],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.mapping.collections.BidirectionalOneToManyTest\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 9,
+    "commit": "482d095f361ef78def0b1f0d07c464287d41578e",
+    "parent": "275387e4ba13347fe7028da408d61adecca26930",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.stateless.UpsertTest\""
+      ],
+      "added": [],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/orm/test/stateless/UpsertTest.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.stateless.UpsertTest\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 11,
+    "commit": "cfd54a41298ae8b529a24a83435f0916f256b1ee",
+    "parent": "9f550bcf2e8e4d4e90cc30802309332d1877f48b",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [],
+      "added": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.query.NativeQueryNestedTreeTest\""
+      ],
+      "modified_files": [],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.query.NativeQueryNestedTreeTest\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 1,
+    "commit": "eafaf38201a0fcaa5e20c448b1ec21531be697a4",
+    "parent": "c5d89d80c50e87212babd2ed67c500e392bc8990",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [],
+      "added": [
+        ":hibernate-core:test --tests \"org.hibernate.internal.util.SubSequenceTest\""
+      ],
+      "modified_files": [],
+      "all": ":hibernate-core:test --tests \"org.hibernate.internal.util.SubSequenceTest\""
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Success",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Only New Tests)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 22,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 22
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [
+        "org.hibernate.testing.annotations.methods.EntityManagerFactoryScopeTesting.annotatedMethodTest(EntityManagerFactoryScope)",
+        "org.hibernate.testing.logger.LoggingRuleTest.testRule",
+        "org.hibernate.testing.annotations.methods.SessionFactoryTesting.testMethodLevelAnnotations(SessionFactoryScope)",
+        "org.hibernate.testing.annotations.methods.EntityManagerFactoryScopeTesting.nonAnnotatedMethodTest(EntityManagerFactoryScope)",
+        "org.hibernate.testing.logger.LogDelegationTest.testRecording",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testMethodLevelImplicitStandard(ServiceRegistryScope)",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testMethodLevelImplicitBootstrap(ServiceRegistryScope)",
+        "org.hibernate.testing.annotations.methods.MoreEntityManagerFactoryScopeTesting.annotatedMethodTest(EntityManagerFactoryScope)",
+        "org.hibernate.internal.util.SubSequenceTest.subSequenceRejectsEndBeforeStart()",
+        "org.hibernate.testing.annotations.methods.EntityManagerFactoryScopeTesting.testBasicUsage(EntityManagerFactoryScope)",
+        "org.hibernate.testing.annotations.methods.SessionFactoryTesting.testClassLevelAnnotations(SessionFactoryScope)",
+        "org.hibernate.testing.annotations.BasicEntityManagerFactoryScopeTests.testBasicUsage(EntityManagerFactoryScope)",
+        "org.hibernate.testing.logger.LogDelegationTest.testClearListeners",
+        "org.hibernate.testing.util.uuid.SafeRandomUUIDGeneratorTest.testSafeUUIDGenerator()",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testMethodLevel(ServiceRegistryScope)",
+        "org.hibernate.testing.logger.LogDelegationTest.testLogDelegationIsActivated",
+        "org.hibernate.testing.annotations.methods.MoreEntityManagerFactoryScopeTesting.testBasicUsage(EntityManagerFactoryScope)",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testClassLevel(ServiceRegistryScope)",
+        "org.hibernate.testing.annotations.BasicSessionFactoryScopeTests.testBasicUsage(SessionFactoryScope)",
+        "org.hibernate.testing.annotations.methods.DomainModelTesting.testMethodLevelAnnotations(DomainModelScope)",
+        "org.hibernate.testing.annotations.methods.DomainModelTesting.testClassLevelAnnotations(DomainModelScope)",
+        "org.hibernate.internal.util.SubSequenceTest.subSequenceAllowsEmptyAtEnd()"
+      ],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 8,
+    "commit": "5dd29f8a006df9bf7accc848a208e6256b7790bf",
+    "parent": "1ad46ec4c41800eb814da5f386ec9b12dd474eff",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [],
+      "added": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.mapping.collections.BidirectionalOneToManyTest\""
+      ],
+      "modified_files": [],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.mapping.collections.BidirectionalOneToManyTest\""
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Success",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Only New Tests)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 21,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 21
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [
+        "org.hibernate.testing.annotations.methods.EntityManagerFactoryScopeTesting.annotatedMethodTest(EntityManagerFactoryScope)",
+        "org.hibernate.testing.logger.LoggingRuleTest.testRule",
+        "org.hibernate.testing.annotations.methods.SessionFactoryTesting.testMethodLevelAnnotations(SessionFactoryScope)",
+        "org.hibernate.testing.annotations.methods.EntityManagerFactoryScopeTesting.nonAnnotatedMethodTest(EntityManagerFactoryScope)",
+        "org.hibernate.testing.logger.LogDelegationTest.testRecording",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testMethodLevelImplicitStandard(ServiceRegistryScope)",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testMethodLevelImplicitBootstrap(ServiceRegistryScope)",
+        "org.hibernate.testing.annotations.methods.MoreEntityManagerFactoryScopeTesting.annotatedMethodTest(EntityManagerFactoryScope)",
+        "org.hibernate.testing.annotations.methods.EntityManagerFactoryScopeTesting.testBasicUsage(EntityManagerFactoryScope)",
+        "org.hibernate.testing.annotations.BasicEntityManagerFactoryScopeTests.testBasicUsage(EntityManagerFactoryScope)",
+        "org.hibernate.orm.test.mapping.collections.BidirectionalOneToManyTest.testParentNotTreatedAsBidirectional(EntityManagerFactoryScope)",
+        "org.hibernate.testing.logger.LogDelegationTest.testClearListeners",
+        "org.hibernate.testing.util.uuid.SafeRandomUUIDGeneratorTest.testSafeUUIDGenerator()",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testMethodLevel(ServiceRegistryScope)",
+        "org.hibernate.testing.logger.LogDelegationTest.testLogDelegationIsActivated",
+        "org.hibernate.testing.annotations.methods.MoreEntityManagerFactoryScopeTesting.testBasicUsage(EntityManagerFactoryScope)",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testClassLevel(ServiceRegistryScope)",
+        "org.hibernate.testing.annotations.BasicSessionFactoryScopeTests.testBasicUsage(SessionFactoryScope)",
+        "org.hibernate.testing.annotations.methods.DomainModelTesting.testMethodLevelAnnotations(DomainModelScope)",
+        "org.hibernate.testing.annotations.methods.DomainModelTesting.testClassLevelAnnotations(DomainModelScope)",
+        "org.hibernate.testing.annotations.methods.SessionFactoryTesting.testClassLevelAnnotations(SessionFactoryScope)"
+      ],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 9,
+    "commit": "482d095f361ef78def0b1f0d07c464287d41578e",
+    "parent": "275387e4ba13347fe7028da408d61adecca26930",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": "tests_fixed",
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.stateless.UpsertTest\""
+      ],
+      "added": [],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/orm/test/stateless/UpsertTest.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.stateless.UpsertTest\""
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Success",
+    "build_status_before": "Success",
+    "test_status_before": "Fail",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 23,
+      "after_fail_count": 0,
+      "before_pass_count": 21,
+      "before_fail_count": 1,
+      "regression_count": 0,
+      "fix_count": 1,
+      "new_pass_count": 1
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [
+        "org.hibernate.orm.test.stateless.UpsertTest.testIdOnly(SessionFactoryScope)"
+      ],
+      "new_passes": [
+        "org.hibernate.orm.test.stateless.UpsertTest.testIdOnlySubtype(SessionFactoryScope)"
+      ],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": [
+        "org.hibernate.orm.test.stateless.UpsertTest.testIdOnly(SessionFactoryScope)"
+      ]
+    }
+  },
+  {
+    "index": 11,
+    "commit": "cfd54a41298ae8b529a24a83435f0916f256b1ee",
+    "parent": "9f550bcf2e8e4d4e90cc30802309332d1877f48b",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [],
+      "added": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.query.NativeQueryNestedTreeTest\""
+      ],
+      "modified_files": [],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.query.NativeQueryNestedTreeTest\""
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Success",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Only New Tests)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 21,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 21
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [
+        "org.hibernate.testing.annotations.methods.SessionFactoryTesting.testMethodLevelAnnotations(SessionFactoryScope)",
+        "org.hibernate.testing.logger.LogDelegationTest.testRecording",
+        "org.hibernate.testing.annotations.methods.EntityManagerFactoryScopeTesting.nonAnnotatedMethodTest(EntityManagerFactoryScope)",
+        "org.hibernate.testing.logger.LoggingRuleTest.testRule",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testMethodLevelImplicitBootstrap(ServiceRegistryScope)",
+        "org.hibernate.testing.annotations.methods.MoreEntityManagerFactoryScopeTesting.testBasicUsage(EntityManagerFactoryScope)",
+        "org.hibernate.testing.annotations.methods.MoreEntityManagerFactoryScopeTesting.annotatedMethodTest(EntityManagerFactoryScope)",
+        "org.hibernate.testing.annotations.BasicSessionFactoryScopeTests.testBasicUsage(SessionFactoryScope)",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testMethodLevel(ServiceRegistryScope)",
+        "org.hibernate.orm.test.query.NativeQueryNestedTreeTest.test(SessionFactoryScope)",
+        "org.hibernate.testing.logger.LogDelegationTest.testClearListeners",
+        "org.hibernate.testing.annotations.methods.DomainModelTesting.testClassLevelAnnotations(DomainModelScope)",
+        "org.hibernate.testing.annotations.methods.EntityManagerFactoryScopeTesting.testBasicUsage(EntityManagerFactoryScope)",
+        "org.hibernate.testing.util.uuid.SafeRandomUUIDGeneratorTest.testSafeUUIDGenerator()",
+        "org.hibernate.testing.logger.LogDelegationTest.testLogDelegationIsActivated",
+        "org.hibernate.testing.annotations.methods.EntityManagerFactoryScopeTesting.annotatedMethodTest(EntityManagerFactoryScope)",
+        "org.hibernate.testing.annotations.BasicEntityManagerFactoryScopeTests.testBasicUsage(EntityManagerFactoryScope)",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testClassLevel(ServiceRegistryScope)",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testMethodLevelImplicitStandard(ServiceRegistryScope)",
+        "org.hibernate.testing.annotations.methods.DomainModelTesting.testMethodLevelAnnotations(DomainModelScope)",
+        "org.hibernate.testing.annotations.methods.SessionFactoryTesting.testClassLevelAnnotations(SessionFactoryScope)"
+      ],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 13,
+    "commit": "794eea15d277074b001d5b129e710263cb554287",
+    "parent": "d563d19cb18fef64cce707048dac8466bc5e33d6",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [],
+      "added": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.annotations.beanvalidation.CollectionActionsValidationStatelessTest\""
+      ],
+      "modified_files": [],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.annotations.beanvalidation.CollectionActionsValidationStatelessTest\""
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Success",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Only New Tests)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 21,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 21
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [
+        "org.hibernate.testing.annotations.methods.SessionFactoryTesting.testMethodLevelAnnotations(SessionFactoryScope)",
+        "org.hibernate.orm.test.annotations.beanvalidation.CollectionActionsValidationStatelessTest.smoke(SessionFactoryScope)",
+        "org.hibernate.testing.logger.LogDelegationTest.testRecording",
+        "org.hibernate.testing.annotations.methods.EntityManagerFactoryScopeTesting.nonAnnotatedMethodTest(EntityManagerFactoryScope)",
+        "org.hibernate.testing.logger.LoggingRuleTest.testRule",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testMethodLevelImplicitBootstrap(ServiceRegistryScope)",
+        "org.hibernate.testing.annotations.methods.MoreEntityManagerFactoryScopeTesting.testBasicUsage(EntityManagerFactoryScope)",
+        "org.hibernate.testing.annotations.methods.MoreEntityManagerFactoryScopeTesting.annotatedMethodTest(EntityManagerFactoryScope)",
+        "org.hibernate.testing.annotations.BasicSessionFactoryScopeTests.testBasicUsage(SessionFactoryScope)",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testMethodLevel(ServiceRegistryScope)",
+        "org.hibernate.testing.logger.LogDelegationTest.testClearListeners",
+        "org.hibernate.testing.annotations.methods.DomainModelTesting.testClassLevelAnnotations(DomainModelScope)",
+        "org.hibernate.testing.annotations.methods.EntityManagerFactoryScopeTesting.testBasicUsage(EntityManagerFactoryScope)",
+        "org.hibernate.testing.util.uuid.SafeRandomUUIDGeneratorTest.testSafeUUIDGenerator()",
+        "org.hibernate.testing.logger.LogDelegationTest.testLogDelegationIsActivated",
+        "org.hibernate.testing.annotations.methods.EntityManagerFactoryScopeTesting.annotatedMethodTest(EntityManagerFactoryScope)",
+        "org.hibernate.testing.annotations.BasicEntityManagerFactoryScopeTests.testBasicUsage(EntityManagerFactoryScope)",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testClassLevel(ServiceRegistryScope)",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testMethodLevelImplicitStandard(ServiceRegistryScope)",
+        "org.hibernate.testing.annotations.methods.DomainModelTesting.testMethodLevelAnnotations(DomainModelScope)",
+        "org.hibernate.testing.annotations.methods.SessionFactoryTesting.testClassLevelAnnotations(SessionFactoryScope)"
+      ],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 19,
+    "commit": "a04f801aa16eb27a44ea20fbf26f276774313b63",
+    "parent": "2b5e12dd55196a7a2f7509076b727a9b36210ee7",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.write.OptionalTableUpdateTests\""
+      ],
+      "added": [],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/orm/test/write/OptionalTableUpdateTests.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.write.OptionalTableUpdateTests\""
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Success",
+    "build_status_before": "Success",
+    "test_status_before": "Success",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 23,
+      "after_fail_count": 0,
+      "before_pass_count": 23,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 28,
+    "commit": "c97bd5424e9a671bc93b49ae4c1362e536fd252f",
+    "parent": "900cbe8ac30689c50d326c963958c371b88092b0",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.dialect.unit.sequence.DB2zSequenceInformationExtractorTest\""
+      ],
+      "added": [],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/orm/test/dialect/unit/sequence/DB2zSequenceInformationExtractorTest.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.dialect.unit.sequence.DB2zSequenceInformationExtractorTest\""
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Success",
+    "build_status_before": "Success",
+    "test_status_before": "Success",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 21,
+      "after_fail_count": 0,
+      "before_pass_count": 21,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 48,
+    "commit": "897665d501c9e17924166c52f9853468a90c4faa",
+    "parent": "7e6d136c741f6a5951472ed92980b5430352f90c",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [],
+      "added": [
+        ":hibernate-envers:test --tests \"org.hibernate.orm.test.envers.integration.lob.LargeObjectMappingTest\""
+      ],
+      "modified_files": [],
+      "all": ":hibernate-envers:test --tests \"org.hibernate.orm.test.envers.integration.lob.LargeObjectMappingTest\""
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Success",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Only New Tests)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 23,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 23
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [
+        "org.hibernate.testing.annotations.methods.SessionFactoryTesting.testMethodLevelAnnotations(SessionFactoryScope)",
+        "org.hibernate.orm.test.dialect.unit.sequence.DB2zSequenceInformationExtractorTest.testSequenceGenerationExtractor",
+        "org.hibernate.testing.logger.LogDelegationTest.testRecording",
+        "org.hibernate.testing.annotations.methods.EntityManagerFactoryScopeTesting.nonAnnotatedMethodTest(EntityManagerFactoryScope)",
+        "org.hibernate.testing.logger.LoggingRuleTest.testRule",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testMethodLevelImplicitBootstrap(ServiceRegistryScope)",
+        "org.hibernate.testing.annotations.methods.MoreEntityManagerFactoryScopeTesting.testBasicUsage(EntityManagerFactoryScope)",
+        "org.hibernate.orm.test.envers.integration.lob.LargeObjectMappingTest.testLobTypeMapping[0]",
+        "org.hibernate.testing.annotations.methods.MoreEntityManagerFactoryScopeTesting.annotatedMethodTest(EntityManagerFactoryScope)",
+        "org.hibernate.testing.annotations.BasicSessionFactoryScopeTests.testBasicUsage(SessionFactoryScope)",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testMethodLevel(ServiceRegistryScope)",
+        "org.hibernate.testing.logger.LogDelegationTest.testClearListeners",
+        "org.hibernate.testing.annotations.methods.DomainModelTesting.testClassLevelAnnotations(DomainModelScope)",
+        "org.hibernate.testing.annotations.methods.EntityManagerFactoryScopeTesting.testBasicUsage(EntityManagerFactoryScope)",
+        "org.hibernate.testing.util.uuid.SafeRandomUUIDGeneratorTest.testSafeUUIDGenerator()",
+        "org.hibernate.testing.logger.LogDelegationTest.testLogDelegationIsActivated",
+        "org.hibernate.testing.annotations.methods.EntityManagerFactoryScopeTesting.annotatedMethodTest(EntityManagerFactoryScope)",
+        "org.hibernate.orm.test.envers.integration.lob.LargeObjectMappingTest.testLobTypeMapping[1]",
+        "org.hibernate.testing.annotations.BasicEntityManagerFactoryScopeTests.testBasicUsage(EntityManagerFactoryScope)",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testClassLevel(ServiceRegistryScope)",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testMethodLevelImplicitStandard(ServiceRegistryScope)",
+        "org.hibernate.testing.annotations.methods.DomainModelTesting.testMethodLevelAnnotations(DomainModelScope)",
+        "org.hibernate.testing.annotations.methods.SessionFactoryTesting.testClassLevelAnnotations(SessionFactoryScope)"
+      ],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 51,
+    "commit": "dbe4ac14fbc9d1873b70267ac08dbf06778de4bd",
+    "parent": "9874ccda41ea0f60dcf9e4ff1688589f86d49b75",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [],
+      "added": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.jpa.xml.BaseShop\"",
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.jpa.xml.ExplicitOptimisticLockAnnotationOnCollectionXmlOnlyTest\"",
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.jpa.xml.Supermarket\""
+      ],
+      "modified_files": [
+        "hibernate-testing/src/main/java/org/hibernate/testing/jdbc/SQLStatementInspector.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.jpa.xml.BaseShop\" :hibernate-core:test --tests \"org.hibernate.orm.test.jpa.xml.ExplicitOptimisticLockAnnotationOnCollectionXmlOnlyTest\" :hibernate-core:test --tests \"org.hibernate.orm.test.jpa.xml.Supermarket\""
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Fail",
+    "build_status_before": "Success",
+    "test_status_before": "Fail",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 22,
+      "after_fail_count": 0,
+      "before_pass_count": 22,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 52,
+    "commit": "a0bf95e68dff8d64c358da0432528f1cc1e9be7e",
+    "parent": "de25ece4d24ac64971cc88f221c68f515f1b94c7",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [],
+      "added": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.typedescriptor.NullTest\""
+      ],
+      "modified_files": [],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.typedescriptor.NullTest\""
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Success",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Only New Tests)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 24,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 24
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [
+        "org.hibernate.testing.annotations.methods.SessionFactoryTesting.testMethodLevelAnnotations(SessionFactoryScope)",
+        "org.hibernate.orm.test.typedescriptor.NullTest.passingNullAsParameterOfQuery(SessionFactoryScope)",
+        "org.hibernate.testing.logger.LogDelegationTest.testRecording",
+        "org.hibernate.testing.annotations.methods.EntityManagerFactoryScopeTesting.nonAnnotatedMethodTest(EntityManagerFactoryScope)",
+        "org.hibernate.testing.logger.LoggingRuleTest.testRule",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testMethodLevelImplicitBootstrap(ServiceRegistryScope)",
+        "org.hibernate.orm.test.typedescriptor.NullTest.passingNullAsParameterOfNativeQuery(SessionFactoryScope)",
+        "org.hibernate.testing.annotations.methods.MoreEntityManagerFactoryScopeTesting.testBasicUsage(EntityManagerFactoryScope)",
+        "org.hibernate.orm.test.envers.integration.lob.LargeObjectMappingTest.testLobTypeMapping[0]",
+        "org.hibernate.testing.annotations.methods.MoreEntityManagerFactoryScopeTesting.annotatedMethodTest(EntityManagerFactoryScope)",
+        "org.hibernate.testing.annotations.BasicSessionFactoryScopeTests.testBasicUsage(SessionFactoryScope)",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testMethodLevel(ServiceRegistryScope)",
+        "org.hibernate.testing.logger.LogDelegationTest.testClearListeners",
+        "org.hibernate.testing.annotations.methods.DomainModelTesting.testClassLevelAnnotations(DomainModelScope)",
+        "org.hibernate.testing.annotations.methods.EntityManagerFactoryScopeTesting.testBasicUsage(EntityManagerFactoryScope)",
+        "org.hibernate.testing.util.uuid.SafeRandomUUIDGeneratorTest.testSafeUUIDGenerator()",
+        "org.hibernate.testing.logger.LogDelegationTest.testLogDelegationIsActivated",
+        "org.hibernate.testing.annotations.methods.EntityManagerFactoryScopeTesting.annotatedMethodTest(EntityManagerFactoryScope)",
+        "org.hibernate.orm.test.envers.integration.lob.LargeObjectMappingTest.testLobTypeMapping[1]",
+        "org.hibernate.testing.annotations.BasicEntityManagerFactoryScopeTests.testBasicUsage(EntityManagerFactoryScope)",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testClassLevel(ServiceRegistryScope)",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testMethodLevelImplicitStandard(ServiceRegistryScope)",
+        "org.hibernate.testing.annotations.methods.DomainModelTesting.testMethodLevelAnnotations(DomainModelScope)",
+        "org.hibernate.testing.annotations.methods.SessionFactoryTesting.testClassLevelAnnotations(SessionFactoryScope)"
+      ],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 54,
+    "commit": "fc84bf7ad64cd0b6c0cf4e7ea842c1f7e88ef16d",
+    "parent": "b4b2a20707f22aec5ce9c6e7d50c54267fddbad3",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.query.hql.FunctionTests\""
+      ],
+      "added": [],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/orm/test/query/hql/FunctionTests.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.query.hql.FunctionTests\""
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Success",
+    "build_status_before": "Success",
+    "test_status_before": "Success",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 127,
+      "after_fail_count": 0,
+      "before_pass_count": 126,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 1
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [
+        "org.hibernate.orm.test.query.hql.FunctionTests.testEpochFunction(SessionFactoryScope)"
+      ],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 56,
+    "commit": "daa498921104316aae2202b4b705236b0c774f86",
+    "parent": "d1b208b2bf81b06bc10fba6b682b89c7688896f5",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.query.hql.FunctionTests\""
+      ],
+      "added": [],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/orm/test/query/hql/FunctionTests.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.query.hql.FunctionTests\""
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Success",
+    "build_status_before": "Success",
+    "test_status_before": "Success",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 130,
+      "after_fail_count": 0,
+      "before_pass_count": 129,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 1
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [
+        "org.hibernate.orm.test.query.hql.FunctionTests.testEpochFunction(SessionFactoryScope)"
+      ],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 65,
+    "commit": "aefc2d1558d92ddc44795549347bc8388d56bf2c",
+    "parent": "b8304a93dbe9cdd4fb1f436df2a452490dd0e0a6",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [],
+      "added": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.notfound.CompositeForeignKeyNotFoundTest\""
+      ],
+      "modified_files": [],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.notfound.CompositeForeignKeyNotFoundTest\""
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Success",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Only New Tests)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 25,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 25
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [
+        "org.hibernate.orm.test.notfound.CompositeForeignKeyNotFoundTest.hhh18891TestWithNotFoundIgnore(SessionFactoryScope)",
+        "org.hibernate.testing.annotations.methods.SessionFactoryTesting.testMethodLevelAnnotations(SessionFactoryScope)",
+        "org.hibernate.orm.test.notfound.CompositeForeignKeyNotFoundTest.hhh18891TestWithNotFoundException(SessionFactoryScope)",
+        "org.hibernate.testing.logger.LogDelegationTest.testRecording",
+        "org.hibernate.testing.annotations.methods.EntityManagerFactoryScopeTesting.nonAnnotatedMethodTest(EntityManagerFactoryScope)",
+        "org.hibernate.testing.logger.LoggingRuleTest.testRule",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testMethodLevelImplicitBootstrap(ServiceRegistryScope)",
+        "org.hibernate.testing.annotations.methods.MoreEntityManagerFactoryScopeTesting.testBasicUsage(EntityManagerFactoryScope)",
+        "org.hibernate.orm.test.envers.integration.lob.LargeObjectMappingTest.testLobTypeMapping[0]",
+        "org.hibernate.orm.test.notfound.CompositeForeignKeyNotFoundTest.hhh18891TestWithoutNotFoundAnnotation(SessionFactoryScope)",
+        "org.hibernate.testing.annotations.methods.MoreEntityManagerFactoryScopeTesting.annotatedMethodTest(EntityManagerFactoryScope)",
+        "org.hibernate.testing.annotations.BasicSessionFactoryScopeTests.testBasicUsage(SessionFactoryScope)",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testMethodLevel(ServiceRegistryScope)",
+        "org.hibernate.testing.logger.LogDelegationTest.testClearListeners",
+        "org.hibernate.testing.annotations.methods.DomainModelTesting.testClassLevelAnnotations(DomainModelScope)",
+        "org.hibernate.testing.annotations.methods.EntityManagerFactoryScopeTesting.testBasicUsage(EntityManagerFactoryScope)",
+        "org.hibernate.testing.util.uuid.SafeRandomUUIDGeneratorTest.testSafeUUIDGenerator()",
+        "org.hibernate.testing.logger.LogDelegationTest.testLogDelegationIsActivated",
+        "org.hibernate.testing.annotations.methods.EntityManagerFactoryScopeTesting.annotatedMethodTest(EntityManagerFactoryScope)",
+        "org.hibernate.orm.test.envers.integration.lob.LargeObjectMappingTest.testLobTypeMapping[1]",
+        "org.hibernate.testing.annotations.BasicEntityManagerFactoryScopeTests.testBasicUsage(EntityManagerFactoryScope)",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testClassLevel(ServiceRegistryScope)",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testMethodLevelImplicitStandard(ServiceRegistryScope)",
+        "org.hibernate.testing.annotations.methods.DomainModelTesting.testMethodLevelAnnotations(DomainModelScope)",
+        "org.hibernate.testing.annotations.methods.SessionFactoryTesting.testClassLevelAnnotations(SessionFactoryScope)"
+      ],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 66,
+    "commit": "b8304a93dbe9cdd4fb1f436df2a452490dd0e0a6",
+    "parent": "500f2d91745e54738c3986cb3f5023b41bc63092",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.mapping.collections.OrderColumnListIndexHHH18771ListInitializerTest\""
+      ],
+      "added": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.mapping.collections.OrderColumnListIndexArrayInitializerTest\""
+      ],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/orm/test/mapping/collections/OrderColumnListIndexHHH18771ListInitializerTest.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.mapping.collections.OrderColumnListIndexHHH18771ListInitializerTest\" :hibernate-core:test --tests \"org.hibernate.orm.test.mapping.collections.OrderColumnListIndexArrayInitializerTest\""
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Success",
+    "build_status_before": "Success",
+    "test_status_before": "Success",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 23,
+      "after_fail_count": 0,
+      "before_pass_count": 23,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 1
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [
+        "org.hibernate.orm.test.mapping.collections.OrderColumnListIndexArrayInitializerTest.hhh18876Test(SessionFactoryScope)"
+      ],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 69,
+    "commit": "90bf4f48510b356c830f54dc2b728543ed68dc08",
+    "parent": "e5c2197a495f877b9f01dc568d69c60973e9097c",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.querycache.EntityWithCollectionReloadCacheInheritanceTest\""
+      ],
+      "added": [],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/orm/test/querycache/EntityWithCollectionReloadCacheInheritanceTest.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.querycache.EntityWithCollectionReloadCacheInheritanceTest\""
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Success",
+    "build_status_before": "Success",
+    "test_status_before": "Success",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 23,
+      "after_fail_count": 0,
+      "before_pass_count": 23,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 70,
+    "commit": "31ecca5912c6689386fc85310ef7ec141b792db5",
+    "parent": "90bf4f48510b356c830f54dc2b728543ed68dc08",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.function.array.ArrayPositionTest\"",
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.function.array.ArrayPositionsTest\""
+      ],
+      "added": [],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/orm/test/function/array/ArrayPositionTest.java",
+        "hibernate-core/src/test/java/org/hibernate/orm/test/function/array/ArrayPositionsTest.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.function.array.ArrayPositionTest\" :hibernate-core:test --tests \"org.hibernate.orm.test.function.array.ArrayPositionsTest\""
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Success",
+    "build_status_before": "Success",
+    "test_status_before": "Success",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 29,
+      "after_fail_count": 0,
+      "before_pass_count": 28,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 1
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [
+        "org.hibernate.orm.test.function.array.ArrayPositionsTest.testPositionsParam(SessionFactoryScope)"
+      ],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 71,
+    "commit": "0f310ba32e0c126ca58e40b38dc4ee98ff0b5db3",
+    "parent": "bb931c7c8d046a9387815b2650650170efcb1b0f",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [],
+      "added": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.secondarytable.HHH18813Test\""
+      ],
+      "modified_files": [],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.secondarytable.HHH18813Test\""
+    },
+    "build_status_after": "Success",
+    "test_status_after": "Success",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Only New Tests)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 23,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 23
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [
+        "org.hibernate.testing.annotations.methods.SessionFactoryTesting.testMethodLevelAnnotations(SessionFactoryScope)",
+        "org.hibernate.testing.logger.LogDelegationTest.testRecording",
+        "org.hibernate.testing.annotations.methods.EntityManagerFactoryScopeTesting.nonAnnotatedMethodTest(EntityManagerFactoryScope)",
+        "org.hibernate.testing.logger.LoggingRuleTest.testRule",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testMethodLevelImplicitBootstrap(ServiceRegistryScope)",
+        "org.hibernate.testing.annotations.methods.MoreEntityManagerFactoryScopeTesting.testBasicUsage(EntityManagerFactoryScope)",
+        "org.hibernate.orm.test.envers.integration.lob.LargeObjectMappingTest.testLobTypeMapping[0]",
+        "org.hibernate.testing.annotations.methods.MoreEntityManagerFactoryScopeTesting.annotatedMethodTest(EntityManagerFactoryScope)",
+        "org.hibernate.testing.annotations.BasicSessionFactoryScopeTests.testBasicUsage(SessionFactoryScope)",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testMethodLevel(ServiceRegistryScope)",
+        "org.hibernate.testing.logger.LogDelegationTest.testClearListeners",
+        "org.hibernate.orm.test.secondarytable.HHH18813Test.hhh18813Test(SessionFactoryScope)",
+        "org.hibernate.testing.annotations.methods.DomainModelTesting.testClassLevelAnnotations(DomainModelScope)",
+        "org.hibernate.testing.annotations.methods.EntityManagerFactoryScopeTesting.testBasicUsage(EntityManagerFactoryScope)",
+        "org.hibernate.testing.util.uuid.SafeRandomUUIDGeneratorTest.testSafeUUIDGenerator()",
+        "org.hibernate.testing.logger.LogDelegationTest.testLogDelegationIsActivated",
+        "org.hibernate.testing.annotations.methods.EntityManagerFactoryScopeTesting.annotatedMethodTest(EntityManagerFactoryScope)",
+        "org.hibernate.orm.test.envers.integration.lob.LargeObjectMappingTest.testLobTypeMapping[1]",
+        "org.hibernate.testing.annotations.BasicEntityManagerFactoryScopeTests.testBasicUsage(EntityManagerFactoryScope)",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testClassLevel(ServiceRegistryScope)",
+        "org.hibernate.testing.annotations.methods.ServiceRegistryTesting.testMethodLevelImplicitStandard(ServiceRegistryScope)",
+        "org.hibernate.testing.annotations.methods.DomainModelTesting.testMethodLevelAnnotations(DomainModelScope)",
+        "org.hibernate.testing.annotations.methods.SessionFactoryTesting.testClassLevelAnnotations(SessionFactoryScope)"
+      ],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 75,
+    "commit": "cb89514772262a30d655b0212d24048c6aa7e0cd",
+    "parent": "a92e0dbadfd4751be100862a4ba9187846970dd2",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.inheritance.discriminator.JoinedInheritanceDiscriminatorSelectionTest\""
+      ],
+      "added": [],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/orm/test/inheritance/discriminator/JoinedInheritanceDiscriminatorSelectionTest.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.inheritance.discriminator.JoinedInheritanceDiscriminatorSelectionTest\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 89,
+    "commit": "1ffde48f5ba6b84bb604cfee02fc43a13bef80c4",
+    "parent": "abfe6b9b556f3748a657f017a7ac2ec45a88197b",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.bytecode.enhancement.access.InvalidPropertyNameTest\""
+      ],
+      "added": [],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/orm/test/bytecode/enhancement/access/InvalidPropertyNameTest.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.bytecode.enhancement.access.InvalidPropertyNameTest\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 98,
+    "commit": "6584eb3d53c32ed041d40a17a9b1ed169e2ee347",
+    "parent": "5328e83e035808fc67bcfa684864deed900ef410",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [],
+      "added": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.associations.ManyToOneUniqueKeyReferenceWithCustomIdTest\""
+      ],
+      "modified_files": [],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.associations.ManyToOneUniqueKeyReferenceWithCustomIdTest\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 99,
+    "commit": "8ba6d4321ba144d1398a70b9df575513ae9de187",
+    "parent": "df8745aaff71085a281830c1d3f0ecedb4cdb561",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.bytecode.internal.bytebuddy.GenerateProxiesTest\""
+      ],
+      "added": [
+        ":hibernate-core:test --tests \"org.hibernate.bytecode.internal.bytebuddy.MappedSuperclassEntity\"",
+        ":hibernate-core:test --tests \"org.hibernate.bytecode.internal.bytebuddy.mappedsuperclass.BaseMappedSuperclass\""
+      ],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/bytecode/internal/bytebuddy/GenerateProxiesTest.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.bytecode.internal.bytebuddy.GenerateProxiesTest\" :hibernate-core:test --tests \"org.hibernate.bytecode.internal.bytebuddy.MappedSuperclassEntity\" :hibernate-core:test --tests \"org.hibernate.bytecode.internal.bytebuddy.mappedsuperclass.BaseMappedSuperclass\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 106,
+    "commit": "4863033429ffaf5f64256ca9885aa6cbbf81d20d",
+    "parent": "cdcfbf4584c7c551d881f8464c27834b4eec5f6a",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [],
+      "added": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.annotations.attributeoverride.MapAttributeOverrideTest\"",
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.annotations.attributeoverride.Route\"",
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.annotations.attributeoverride.Schedule\""
+      ],
+      "modified_files": [],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.annotations.attributeoverride.MapAttributeOverrideTest\" :hibernate-core:test --tests \"org.hibernate.orm.test.annotations.attributeoverride.Route\" :hibernate-core:test --tests \"org.hibernate.orm.test.annotations.attributeoverride.Schedule\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 125,
+    "commit": "b1787d9a07955635bc82aea0643fc77f9311c5bb",
+    "parent": "a8d0e736324ff080fd624b076371aeb5a1f8a5d2",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.jpa.criteria.basic.PredicateTest\""
+      ],
+      "added": [],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/orm/test/jpa/criteria/basic/PredicateTest.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.jpa.criteria.basic.PredicateTest\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 131,
+    "commit": "dfbb72abe62c25907f8d40f739d626983e95ffcd",
+    "parent": "a7cbd1a3b81bfb87762630be29efd6783d3234c4",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.boot.database.metadata.MetadataAccessTests\""
+      ],
+      "added": [],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/orm/test/boot/database/metadata/MetadataAccessTests.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.boot.database.metadata.MetadataAccessTests\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 135,
+    "commit": "9ba0dd7af03d63dc39ce0ac8acd6688803ea0af9",
+    "parent": "b2f1725520d0e54219689d0b6c18b00683b5c89e",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.jpa.ql.MapIssueTest\"",
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.sql.exec.onetoone.bidirectional.EntityWithBidirectionalAssociationsOneOfWhichIsAJoinTableTest\""
+      ],
+      "added": [],
+      "modified_files": [
+        "hibernate-core/src/main/java/org/hibernate/query/sqm/tree/select/SqmQuerySpec.java",
+        "hibernate-core/src/test/java/org/hibernate/orm/test/jpa/ql/MapIssueTest.java",
+        "hibernate-core/src/test/java/org/hibernate/orm/test/sql/exec/onetoone/bidirectional/EntityWithBidirectionalAssociationsOneOfWhichIsAJoinTableTest.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.jpa.ql.MapIssueTest\" :hibernate-core:test --tests \"org.hibernate.orm.test.sql.exec.onetoone.bidirectional.EntityWithBidirectionalAssociationsOneOfWhichIsAJoinTableTest\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 137,
+    "commit": "32d4f1596e2a2bfb93c90e9e8c2e734c880a2f6a",
+    "parent": "73edbac469a14086f8f068674b1daa96a7110d77",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.boot.database.metadata.MetadataAccessTests\""
+      ],
+      "added": [],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/orm/test/boot/database/metadata/MetadataAccessTests.java",
+        "hibernate-testing/src/main/java/org/hibernate/testing/logger/TriggerOnPrefixLogListener.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.boot.database.metadata.MetadataAccessTests\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  },
+  {
+    "index": 150,
+    "commit": "0e0437715b66225b868af1440882a00eeab43a8e",
+    "parent": "94f17a92e02f124a8423e16e6e578f354f2e42fb",
+    "validation_status": "VALID_BACKPORT",
+    "validation_reason": null,
+    "test_targets": {
+      "modified": [
+        ":hibernate-core:test --tests \"org.hibernate.orm.test.tenantid.TenantIdTest\""
+      ],
+      "added": [],
+      "modified_files": [
+        "hibernate-core/src/test/java/org/hibernate/orm/test/tenantid/TenantIdTest.java"
+      ],
+      "all": ":hibernate-core:test --tests \"org.hibernate.orm.test.tenantid.TenantIdTest\""
+    },
+    "build_status_after": "Fail",
+    "test_status_after": "Skipped",
+    "build_status_before": "Skipped",
+    "test_status_before": "Skipped (Build Failed)",
+    "error_info": {
+      "before_error_type": null,
+      "before_error_msg": null,
+      "import_errors": []
+    },
+    "stats": {
+      "after_pass_count": 0,
+      "after_fail_count": 0,
+      "before_pass_count": 0,
+      "before_fail_count": 0,
+      "regression_count": 0,
+      "fix_count": 0,
+      "new_pass_count": 0
+    },
+    "details": {
+      "regressions": [],
+      "fixes": [],
+      "new_passes": [],
+      "persistent_failures": [],
+      "all_failures_after": [],
+      "all_failures_before": []
+    }
+  }
+]
