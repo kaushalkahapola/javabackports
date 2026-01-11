@@ -14,6 +14,19 @@ def find_gradle_module(repo, filepath):
     # Normalize slashes for the current OS
     filepath = filepath.replace("/", os.sep).replace("\\", os.sep)
     
+    # 0. Fast path: structure-based detection (for repos where submodules don't have build.gradle)
+    # Pattern: likely-module-name/src/test/...
+    parts = filepath.replace("\\", "/").split("/")
+    if "src" in parts:
+        src_idx = parts.index("src")
+        if src_idx > 0:
+             # The module is likely the folder immediately before 'src'
+             # e.g. hibernate-core/src/ -> :hibernate-core
+             # e.g. sub/mod/src/ -> :sub:mod
+             module_path = ":".join(parts[:src_idx])
+             print(f"DEBUG: Structure-based detection found: :{module_path}", file=sys.stderr)
+             return ":" + module_path
+    
     # 1. Look for build.gradle in current or parent dirs
     current_dir = os.path.dirname(filepath)
     while current_dir:
