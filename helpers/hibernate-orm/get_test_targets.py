@@ -11,20 +11,32 @@ def find_gradle_module(repo, filepath):
     """
     # filepath is relative to repo root (e.g. hibernate-core/src/test/java/...)
     
+    # Normalize slashes for the current OS
+    filepath = filepath.replace("/", os.sep).replace("\\", os.sep)
+    
     # 1. Look for build.gradle in current or parent dirs
     current_dir = os.path.dirname(filepath)
     while current_dir:
         build_gradle = os.path.join(repo, current_dir, "build.gradle")
         build_gradle_kts = os.path.join(repo, current_dir, "build.gradle.kts")
         
+        # DEBUG: Print what we are checking
+        print(f"DEBUG: Checking {build_gradle}", file=sys.stderr)
+        
         if os.path.exists(build_gradle) or os.path.exists(build_gradle_kts):
             # Convert path to module format (e.g. "hibernate-core" -> ":hibernate-core")
-            normalized = current_dir.replace("\\", "/").replace("/", ":")
-            return ":" + normalized
+            # For Gradle, we always want forward slashes/colons
+            normalized = current_dir.replace(os.sep, "/")
+            return ":" + normalized.replace("/", ":")
             
         parent = os.path.dirname(current_dir)
         if parent == current_dir or not parent:
-            break
+            # Check root if we haven't yet (current_dir is top level folder)
+            # But usually tests are in a module. 
+            # If we reached root "", check root build.gradle?
+            # os.path.dirname("foo") -> ""
+            # We want to check "" as well if needed, but the loop breaks.
+             break
         current_dir = parent
         
     return None
