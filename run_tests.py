@@ -84,7 +84,7 @@ PROJECT_CONFIG = {
     },
     "hibernate-orm": {
         "repo_dir": "hibernate-orm",
-        "report_pattern": "**/build/**/*.xml",
+        "report_pattern": "**/*.xml",
         "builder_tag": "hibernate-builder:latest",
         "build_system": "gradle"
     },
@@ -383,6 +383,8 @@ def get_smart_test_targets(toolkit_dir, project_dir, commit_sha, project_name):
             added = data.get("added", [])
             
             print(f"--- Test target detection: {len(modified)} modified, {len(added)} added ---")
+            print(f"--- Debug: Modified targets: {modified} ---")
+            print(f"--- Debug: Added targets: {added} ---")
             
             # Determine all_targets string for backward compatibility
             if not modified and not added:

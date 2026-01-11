@@ -9,35 +9,21 @@ def find_gradle_module(repo, filepath):
     """
     Finds the Gradle module path (e.g. :hibernate-core) for a given file.
     """
-    # filepath is relative to repo root
+    # filepath is relative to repo root (e.g. hibernate-core/src/test/java/...)
     
-    # Hibernate pattern: module-name/src/test/...
-    # Extract the first directory component before /src/
-    if "/src/" in filepath or "\\src\\" in filepath:
-        normalized_path = filepath.replace("\\", "/")
-        parts = normalized_path.split("/src/")
-        if len(parts) >= 2:
-            # The module is the directory before /src/
-            module_dir = parts[0]
-            if module_dir and "/" not in module_dir:
-                # Single-level module like "hibernate-core"
-                return ":" + module_dir
-            elif module_dir and "/" in module_dir:
-                # Multi-level module
-                return ":" + module_dir.replace("/", ":")
-    
-    # Fallback: walk up directory tree looking for build.gradle
+    # 1. Look for build.gradle in current or parent dirs
     current_dir = os.path.dirname(filepath)
     while current_dir:
-        build_gradle_path = os.path.join(repo, current_dir, "build.gradle")
-        build_gradle_kts_path = os.path.join(repo, current_dir, "build.gradle.kts")
+        build_gradle = os.path.join(repo, current_dir, "build.gradle")
+        build_gradle_kts = os.path.join(repo, current_dir, "build.gradle.kts")
         
-        if os.path.exists(build_gradle_path) or os.path.exists(build_gradle_kts_path):
-            normalized_dir = current_dir.replace("\\", "/")
-            return ":" + normalized_dir.replace("/", ":")
+        if os.path.exists(build_gradle) or os.path.exists(build_gradle_kts):
+            # Convert path to module format (e.g. "hibernate-core" -> ":hibernate-core")
+            normalized = current_dir.replace("\\", "/").replace("/", ":")
+            return ":" + normalized
             
         parent = os.path.dirname(current_dir)
-        if parent == current_dir:
+        if parent == current_dir or not parent:
             break
         current_dir = parent
         
