@@ -17,8 +17,7 @@ RUN curl -L "https://download.java.net/java/GA/jdk25.0.1/2fbf10d8c78e40bd87641c4
     mv /opt/java/jdk-25.0.1 /opt/java/jdk-25 && \
     rm /tmp/jdk25.tar.gz
 
-ENV JAVA_HOME=/opt/java/jdk-25
-ENV PATH="${JAVA_HOME}/bin:${PATH}"
+ENV JDK25_HOME=/opt/java/jdk-25
 
 # Create a non-root user 'gradle'
 RUN groupadd --gid 1000 gradle && \

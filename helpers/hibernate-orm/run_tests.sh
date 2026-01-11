@@ -29,8 +29,24 @@ if ${DOCKER_CMD} run --rm \
     "${IMAGE_TAG}" \
     bash -c "set -e; \
     git config --global --add safe.directory /repo; \
-    ${GRADLE_CMD} -i; \
-    RET=\$?; \
+    TEST_CMD="${GRADLE_CMD} -i"
+    
+    # Try running tests
+    if ${TEST_CMD} > test_output.log 2>&1; then
+       cat test_output.log
+       RET=0
+    else
+       RET=\$?
+       cat test_output.log
+       # Check for JDK requirement failure
+       if grep -q "requires at least JDK 25" test_output.log; then
+           echo "--- Detected JDK 25 requirement. Retrying tests with JDK 25... ---"
+           export JAVA_HOME=/opt/java/jdk-25
+           export PATH="${JAVA_HOME}/bin:${PATH}"
+           ${TEST_CMD}
+           RET=\$?
+       fi
+    fi \
     echo \"--- Debug: finding build directories ---\"; \
     find /repo -type d -name \"build\" -maxdepth 3; \
     echo \"--- Debug: Listing all XML files ---\"; \
