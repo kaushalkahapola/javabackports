@@ -65,13 +65,17 @@ def main():
         )
         
         if not is_test_file:
+            print(f"DEBUG: Skipping non-test file: {filepath}", file=sys.stderr)
             continue
             
         # Find the Gradle module
         module_path = find_gradle_module(args.repo, filepath)
         if not module_path:
+            print(f"DEBUG: Could not find module for: {filepath}", file=sys.stderr)
             continue
             
+        print(f"DEBUG: Found module {module_path} for {filepath}", file=sys.stderr)
+
         try:
             # Extract class name
             rel_path = ""
@@ -87,7 +91,8 @@ def main():
                 test_target = f"{module_path}:test --tests \"{class_name}\""
             else:
                 test_target = f"{module_path}:test"
-        except:
+        except Exception as e:
+             print(f"DEBUG: Error processing {filepath}: {e}", file=sys.stderr)
              test_target = f"{module_path}:test"
 
         if test_target:
