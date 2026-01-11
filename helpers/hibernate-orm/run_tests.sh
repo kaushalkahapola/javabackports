@@ -29,12 +29,13 @@ if ${DOCKER_CMD} run --rm \
     "${IMAGE_TAG}" \
     bash -c "set -e; \
     git config --global --add safe.directory /repo; \
-    ${GRADLE_CMD}; \
-    echo "--- Debug: finding build directories ---"; \
-    find /repo -type d -name "build" -maxdepth 3; \
-    echo "--- Debug: Listing all XML files ---"; \
-    find /repo -name "*.xml"; \
-    exit \$?"; then
+    ${GRADLE_CMD} -i; \
+    RET=\$?; \
+    echo \"--- Debug: finding build directories ---\"; \
+    find /repo -type d -name \"build\" -maxdepth 3; \
+    echo \"--- Debug: Listing all XML files ---\"; \
+    find /repo -name \"*.xml\"; \
+    exit \$RET"; then
     echo "✅ Tests Passed"
     exit 0
 else
