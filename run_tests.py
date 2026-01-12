@@ -136,6 +136,13 @@ PROJECT_CONFIG = {
         "builder_tag": "lucene-builder:latest",
         "build_system": "self-building"
     }
+    ,
+    "grpc-java": {
+        "repo_dir": "grpc-java",
+        "report_pattern": "**/build/test-results/**/*.xml",
+        "builder_tag": "grpc-java-builder:latest",
+        "build_system": "self-building"
+    }
 }
 
 def run_command(command, env=None, check=True, cwd=None, **kwargs):
@@ -379,6 +386,13 @@ def get_smart_test_targets(toolkit_dir, project_dir, commit_sha, project_name):
         # Try to parse as JSON (new format)
         try:
             data = json.loads(output)
+            
+            # Check if commit should be skipped (e.g., Android files involved)
+            if data.get("skip", False):
+                skip_reason = data.get("reason", "Unknown reason")
+                print(f"--- Skipping commit: {skip_reason} ---")
+                return {"modified": [], "added": [], "all_targets": "SKIP", "skip": True}
+            
             modified = data.get("modified", [])
             added = data.get("added", [])
             
@@ -395,13 +409,14 @@ def get_smart_test_targets(toolkit_dir, project_dir, commit_sha, project_name):
             return {
                 "modified": modified,
                 "added": added,
-                "all_targets": all_targets
+                "all_targets": all_targets,
+                "skip": False
             }
         except json.JSONDecodeError as e:
             print(f"--- ERROR: Failed to parse JSON from get_test_targets: {e} ---")
             print(f"--- Output was: {output} ---")
             # Fallback for old format (space-separated list)
-            return {"modified": [], "added": [], "all_targets": output}
+            return {"modified": [], "added": [], "all_targets": output, "skip": False}
     except Exception as e:
         print(f"--- ERROR calling get_test_targets: {e} ---")
         return {"modified": [], "added": [], "all_targets": "ALL"}
@@ -429,10 +444,10 @@ def collect_test_reports(project_name, project_repo_dir, dest_dir):
             except Exception as e:
                 print(f"Failed to copy {full_src_path}: {e}")
     else:
-        # For self-building projects (like ES), source_dir is already the build directory
-        # We aggregated all results into 'all-test-results' in run_tests.sh
+        # For self-building projects, use the project-specific report pattern
         if PROJECT_CONFIG[project_name]['build_system'] == 'self-building':
-             full_pattern = os.path.join(project_repo_dir, "all-test-results", "*.xml")
+             # Use the report_pattern from config, with proper glob expansion
+             full_pattern = os.path.join(project_repo_dir, PROJECT_CONFIG[project_name]["report_pattern"])
         else:
              full_pattern = os.path.join(project_repo_dir, PROJECT_CONFIG[project_name]["report_pattern"])
         
@@ -535,6 +550,7 @@ def execute_lifecycle(project_name, commit_sha, state, toolkit_dir, project_repo
 
     env["TEST_TARGETS"] = test_targets
     env["TEST_REPORT_DIR"] = test_output_dir
+    env["TEST_STATUS_FILE"] = os.path.join(state_dir, "test_status.txt")
     if config['build_system'] == 'self-building':
         env["BUILD_TYPE"] = state
 
@@ -570,7 +586,7 @@ def execute_lifecycle(project_name, commit_sha, state, toolkit_dir, project_repo
         test_status = "Error"
 
     source_dir = project_repo_dir
-    if config['build_system'] == 'self-building':
+    if config['build_system'] == 'self-building' and project_name not in ['grpc-java']:
         source_dir = build_output_dir
     collect_test_reports(project_name, source_dir, test_output_dir)
     passed, failed = parse_test_results(test_output_dir)
@@ -794,6 +810,11 @@ def main():
         modified_tests = test_targets_data["modified"]
         added_tests = test_targets_data["added"]
         all_targets = test_targets_data["all_targets"]
+        
+        # Check if commit should be skipped (e.g., Android files involved)
+        if test_targets_data.get("skip", False):
+            print(f"--- Skipping {commit_sha} (Android files involved; cannot validate without Android SDK) ---")
+            continue
 
         # If no explicit test files were detected, skip
         if len(modified_tests) == 0 and len(added_tests) == 0:
